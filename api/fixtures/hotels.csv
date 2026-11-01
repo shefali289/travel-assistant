@@ -1,0 +1,4 @@
+id,name,nightlyPrice,currency,breakfastIncluded,explanation
+h1,Harbour House,220,NZD,true,Within budget; breakfast included.
+h2,City Garden,245,NZD,true,Near the meeting district.
+h3,Quay Rooms,195,NZD,false,Lower price; breakfast costs extra.
