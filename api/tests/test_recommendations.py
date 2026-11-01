@@ -47,6 +47,9 @@ ERROR_BODY = {
 
 BODY_MESSAGE = "The request body must be JSON with a message field"
 UNKNOWN_FIELD_MESSAGE = "Send only message and scenario"
+BLANK_MESSAGE = "The message field must not be blank. Describe the hotel you need."
+NOT_TEXT_MESSAGE = "The message field must be text. Describe the hotel you need."
+SCENARIO_MESSAGE = "The scenario field must be success, empty or error."
 FRAMEWORK_WORDING = ("value error", "input should", "string should", "field required", "extra inputs", "pydantic", "('body'")
 
 INVALID_MESSAGE_PAYLOADS = [
@@ -166,11 +169,11 @@ def run_python(code, cwd, unset=()):
     return subprocess.run([sys.executable, "-c", code], cwd=cwd, env=env, capture_output=True, text=True, timeout=60)
 
 
+CSV_HEADER = "id,name,nightlyPrice,currency,breakfastIncluded,explanation\n"
+
+
 def csv_with(price="220", breakfast="true"):
-    return (
-        "id,name,nightlyPrice,currency,breakfastIncluded,explanation\n"
-        f"h1,Harbour House,{price},NZD,{breakfast},Within budget.\n"
-    )
+    return CSV_HEADER + f"h1,Harbour House,{price},NZD,{breakfast},Within budget.\n"
 
 
 # AC2.1: fixture parsing
@@ -219,6 +222,30 @@ def test_ac2_1_non_numeric_nan_or_inf_price_raises(tmp_path, price):
 
 @pytest.mark.parametrize(
     "bad_csv",
+    [
+        pytest.param(CSV_HEADER, id="header-only"),
+        pytest.param("", id="empty-file"),
+        pytest.param(CSV_HEADER + "h1,Harbour House,220,NZD,true\n", id="short-row"),
+        pytest.param(CSV_HEADER + "h1,Harbour House,220,NZD,true,Good, cheap\n", id="unquoted-comma"),
+        pytest.param("id,name\nh1,Harbour House\n", id="missing-columns"),
+        pytest.param(CSV_HEADER.strip() + ",extra\nh1,Harbour House,220,NZD,true,Good,x\n", id="extra-column"),
+    ],
+)
+def test_ac2_1_wrong_columns_or_no_rows_raises(tmp_path, bad_csv):
+    path = tmp_path / "hotels.csv"
+    path.write_text(bad_csv, encoding="utf-8")
+    with pytest.raises(ValueError):
+        main.load_fixtures(path)
+
+
+def test_ac2_1_quoted_comma_in_a_value_is_kept(tmp_path):
+    path = tmp_path / "hotels.csv"
+    path.write_text(CSV_HEADER + 'h1,Harbour House,220,NZD,true,"Good, cheap"\n', encoding="utf-8")
+    assert main.load_fixtures(path)[0]["explanation"] == "Good, cheap"
+
+
+@pytest.mark.parametrize(
+    "bad_csv",
     [pytest.param(csv_with(breakfast="yes"), id="bad-boolean"), pytest.param(csv_with(price="nan"), id="bad-price")],
 )
 def test_ac2_1_bad_fixture_data_stops_the_app_importing(tmp_path, bad_csv):
@@ -255,6 +282,30 @@ def test_ac2_2_several_errors_report_only_the_first(client, payload):
     assert "hiddenField" not in text
 
 
+def test_ac2_2_scenario_error_is_reported_before_an_unknown_field(client):
+    text = assert_validation_error(post_json(client, {"message": MSG, "scenario": "nope", "hiddenField": 1}))
+    assert text == SCENARIO_MESSAGE
+
+
+@pytest.mark.parametrize(
+    ("payload", "expected"),
+    [
+        pytest.param({"scenario": "success"}, "The message field is required. Describe the hotel you need.", id="missing"),
+        pytest.param({"message": ""}, BLANK_MESSAGE, id="empty"),
+        pytest.param({"message": "   "}, BLANK_MESSAGE, id="spaces"),
+        pytest.param({"message": None}, NOT_TEXT_MESSAGE, id="null"),
+        pytest.param({"message": 42}, NOT_TEXT_MESSAGE, id="number"),
+    ],
+)
+def test_ac2_2_invalid_message_has_its_exact_text(client, payload, expected):
+    assert assert_validation_error(post_json(client, payload)) == expected
+
+
+def test_ac2_2_blank_message_text_is_the_contract_example(client):
+    example = RECOMMENDATIONS["responses"]["422"]["content"]["application/json"]["example"]["message"]
+    assert assert_validation_error(post_json(client, {"message": ""})) == example
+
+
 # AC2.3 to AC2.6: the scenarios
 
 
@@ -288,6 +339,16 @@ def test_ac2_6_error_scenario_returns_retryable_503(client):
 @pytest.mark.parametrize("payload", INVALID_SCENARIO_PAYLOADS)
 def test_ac2_7_unknown_or_null_scenario_returns_422_naming_scenario(client, payload):
     assert "scenario" in assert_validation_error(post_json(client, payload))
+
+
+@pytest.mark.parametrize("payload", INVALID_SCENARIO_PAYLOADS)
+def test_ac2_7_scenario_error_has_its_exact_text(client, payload):
+    assert assert_validation_error(post_json(client, payload)) == SCENARIO_MESSAGE
+
+
+def test_ac2_7_message_over_500_characters_has_its_exact_text(client):
+    text = assert_validation_error(post_json(client, {"message": "x" * 501}))
+    assert text == "The message field must be 500 characters or fewer."
 
 
 def test_ac2_7_unknown_field_returns_422_without_echoing_it(client):
@@ -399,6 +460,12 @@ def test_ac2_9_non_numeric_or_negative_delay_falls_back_to_800ms(client, monkeyp
     elapsed = time.perf_counter() - started
     assert response.status_code == 200
     assert 0.78 <= elapsed < 1.6
+
+
+@pytest.mark.parametrize("value", ["nan", "inf", "-inf", "1e400"])
+def test_ac2_9_non_finite_delay_falls_back_to_800ms(monkeypatch, value):
+    monkeypatch.setenv("FIXTURE_DELAY_MS", value)
+    assert main.delay_seconds() == 0.8
 
 
 @pytest.mark.parametrize(

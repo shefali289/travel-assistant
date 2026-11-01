@@ -1,14 +1,22 @@
-Traceback (most recent call last):
-  File "/home/claude/serko-hotel-assistant/scripts/probes/api_contract.py", line 19, in <module>
-    SPEC = yaml.safe_load((ROOT / "openapi" / "openapi.yaml").read_text())
-                          ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^
-  File "/usr/local/lib/python3.13/pathlib/_local.py", line 546, in read_text
-    return PathBase.read_text(self, encoding, errors, newline)
-           ~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/usr/local/lib/python3.13/pathlib/_abc.py", line 632, in read_text
-    with self.open(mode='r', encoding=encoding, errors=errors, newline=newline) as f:
-         ~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/usr/local/lib/python3.13/pathlib/_local.py", line 537, in open
-    return io.open(self, mode, buffering, encoding, errors, newline)
-           ~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-FileNotFoundError: [Errno 2] No such file or directory: '/home/claude/serko-hotel-assistant/openapi/openapi.yaml'
+  ok   success -> 200
+  ok   success -> exactly the three fixtures with correct types
+  ok   success -> non-empty assistant message
+  ok   success body matches spec []
+  ok   empty -> 200 with hotels: [] and a message
+  ok   empty body matches spec []
+  ok   error -> 503
+  ok   error -> body with a useful message
+  ok   503 body matches spec []
+  ok   missing message -> 422
+  ok   missing message body matches spec []
+  ok   empty message -> 422
+  ok   empty message body matches spec []
+  ok   whitespace message -> 422
+  ok   whitespace message body matches spec []
+  ok   non-string message -> 422
+  ok   non-string message body matches spec []
+  ok   unknown scenario -> 422
+  ok   unknown scenario body matches spec []
+  ok   non-JSON body -> 422
+
+0 failure(s)

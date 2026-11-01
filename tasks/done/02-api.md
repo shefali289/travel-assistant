@@ -45,7 +45,7 @@ Questions:
   A: Yes, corrected in the plan commit.
 
 ## 2. Spec: acceptance criteria (put the AC id in each pytest name, e.g. `test_ac2_3_success_returns_three_fixtures`)
-- **AC2.1** The CSV at `api/fixtures/hotels.csv` is parsed into hotels with `nightlyPrice` as a number (whole numbers stay integers) and `breakfastIncluded` as a boolean. Only `true` and `false` are valid booleans. An invalid boolean, or a non-numeric, `nan` or `inf` price, raises an error. Fixtures load at import, so bad data stops the API from starting.
+- **AC2.1** The CSV at `api/fixtures/hotels.csv` is parsed into hotels with `nightlyPrice` as a number (whole numbers stay integers) and `breakfastIncluded` as a boolean. Only `true` and `false` are valid booleans. An invalid boolean, a non-numeric, `nan` or `inf` price, a row or header with the wrong columns, or a file with no rows raises `ValueError`. Fixtures load at import, so bad data stops the API from starting.
 - **AC2.2** Missing, empty, whitespace-only, `null` or non-string `message` → **422** `ErrorResponse` (`code: validation_error`, `retryable: false`) whose message names the field. A request with several errors reports only the first, in plain wording.
 - **AC2.3** `scenario=success` → 200 with exactly h1, h2, h3 (all fields equal to the CSV), the message "Here are three hotels to consider.", and `source: "fixture"`.
 - **AC2.4** No `scenario` → treated as `success`.
@@ -98,7 +98,7 @@ Gate passes. The red commit precedes green. Any contract revisions are recorded.
 - The two exact 422 texts in AC2.7 are compared with equality and no trailing full stop, as written in the AC.
 - "Refused" and "not allowed" CORS tests first assert that the allowed case works. Without that control they would pass against the stub, which has no CORS at all.
 - Delay tests use real time with slack for timer resolution: lower bounds of 90 ms for 100 ms and 780 ms for 800 ms, and upper bounds of 700 ms and 1.6 s. They may need widening on a very slow machine.
-- `FIXTURE_DELAY_MS` values `nan` and `inf` are not tested, because a parser that accepts them could hang the run. Green should still fall back to 800 ms for them.
+- `FIXTURE_DELAY_MS` values `nan` and `inf` were not tested at red, because a parser that accepts them could hang the run. Review finding 3 added them by calling `delay_seconds()` directly, which cannot hang.
 - Passing at red, because the behaviour needs no new code: `test_ac2_8_health_response_matches_the_contract` and the 15 cases of `test_ac2_8_rejected_payloads_also_fail_the_contract_request_schema`, which check only the YAML.
 - `evidence/02-api-red.txt` has the local repo path and username replaced with `<repo>` and `<user>`, because `AGENTS.md` bars personal data in files. Nothing else in the output changed.
 - Green: `/recommendations` keeps FastAPI's body parsing, as section 3 says, instead of reading the raw body. The invalid UTF-8 case is mapped by a handler that turns any `HTTPException` 400 into the 422 `ErrorResponse`. FastAPI raises a 400 only there, and no route in the app raises one. Framework 404 and 405 stay as they are, as the plan answer says.
@@ -106,9 +106,12 @@ Gate passes. The red commit precedes green. Any contract revisions are recorded.
 - A blank message over 500 characters gets the length error, because the length check runs before the blank check. Both name `message`.
 - `FIXTURE_DELAY_MS` is parsed with `float()`, so `1.5` means 1.5 ms. `nan`, `inf`, `-inf` and values that overflow (`1e400`) fall back to 800 ms. Checked once with a throwaway script outside the repo, as they stay untested on purpose. There is no upper limit, so a very large finite value waits that long: the AC only names non-numeric and negative values, and the value comes from the operator.
 - `parse_price` goes through `float()`, so `220.0` in the CSV becomes the integer 220, following "whole numbers stay integers". The AC does not bar negative prices and the contract has no minimum, so they load.
-- Beyond the listed ACs, `load_fixtures` raises `ValueError` on a row with missing columns. Otherwise a short row would serve `explanation: null`, which breaks the contract. No test covers this.
+- `load_fixtures` raises `ValueError` on a row with missing columns, because a short row would otherwise serve `explanation: null`, which breaks the contract. Review finding 1 widened this to wrong columns and no rows, added tests, and added it to AC2.1.
+- Triage: the human chose to fix all four review findings. The fixes only add tests, apart from the loader check in `api/app/main.py`. No existing test assertion changed. `csv_with` in the test file now builds on a shared `CSV_HEADER`, with the same output. The empty `ALLOWED_ORIGINS` question stays as it is, because it meets AC2.10 and refusing is the safer behaviour.
 - Checked with the same throwaway script, not covered by tests: a lone surrogate in `message`, a JSON `null`, number or string body, very deep nesting and a `text/plain` body all return a 422 `ErrorResponse`. JSON with no `Content-Type` returns 200, as the plan answer says.
 - No test was edited and `openapi/openapi.yaml` did not change.
+- Review verdict APPROVE with 3 MINOR and 1 NIT findings and one question (`reviews/02-api.md`). Final gate held until the human triages them, because a pass moves this doc to `tasks/done/`.
+- The harness changed to one commit per task during this review (uncommitted edits to `AGENTS.md`, `tasks/README.md`, `.claude/commands/` and `scripts/`). So the review is not committed on its own: it goes in the final commit.
 
 ## Status log (updated automatically)
 - 2026-11-01 07:33 UTC - on branch task/02-api
@@ -121,3 +124,8 @@ Gate passes. The red commit precedes green. Any contract revisions are recorded.
 - 2026-11-01 07:50 UTC - next: implement (agent)
 - 2026-11-01 07:53 UTC - green: 116 passed, probe 0 failures; evidence saved, waiting on the feat(02-api) commit
 - 2026-11-01 07:53 UTC - next: commit-green (human)
+- 2026-11-01 07:56 UTC - gate FAILED [REVIEW] 30 passed, 1 failed: no review: run /review 02-api (writes reviews/02-api.md)
+- 2026-11-01 07:57 UTC - next: commit-work (human)
+- 2026-11-01 08:03 UTC - next: gate (agent)
+- 2026-11-01 08:20 UTC - gate PASSED (31 checks)
+- 2026-11-01 08:21 UTC - next: commit-done (human)

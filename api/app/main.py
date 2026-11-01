@@ -15,6 +15,7 @@ from pydantic import BaseModel, ConfigDict, Field, StrictStr, field_validator
 from starlette.exceptions import HTTPException
 
 FIXTURES_CSV = Path(__file__).resolve().parents[1] / "fixtures" / "hotels.csv"
+FIXTURE_COLUMNS = {"id", "name", "nightlyPrice", "currency", "breakfastIncluded", "explanation"}
 DEFAULT_ORIGINS = "http://localhost:3000"
 DEFAULT_DELAY_MS = 800.0
 
@@ -70,10 +71,12 @@ def load_fixtures(path: Path = FIXTURES_CSV) -> list[dict]:
     """Read the hotels from the CSV. Raises ValueError on bad data."""
     with open(path, encoding="utf-8", newline="") as file:
         rows = list(csv.DictReader(file))
+    if not rows:
+        raise ValueError(f"No hotels in fixtures: {path}")
     hotels = []
     for row in rows:
-        if None in row.values():
-            raise ValueError(f"Fixture row has missing columns: {row}")
+        if set(row) != FIXTURE_COLUMNS or None in row.values():
+            raise ValueError(f"Fixture row has the wrong columns: {row}")
         hotels.append(
             {
                 "id": row["id"],
