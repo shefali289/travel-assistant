@@ -1,5 +1,5 @@
 # Review: 01-contract
-Reviewer: AI agent (/review), triaged by: human (pending)
+Reviewer: AI agent (/review), triaged by: human
 Diff: 0c7c4b2..e672aaf
 
 ## Spec compliance
@@ -33,12 +33,12 @@ Nothing in the contract goes beyond the brief without being recorded in `APPROAC
 
 ## Findings
 <!-- One line each. Severity: BLOCKER | MAJOR | MINOR | NIT. Tick [x] when fixed or consciously accepted, and say why. -->
-- [ ] MINOR: `AGENTS.md:28` still gives the delay only on the `success` line, while the contract applies it to all three (`openapi/openapi.yaml:126`). An agent on task 02 or 03 reading the summary could skip the delay on `empty` and `error`, and nothing would catch it, because the probes and tests set `FIXTURE_DELAY_MS=0`. Fix: update the summary, and carry the answer into `/plan 02-api` with a test that the delay applies to each scenario.
-- [ ] MINOR: `openapi/openapi.yaml:178` and `:202`: `message` has no `minLength` on `RecommendationResponse` or `ErrorResponse`, so `{"code":"service_unavailable","message":"","retryable":true}` validates, although the brief asks for a useful message. AC2.3 and AC2.6 would catch this in tests, but the contract does not promise it. Fix: add `minLength: 1` to both, while no implementation depends on the schema.
-- [ ] NIT: `openapi/openapi.yaml:47`: the example says "three Wellington hotels", but `:9` says the message text is not interpreted. If task 02 copies the text, a request for Auckland gets a Wellington answer. Fix: "Here are three hotels to consider."
-- [ ] NIT: `tasks/01-contract.md:87` is stale. It lists moving `main` as open for the human, but `main` is now at `0c7c4b2`. Fix: add a line saying it is resolved.
+- [x] MINOR: `AGENTS.md:28` still gives the delay only on the `success` line, while the contract applies it to all three (`openapi/openapi.yaml:126`). An agent on task 02 or 03 reading the summary could skip the delay on `empty` and `error`, and nothing would catch it, because the probes and tests set `FIXTURE_DELAY_MS=0`. Fix: update the summary, and carry the answer into `/plan 02-api` with a test that the delay applies to each scenario. Accepted by the human without a change: not blocking. Open risk: carry the delay answer into `/plan 02-api`.
+- [x] MINOR: `openapi/openapi.yaml:178` and `:202`: `message` has no `minLength` on `RecommendationResponse` or `ErrorResponse`, so `{"code":"service_unavailable","message":"","retryable":true}` validates, although the brief asks for a useful message. AC2.3 and AC2.6 would catch this in tests, but the contract does not promise it. Fix: add `minLength: 1` to both, while no implementation depends on the schema. Accepted by the human without a change: not blocking. AC2.3 and AC2.6 cover non-empty messages in task 02.
+- [x] NIT: `openapi/openapi.yaml:47`: the example says "three Wellington hotels", but `:9` says the message text is not interpreted. If task 02 copies the text, a request for Auckland gets a Wellington answer. Fix: "Here are three hotels to consider." Accepted by the human without a change: not blocking. Open risk: task 02 should not copy this example text as it stands.
+- [x] NIT: `tasks/01-contract.md:87` is stale. It lists moving `main` as open for the human, but `main` is now at `0c7c4b2`. Fix: add a line saying it is resolved. Accepted by the human without a change: not blocking.
 
-Question for the human, not a defect: a 422 returns without the delay (`openapi/openapi.yaml:22`, decision at `tasks/01-contract.md:83`). The plan only covered the three scenarios. The reviewer agrees with this reading, but it was the agent's call.
+Question for the human, not a defect (accepted with the findings): a 422 returns without the delay (`openapi/openapi.yaml:22`, decision at `tasks/01-contract.md:83`). The plan only covered the three scenarios. The reviewer agrees with this reading, but it was the agent's call.
 
 Not verified:
 - No real `/recommendations` response has been checked against the contract, because the endpoint does not exist until task 02. `scripts/probes/api_contract.py` loads this contract without a traceback and reports 19 failures, none of which were inspected individually. They are expected at this stage, and it is expected to pass after task 02.
