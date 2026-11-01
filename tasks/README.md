@@ -37,7 +37,7 @@ Expected history per task, on `task/NN-name`: `docs(NN)` → `test(NN)` → `fea
 ## Task board
 | # | Task | Outcome | Verified by | Status |
 |---|---|---|---|---|
-| 01 | [contract](01-contract.md) | OpenAPI contract drafted before any code | contract probe | Todo |
+| 01 | [contract](done/01-contract.md) | OpenAPI contract drafted before any code | contract probe | Done |
 | 02 | [api](02-api.md) | FastAPI validates input and serves the 3 scenarios from the CSV fixture | pytest + API probe | Todo |
 | 03 | [search](03-search.md) | Traveller types a request, picks a demo scenario, sees progress | Vitest + journey `search` | Todo |
 | 04 | [results](04-results.md) | Traveller reviews message + cards; empty and recoverable error states | Vitest + journey `results` | Todo |

@@ -85,6 +85,9 @@ Gate passes. The contract is committed before any `/recommendations` implementat
 - The example message texts are written to fit AC2.2 and AC2.6 (the 422 names the field, the 503 says to try again). They are illustrations, not exact strings for task 02.
 - The checks the probe misses were run once with a throwaway script outside the repo (no new test files, per the plan). `/review` still checks them line by line.
 - Open, for the human: the gate's BRANCH step fails on commit naming because harness commit `0c7c4b2` (`chore: one branch per task...`) is on this branch and not on `main`. Committing this work does not clear it. Fast-forwarding `main` to `0c7c4b2` does. The agent has not moved `main`.
+- Review verdict APPROVE with 2 MINOR and 2 NIT findings (`reviews/01-contract.md`). The reviewer recommends fixing all four before task 02. The human triaged them: all four accepted without a change, and the 422 with no delay stands.
+- For `/plan 02-api`: `AGENTS.md:28` still gives the delay only on `success` (the contract says all three), the contract allows an empty `message` (AC2.3 and AC2.6 must catch it), and the 200 example text says "Wellington", so do not copy it as it stands.
+- Final gate held until triage, because `tasks/README.md` says the chain stops at review triage and a pass moves this doc to `tasks/done/`.
 
 ## Status log (updated automatically)
 - 2026-10-31 08:50 UTC - next: plan (agent)
@@ -94,3 +97,7 @@ Gate passes. The contract is committed before any `/recommendations` implementat
 - 2026-11-01 07:11 UTC - next: implement (agent)
 - 2026-11-01 07:15 UTC - gate FAILED [BRANCH,REVIEW] 15 passed, 3 failed: uncommitted changes: commit them, then re-run the gate (see git status); commits not named type(01-contract): chore: one branch per task, gate rebases on main and checks the branch; no review: run /review 01-contract (writes reviews/01-contract.md)
 - 2026-11-01 07:16 UTC - next: commit-work (human)
+- 2026-11-01 07:23 UTC - next: commit-review (human)
+- 2026-11-01 07:30 UTC - next: gate (agent)
+- 2026-11-01 07:32 UTC - gate PASSED (19 checks)
+- 2026-11-01 07:32 UTC - next: commit-done (human)
