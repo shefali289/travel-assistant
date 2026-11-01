@@ -90,9 +90,23 @@ Gate passes. The red commit precedes green. Any contract revisions are recorded.
 - All plan recommendations accepted by the human. Scope changed: AC2.1, 2.2, 2.3, 2.5, 2.6, 2.7, 2.8, 2.9 and 2.10 were tightened, and AC2.11 is new (generated docs off).
 - Turning off the generated docs is not a contract revision, because the YAML never declared those routes. So `APPROACH.md` "Contract revisions" does not change.
 - `AGENTS.md` contract summary corrected: the delay applies to all three scenarios, not only `success`.
+- Test interface, set by the red tests: `load_fixtures(path=FIXTURES_CSV)` returns a list of dicts with the contract's field names. The stub is not called at import yet, or collection would fail. Green must call it at import.
+- Bad fixture data must raise `ValueError` specifically. The AC only says "an error", but `pytest.raises(Exception)` would pass against the stub's `NotImplementedError`.
+- "Only `true` and `false`" is read as exact and case-sensitive: `True` and `FALSE` are invalid. Whether `220.0` becomes an integer is not pinned, because the AC does not say.
+- "Stops the API from starting" is tested by importing a copy of `api/app` in a subprocess next to a bad CSV. "Only real environment variables" is tested the same way with a `.env` beside the copy. No mocks.
+- "Reports only the first" error is read as field order: `message`, then `scenario`, then unknown fields.
+- The two exact 422 texts in AC2.7 are compared with equality and no trailing full stop, as written in the AC.
+- "Refused" and "not allowed" CORS tests first assert that the allowed case works. Without that control they would pass against the stub, which has no CORS at all.
+- Delay tests use real time with slack for timer resolution: lower bounds of 90 ms for 100 ms and 780 ms for 800 ms, and upper bounds of 700 ms and 1.6 s. They may need widening on a very slow machine.
+- `FIXTURE_DELAY_MS` values `nan` and `inf` are not tested, because a parser that accepts them could hang the run. Green should still fall back to 800 ms for them.
+- Passing at red, because the behaviour needs no new code: `test_ac2_8_health_response_matches_the_contract` and the 15 cases of `test_ac2_8_rejected_payloads_also_fail_the_contract_request_schema`, which check only the YAML.
+- `evidence/02-api-red.txt` has the local repo path and username replaced with `<repo>` and `<user>`, because `AGENTS.md` bars personal data in files. Nothing else in the output changed.
 
 ## Status log (updated automatically)
 - 2026-11-01 07:33 UTC - on branch task/02-api
 - 2026-11-01 07:33 UTC - next: plan (agent)
 - 2026-11-01 07:37 UTC - next: answers (human)
 - 2026-11-01 07:39 UTC - next: commit-plan (human)
+- 2026-11-01 07:40 UTC - next: implement (agent)
+- 2026-11-01 07:45 UTC - red: 99 failed, 17 passed; evidence saved, waiting on the test(02-api) commit
+- 2026-11-01 07:46 UTC - next: commit-red (human)

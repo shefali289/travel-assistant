@@ -1,0 +1,1886 @@
+.FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF [ 62%]
+................FFFFFFFFFFFFFFFFFFFFFFFFFFFF                             [100%]
+================================== FAILURES ===================================
+_______ test_ac2_1_load_fixtures_parses_csv_with_exact_values_and_types _______
+
+    def test_ac2_1_load_fixtures_parses_csv_with_exact_values_and_types():
+>       assert_exact(main.load_fixtures(), HOTELS)
+                     ^^^^^^^^^^^^^^^^^^^^
+
+tests\test_recommendations.py:180: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+path = WindowsPath('<repo>/api/fixtures/hotels.csv')
+
+    def load_fixtures(path: Path = FIXTURES_CSV) -> list[dict]:
+        """Red stub so the tests load. Not called at import yet. Implemented in the green step."""
+>       raise NotImplementedError
+E       NotImplementedError
+
+app\main.py:13: NotImplementedError
+______ test_ac2_1_load_fixtures_finds_the_csv_from_any_working_directory ______
+
+tmp_path = WindowsPath('C:/Users/<user>/AppData/Local/Temp/pytest-of-<user>/pytest-3/test_ac2_1_load_fixtures_finds0')
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x000001A940BAA420>
+
+    def test_ac2_1_load_fixtures_finds_the_csv_from_any_working_directory(tmp_path, monkeypatch):
+        monkeypatch.chdir(tmp_path)
+>       assert_exact(main.load_fixtures(), HOTELS)
+                     ^^^^^^^^^^^^^^^^^^^^
+
+<repo>\api\tests\test_recommendations.py:185: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+path = WindowsPath('<repo>/api/fixtures/hotels.csv')
+
+    def load_fixtures(path: Path = FIXTURES_CSV) -> list[dict]:
+        """Red stub so the tests load. Not called at import yet. Implemented in the green step."""
+>       raise NotImplementedError
+E       NotImplementedError
+
+<repo>\api\app\main.py:13: NotImplementedError
+___ test_ac2_1_whole_prices_stay_integers_and_others_stay_decimal[220-220] ____
+
+tmp_path = WindowsPath('C:/Users/<user>/AppData/Local/Temp/pytest-of-<user>/pytest-3/test_ac2_1_whole_prices_stay_i0')
+price = '220', expected = 220
+
+    @pytest.mark.parametrize(("price", "expected"), [("220", 220), ("219.5", 219.5)])
+    def test_ac2_1_whole_prices_stay_integers_and_others_stay_decimal(tmp_path, price, expected):
+        path = tmp_path / "hotels.csv"
+        path.write_text(csv_with(price=price), encoding="utf-8")
+>       parsed = main.load_fixtures(path)[0]["nightlyPrice"]
+                 ^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests\test_recommendations.py:192: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+path = WindowsPath('C:/Users/<user>/AppData/Local/Temp/pytest-of-<user>/pytest-3/test_ac2_1_whole_prices_stay_i0/hotels.csv')
+
+    def load_fixtures(path: Path = FIXTURES_CSV) -> list[dict]:
+        """Red stub so the tests load. Not called at import yet. Implemented in the green step."""
+>       raise NotImplementedError
+E       NotImplementedError
+
+app\main.py:13: NotImplementedError
+_ test_ac2_1_whole_prices_stay_integers_and_others_stay_decimal[219.5-219.5] __
+
+tmp_path = WindowsPath('C:/Users/<user>/AppData/Local/Temp/pytest-of-<user>/pytest-3/test_ac2_1_whole_prices_stay_i1')
+price = '219.5', expected = 219.5
+
+    @pytest.mark.parametrize(("price", "expected"), [("220", 220), ("219.5", 219.5)])
+    def test_ac2_1_whole_prices_stay_integers_and_others_stay_decimal(tmp_path, price, expected):
+        path = tmp_path / "hotels.csv"
+        path.write_text(csv_with(price=price), encoding="utf-8")
+>       parsed = main.load_fixtures(path)[0]["nightlyPrice"]
+                 ^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests\test_recommendations.py:192: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+path = WindowsPath('C:/Users/<user>/AppData/Local/Temp/pytest-of-<user>/pytest-3/test_ac2_1_whole_prices_stay_i1/hotels.csv')
+
+    def load_fixtures(path: Path = FIXTURES_CSV) -> list[dict]:
+        """Red stub so the tests load. Not called at import yet. Implemented in the green step."""
+>       raise NotImplementedError
+E       NotImplementedError
+
+app\main.py:13: NotImplementedError
+____________ test_ac2_1_true_and_false_become_booleans[true-True] _____________
+
+tmp_path = WindowsPath('C:/Users/<user>/AppData/Local/Temp/pytest-of-<user>/pytest-3/test_ac2_1_true_and_false_beco0')
+breakfast = 'true', expected = True
+
+    @pytest.mark.parametrize(("breakfast", "expected"), [("true", True), ("false", False)])
+    def test_ac2_1_true_and_false_become_booleans(tmp_path, breakfast, expected):
+        path = tmp_path / "hotels.csv"
+        path.write_text(csv_with(breakfast=breakfast), encoding="utf-8")
+>       assert main.load_fixtures(path)[0]["breakfastIncluded"] is expected
+               ^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests\test_recommendations.py:201: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+path = WindowsPath('C:/Users/<user>/AppData/Local/Temp/pytest-of-<user>/pytest-3/test_ac2_1_true_and_false_beco0/hotels.csv')
+
+    def load_fixtures(path: Path = FIXTURES_CSV) -> list[dict]:
+        """Red stub so the tests load. Not called at import yet. Implemented in the green step."""
+>       raise NotImplementedError
+E       NotImplementedError
+
+app\main.py:13: NotImplementedError
+___________ test_ac2_1_true_and_false_become_booleans[false-False] ____________
+
+tmp_path = WindowsPath('C:/Users/<user>/AppData/Local/Temp/pytest-of-<user>/pytest-3/test_ac2_1_true_and_false_beco1')
+breakfast = 'false', expected = False
+
+    @pytest.mark.parametrize(("breakfast", "expected"), [("true", True), ("false", False)])
+    def test_ac2_1_true_and_false_become_booleans(tmp_path, breakfast, expected):
+        path = tmp_path / "hotels.csv"
+        path.write_text(csv_with(breakfast=breakfast), encoding="utf-8")
+>       assert main.load_fixtures(path)[0]["breakfastIncluded"] is expected
+               ^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests\test_recommendations.py:201: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+path = WindowsPath('C:/Users/<user>/AppData/Local/Temp/pytest-of-<user>/pytest-3/test_ac2_1_true_and_false_beco1/hotels.csv')
+
+    def load_fixtures(path: Path = FIXTURES_CSV) -> list[dict]:
+        """Red stub so the tests load. Not called at import yet. Implemented in the green step."""
+>       raise NotImplementedError
+E       NotImplementedError
+
+app\main.py:13: NotImplementedError
+___________________ test_ac2_1_invalid_boolean_raises[yes] ____________________
+
+tmp_path = WindowsPath('C:/Users/<user>/AppData/Local/Temp/pytest-of-<user>/pytest-3/test_ac2_1_invalid_boolean_rai0')
+breakfast = 'yes'
+
+    @pytest.mark.parametrize("breakfast", ["yes", "1", "", "True", "FALSE"])
+    def test_ac2_1_invalid_boolean_raises(tmp_path, breakfast):
+        path = tmp_path / "hotels.csv"
+        path.write_text(csv_with(breakfast=breakfast), encoding="utf-8")
+        with pytest.raises(ValueError):
+>           main.load_fixtures(path)
+
+tests\test_recommendations.py:209: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+path = WindowsPath('C:/Users/<user>/AppData/Local/Temp/pytest-of-<user>/pytest-3/test_ac2_1_invalid_boolean_rai0/hotels.csv')
+
+    def load_fixtures(path: Path = FIXTURES_CSV) -> list[dict]:
+        """Red stub so the tests load. Not called at import yet. Implemented in the green step."""
+>       raise NotImplementedError
+E       NotImplementedError
+
+app\main.py:13: NotImplementedError
+____________________ test_ac2_1_invalid_boolean_raises[1] _____________________
+
+tmp_path = WindowsPath('C:/Users/<user>/AppData/Local/Temp/pytest-of-<user>/pytest-3/test_ac2_1_invalid_boolean_rai1')
+breakfast = '1'
+
+    @pytest.mark.parametrize("breakfast", ["yes", "1", "", "True", "FALSE"])
+    def test_ac2_1_invalid_boolean_raises(tmp_path, breakfast):
+        path = tmp_path / "hotels.csv"
+        path.write_text(csv_with(breakfast=breakfast), encoding="utf-8")
+        with pytest.raises(ValueError):
+>           main.load_fixtures(path)
+
+tests\test_recommendations.py:209: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+path = WindowsPath('C:/Users/<user>/AppData/Local/Temp/pytest-of-<user>/pytest-3/test_ac2_1_invalid_boolean_rai1/hotels.csv')
+
+    def load_fixtures(path: Path = FIXTURES_CSV) -> list[dict]:
+        """Red stub so the tests load. Not called at import yet. Implemented in the green step."""
+>       raise NotImplementedError
+E       NotImplementedError
+
+app\main.py:13: NotImplementedError
+_____________________ test_ac2_1_invalid_boolean_raises[] _____________________
+
+tmp_path = WindowsPath('C:/Users/<user>/AppData/Local/Temp/pytest-of-<user>/pytest-3/test_ac2_1_invalid_boolean_rai2')
+breakfast = ''
+
+    @pytest.mark.parametrize("breakfast", ["yes", "1", "", "True", "FALSE"])
+    def test_ac2_1_invalid_boolean_raises(tmp_path, breakfast):
+        path = tmp_path / "hotels.csv"
+        path.write_text(csv_with(breakfast=breakfast), encoding="utf-8")
+        with pytest.raises(ValueError):
+>           main.load_fixtures(path)
+
+tests\test_recommendations.py:209: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+path = WindowsPath('C:/Users/<user>/AppData/Local/Temp/pytest-of-<user>/pytest-3/test_ac2_1_invalid_boolean_rai2/hotels.csv')
+
+    def load_fixtures(path: Path = FIXTURES_CSV) -> list[dict]:
+        """Red stub so the tests load. Not called at import yet. Implemented in the green step."""
+>       raise NotImplementedError
+E       NotImplementedError
+
+app\main.py:13: NotImplementedError
+___________________ test_ac2_1_invalid_boolean_raises[True] ___________________
+
+tmp_path = WindowsPath('C:/Users/<user>/AppData/Local/Temp/pytest-of-<user>/pytest-3/test_ac2_1_invalid_boolean_rai3')
+breakfast = 'True'
+
+    @pytest.mark.parametrize("breakfast", ["yes", "1", "", "True", "FALSE"])
+    def test_ac2_1_invalid_boolean_raises(tmp_path, breakfast):
+        path = tmp_path / "hotels.csv"
+        path.write_text(csv_with(breakfast=breakfast), encoding="utf-8")
+        with pytest.raises(ValueError):
+>           main.load_fixtures(path)
+
+tests\test_recommendations.py:209: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+path = WindowsPath('C:/Users/<user>/AppData/Local/Temp/pytest-of-<user>/pytest-3/test_ac2_1_invalid_boolean_rai3/hotels.csv')
+
+    def load_fixtures(path: Path = FIXTURES_CSV) -> list[dict]:
+        """Red stub so the tests load. Not called at import yet. Implemented in the green step."""
+>       raise NotImplementedError
+E       NotImplementedError
+
+app\main.py:13: NotImplementedError
+__________________ test_ac2_1_invalid_boolean_raises[FALSE] ___________________
+
+tmp_path = WindowsPath('C:/Users/<user>/AppData/Local/Temp/pytest-of-<user>/pytest-3/test_ac2_1_invalid_boolean_rai4')
+breakfast = 'FALSE'
+
+    @pytest.mark.parametrize("breakfast", ["yes", "1", "", "True", "FALSE"])
+    def test_ac2_1_invalid_boolean_raises(tmp_path, breakfast):
+        path = tmp_path / "hotels.csv"
+        path.write_text(csv_with(breakfast=breakfast), encoding="utf-8")
+        with pytest.raises(ValueError):
+>           main.load_fixtures(path)
+
+tests\test_recommendations.py:209: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+path = WindowsPath('C:/Users/<user>/AppData/Local/Temp/pytest-of-<user>/pytest-3/test_ac2_1_invalid_boolean_rai4/hotels.csv')
+
+    def load_fixtures(path: Path = FIXTURES_CSV) -> list[dict]:
+        """Red stub so the tests load. Not called at import yet. Implemented in the green step."""
+>       raise NotImplementedError
+E       NotImplementedError
+
+app\main.py:13: NotImplementedError
+_____________ test_ac2_1_non_numeric_nan_or_inf_price_raises[abc] _____________
+
+tmp_path = WindowsPath('C:/Users/<user>/AppData/Local/Temp/pytest-of-<user>/pytest-3/test_ac2_1_non_numeric_nan_or_0')
+price = 'abc'
+
+    @pytest.mark.parametrize("price", ["abc", "", "nan", "inf", "-inf"])
+    def test_ac2_1_non_numeric_nan_or_inf_price_raises(tmp_path, price):
+        path = tmp_path / "hotels.csv"
+        path.write_text(csv_with(price=price), encoding="utf-8")
+        with pytest.raises(ValueError):
+>           main.load_fixtures(path)
+
+tests\test_recommendations.py:217: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+path = WindowsPath('C:/Users/<user>/AppData/Local/Temp/pytest-of-<user>/pytest-3/test_ac2_1_non_numeric_nan_or_0/hotels.csv')
+
+    def load_fixtures(path: Path = FIXTURES_CSV) -> list[dict]:
+        """Red stub so the tests load. Not called at import yet. Implemented in the green step."""
+>       raise NotImplementedError
+E       NotImplementedError
+
+app\main.py:13: NotImplementedError
+______________ test_ac2_1_non_numeric_nan_or_inf_price_raises[] _______________
+
+tmp_path = WindowsPath('C:/Users/<user>/AppData/Local/Temp/pytest-of-<user>/pytest-3/test_ac2_1_non_numeric_nan_or_1')
+price = ''
+
+    @pytest.mark.parametrize("price", ["abc", "", "nan", "inf", "-inf"])
+    def test_ac2_1_non_numeric_nan_or_inf_price_raises(tmp_path, price):
+        path = tmp_path / "hotels.csv"
+        path.write_text(csv_with(price=price), encoding="utf-8")
+        with pytest.raises(ValueError):
+>           main.load_fixtures(path)
+
+tests\test_recommendations.py:217: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+path = WindowsPath('C:/Users/<user>/AppData/Local/Temp/pytest-of-<user>/pytest-3/test_ac2_1_non_numeric_nan_or_1/hotels.csv')
+
+    def load_fixtures(path: Path = FIXTURES_CSV) -> list[dict]:
+        """Red stub so the tests load. Not called at import yet. Implemented in the green step."""
+>       raise NotImplementedError
+E       NotImplementedError
+
+app\main.py:13: NotImplementedError
+_____________ test_ac2_1_non_numeric_nan_or_inf_price_raises[nan] _____________
+
+tmp_path = WindowsPath('C:/Users/<user>/AppData/Local/Temp/pytest-of-<user>/pytest-3/test_ac2_1_non_numeric_nan_or_2')
+price = 'nan'
+
+    @pytest.mark.parametrize("price", ["abc", "", "nan", "inf", "-inf"])
+    def test_ac2_1_non_numeric_nan_or_inf_price_raises(tmp_path, price):
+        path = tmp_path / "hotels.csv"
+        path.write_text(csv_with(price=price), encoding="utf-8")
+        with pytest.raises(ValueError):
+>           main.load_fixtures(path)
+
+tests\test_recommendations.py:217: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+path = WindowsPath('C:/Users/<user>/AppData/Local/Temp/pytest-of-<user>/pytest-3/test_ac2_1_non_numeric_nan_or_2/hotels.csv')
+
+    def load_fixtures(path: Path = FIXTURES_CSV) -> list[dict]:
+        """Red stub so the tests load. Not called at import yet. Implemented in the green step."""
+>       raise NotImplementedError
+E       NotImplementedError
+
+app\main.py:13: NotImplementedError
+_____________ test_ac2_1_non_numeric_nan_or_inf_price_raises[inf] _____________
+
+tmp_path = WindowsPath('C:/Users/<user>/AppData/Local/Temp/pytest-of-<user>/pytest-3/test_ac2_1_non_numeric_nan_or_3')
+price = 'inf'
+
+    @pytest.mark.parametrize("price", ["abc", "", "nan", "inf", "-inf"])
+    def test_ac2_1_non_numeric_nan_or_inf_price_raises(tmp_path, price):
+        path = tmp_path / "hotels.csv"
+        path.write_text(csv_with(price=price), encoding="utf-8")
+        with pytest.raises(ValueError):
+>           main.load_fixtures(path)
+
+tests\test_recommendations.py:217: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+path = WindowsPath('C:/Users/<user>/AppData/Local/Temp/pytest-of-<user>/pytest-3/test_ac2_1_non_numeric_nan_or_3/hotels.csv')
+
+    def load_fixtures(path: Path = FIXTURES_CSV) -> list[dict]:
+        """Red stub so the tests load. Not called at import yet. Implemented in the green step."""
+>       raise NotImplementedError
+E       NotImplementedError
+
+app\main.py:13: NotImplementedError
+____________ test_ac2_1_non_numeric_nan_or_inf_price_raises[-inf] _____________
+
+tmp_path = WindowsPath('C:/Users/<user>/AppData/Local/Temp/pytest-of-<user>/pytest-3/test_ac2_1_non_numeric_nan_or_4')
+price = '-inf'
+
+    @pytest.mark.parametrize("price", ["abc", "", "nan", "inf", "-inf"])
+    def test_ac2_1_non_numeric_nan_or_inf_price_raises(tmp_path, price):
+        path = tmp_path / "hotels.csv"
+        path.write_text(csv_with(price=price), encoding="utf-8")
+        with pytest.raises(ValueError):
+>           main.load_fixtures(path)
+
+tests\test_recommendations.py:217: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+path = WindowsPath('C:/Users/<user>/AppData/Local/Temp/pytest-of-<user>/pytest-3/test_ac2_1_non_numeric_nan_or_4/hotels.csv')
+
+    def load_fixtures(path: Path = FIXTURES_CSV) -> list[dict]:
+        """Red stub so the tests load. Not called at import yet. Implemented in the green step."""
+>       raise NotImplementedError
+E       NotImplementedError
+
+app\main.py:13: NotImplementedError
+______ test_ac2_1_bad_fixture_data_stops_the_app_importing[bad-boolean] _______
+
+tmp_path = WindowsPath('C:/Users/<user>/AppData/Local/Temp/pytest-of-<user>/pytest-3/test_ac2_1_bad_fixture_data_st0')
+bad_csv = 'id,name,nightlyPrice,currency,breakfastIncluded,explanation\nh1,Harbour House,220,NZD,yes,Within budget.\n'
+
+    @pytest.mark.parametrize(
+        "bad_csv",
+        [pytest.param(csv_with(breakfast="yes"), id="bad-boolean"), pytest.param(csv_with(price="nan"), id="bad-price")],
+    )
+    def test_ac2_1_bad_fixture_data_stops_the_app_importing(tmp_path, bad_csv):
+        good = copy_app(tmp_path / "good")
+        control = run_python("import app.main", good)
+        assert control.returncode == 0, control.stderr
+    
+        bad = copy_app(tmp_path / "bad", bad_csv)
+        result = run_python("import app.main", bad)
+>       assert result.returncode != 0
+E       AssertionError: assert 0 != 0
+E        +  where 0 = CompletedProcess(args=['<repo>\\api\\.venv\\Scripts\\python.exe', '-c', 'import app.main'], returncode=0, stdout='', stderr='').returncode
+
+tests\test_recommendations.py:231: AssertionError
+_______ test_ac2_1_bad_fixture_data_stops_the_app_importing[bad-price] ________
+
+tmp_path = WindowsPath('C:/Users/<user>/AppData/Local/Temp/pytest-of-<user>/pytest-3/test_ac2_1_bad_fixture_data_st1')
+bad_csv = 'id,name,nightlyPrice,currency,breakfastIncluded,explanation\nh1,Harbour House,nan,NZD,true,Within budget.\n'
+
+    @pytest.mark.parametrize(
+        "bad_csv",
+        [pytest.param(csv_with(breakfast="yes"), id="bad-boolean"), pytest.param(csv_with(price="nan"), id="bad-price")],
+    )
+    def test_ac2_1_bad_fixture_data_stops_the_app_importing(tmp_path, bad_csv):
+        good = copy_app(tmp_path / "good")
+        control = run_python("import app.main", good)
+        assert control.returncode == 0, control.stderr
+    
+        bad = copy_app(tmp_path / "bad", bad_csv)
+        result = run_python("import app.main", bad)
+>       assert result.returncode != 0
+E       AssertionError: assert 0 != 0
+E        +  where 0 = CompletedProcess(args=['<repo>\\api\\.venv\\Scripts\\python.exe', '-c', 'import app.main'], returncode=0, stdout='', stderr='').returncode
+
+tests\test_recommendations.py:231: AssertionError
+______ test_ac2_2_invalid_message_returns_422_naming_the_field[missing] _______
+
+client = <starlette.testclient.TestClient object at 0x000001A940AEFB00>
+payload = {'scenario': 'success'}
+
+    @pytest.mark.parametrize("payload", INVALID_MESSAGE_PAYLOADS)
+    def test_ac2_2_invalid_message_returns_422_naming_the_field(client, payload):
+>       assert "message" in assert_validation_error(post_json(client, payload))
+                            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests\test_recommendations.py:240: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+response = <Response [404 Not Found]>
+
+    def assert_validation_error(response):
+>       assert response.status_code == 422
+E       assert 404 == 422
+E        +  where 404 = <Response [404 Not Found]>.status_code
+
+tests\test_recommendations.py:133: AssertionError
+_______ test_ac2_2_invalid_message_returns_422_naming_the_field[empty] ________
+
+client = <starlette.testclient.TestClient object at 0x000001A940A0DB50>
+payload = {'message': ''}
+
+    @pytest.mark.parametrize("payload", INVALID_MESSAGE_PAYLOADS)
+    def test_ac2_2_invalid_message_returns_422_naming_the_field(client, payload):
+>       assert "message" in assert_validation_error(post_json(client, payload))
+                            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests\test_recommendations.py:240: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+response = <Response [404 Not Found]>
+
+    def assert_validation_error(response):
+>       assert response.status_code == 422
+E       assert 404 == 422
+E        +  where 404 = <Response [404 Not Found]>.status_code
+
+tests\test_recommendations.py:133: AssertionError
+_______ test_ac2_2_invalid_message_returns_422_naming_the_field[spaces] _______
+
+client = <starlette.testclient.TestClient object at 0x000001A940A0E360>
+payload = {'message': '   '}
+
+    @pytest.mark.parametrize("payload", INVALID_MESSAGE_PAYLOADS)
+    def test_ac2_2_invalid_message_returns_422_naming_the_field(client, payload):
+>       assert "message" in assert_validation_error(post_json(client, payload))
+                            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests\test_recommendations.py:240: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+response = <Response [404 Not Found]>
+
+    def assert_validation_error(response):
+>       assert response.status_code == 422
+E       assert 404 == 422
+E        +  where 404 = <Response [404 Not Found]>.status_code
+
+tests\test_recommendations.py:133: AssertionError
+____ test_ac2_2_invalid_message_returns_422_naming_the_field[tab-newline] _____
+
+client = <starlette.testclient.TestClient object at 0x000001A940A0CB90>
+payload = {'message': '\t\n'}
+
+    @pytest.mark.parametrize("payload", INVALID_MESSAGE_PAYLOADS)
+    def test_ac2_2_invalid_message_returns_422_naming_the_field(client, payload):
+>       assert "message" in assert_validation_error(post_json(client, payload))
+                            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests\test_recommendations.py:240: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+response = <Response [404 Not Found]>
+
+    def assert_validation_error(response):
+>       assert response.status_code == 422
+E       assert 404 == 422
+E        +  where 404 = <Response [404 Not Found]>.status_code
+
+tests\test_recommendations.py:133: AssertionError
+________ test_ac2_2_invalid_message_returns_422_naming_the_field[null] ________
+
+client = <starlette.testclient.TestClient object at 0x000001A940A79C40>
+payload = {'message': None}
+
+    @pytest.mark.parametrize("payload", INVALID_MESSAGE_PAYLOADS)
+    def test_ac2_2_invalid_message_returns_422_naming_the_field(client, payload):
+>       assert "message" in assert_validation_error(post_json(client, payload))
+                            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests\test_recommendations.py:240: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+response = <Response [404 Not Found]>
+
+    def assert_validation_error(response):
+>       assert response.status_code == 422
+E       assert 404 == 422
+E        +  where 404 = <Response [404 Not Found]>.status_code
+
+tests\test_recommendations.py:133: AssertionError
+_______ test_ac2_2_invalid_message_returns_422_naming_the_field[number] _______
+
+client = <starlette.testclient.TestClient object at 0x000001A940A7AB10>
+payload = {'message': 42}
+
+    @pytest.mark.parametrize("payload", INVALID_MESSAGE_PAYLOADS)
+    def test_ac2_2_invalid_message_returns_422_naming_the_field(client, payload):
+>       assert "message" in assert_validation_error(post_json(client, payload))
+                            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests\test_recommendations.py:240: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+response = <Response [404 Not Found]>
+
+    def assert_validation_error(response):
+>       assert response.status_code == 422
+E       assert 404 == 422
+E        +  where 404 = <Response [404 Not Found]>.status_code
+
+tests\test_recommendations.py:133: AssertionError
+______ test_ac2_2_invalid_message_returns_422_naming_the_field[boolean] _______
+
+client = <starlette.testclient.TestClient object at 0x000001A940A0CB90>
+payload = {'message': True}
+
+    @pytest.mark.parametrize("payload", INVALID_MESSAGE_PAYLOADS)
+    def test_ac2_2_invalid_message_returns_422_naming_the_field(client, payload):
+>       assert "message" in assert_validation_error(post_json(client, payload))
+                            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests\test_recommendations.py:240: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+response = <Response [404 Not Found]>
+
+    def assert_validation_error(response):
+>       assert response.status_code == 422
+E       assert 404 == 422
+E        +  where 404 = <Response [404 Not Found]>.status_code
+
+tests\test_recommendations.py:133: AssertionError
+________ test_ac2_2_invalid_message_returns_422_naming_the_field[list] ________
+
+client = <starlette.testclient.TestClient object at 0x000001A940A0E9C0>
+payload = {'message': ['hi']}
+
+    @pytest.mark.parametrize("payload", INVALID_MESSAGE_PAYLOADS)
+    def test_ac2_2_invalid_message_returns_422_naming_the_field(client, payload):
+>       assert "message" in assert_validation_error(post_json(client, payload))
+                            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests\test_recommendations.py:240: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+response = <Response [404 Not Found]>
+
+    def assert_validation_error(response):
+>       assert response.status_code == 422
+E       assert 404 == 422
+E        +  where 404 = <Response [404 Not Found]>.status_code
+
+tests\test_recommendations.py:133: AssertionError
+_______ test_ac2_2_invalid_message_returns_422_naming_the_field[object] _______
+
+client = <starlette.testclient.TestClient object at 0x000001A940A0D700>
+payload = {'message': {'text': 'hi'}}
+
+    @pytest.mark.parametrize("payload", INVALID_MESSAGE_PAYLOADS)
+    def test_ac2_2_invalid_message_returns_422_naming_the_field(client, payload):
+>       assert "message" in assert_validation_error(post_json(client, payload))
+                            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests\test_recommendations.py:240: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+response = <Response [404 Not Found]>
+
+    def assert_validation_error(response):
+>       assert response.status_code == 422
+E       assert 404 == 422
+E        +  where 404 = <Response [404 Not Found]>.status_code
+
+tests\test_recommendations.py:133: AssertionError
+____ test_ac2_2_several_errors_report_only_the_first[message-and-scenario] ____
+
+client = <starlette.testclient.TestClient object at 0x000001A940AEF170>
+payload = {'message': '', 'scenario': 'nope'}
+
+    @pytest.mark.parametrize(
+        "payload",
+        [
+            pytest.param({"message": "", "scenario": "nope"}, id="message-and-scenario"),
+            pytest.param({"scenario": "nope"}, id="missing-message-and-scenario"),
+            pytest.param({"message": "", "scenario": "nope", "hiddenField": 1}, id="message-scenario-and-unknown-field"),
+        ],
+    )
+    def test_ac2_2_several_errors_report_only_the_first(client, payload):
+>       text = assert_validation_error(post_json(client, payload))
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests\test_recommendations.py:252: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+response = <Response [404 Not Found]>
+
+    def assert_validation_error(response):
+>       assert response.status_code == 422
+E       assert 404 == 422
+E        +  where 404 = <Response [404 Not Found]>.status_code
+
+tests\test_recommendations.py:133: AssertionError
+_ test_ac2_2_several_errors_report_only_the_first[missing-message-and-scenario] _
+
+client = <starlette.testclient.TestClient object at 0x000001A940AC4080>
+payload = {'scenario': 'nope'}
+
+    @pytest.mark.parametrize(
+        "payload",
+        [
+            pytest.param({"message": "", "scenario": "nope"}, id="message-and-scenario"),
+            pytest.param({"scenario": "nope"}, id="missing-message-and-scenario"),
+            pytest.param({"message": "", "scenario": "nope", "hiddenField": 1}, id="message-scenario-and-unknown-field"),
+        ],
+    )
+    def test_ac2_2_several_errors_report_only_the_first(client, payload):
+>       text = assert_validation_error(post_json(client, payload))
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests\test_recommendations.py:252: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+response = <Response [404 Not Found]>
+
+    def assert_validation_error(response):
+>       assert response.status_code == 422
+E       assert 404 == 422
+E        +  where 404 = <Response [404 Not Found]>.status_code
+
+tests\test_recommendations.py:133: AssertionError
+_ test_ac2_2_several_errors_report_only_the_first[message-scenario-and-unknown-field] _
+
+client = <starlette.testclient.TestClient object at 0x000001A940A79550>
+payload = {'hiddenField': 1, 'message': '', 'scenario': 'nope'}
+
+    @pytest.mark.parametrize(
+        "payload",
+        [
+            pytest.param({"message": "", "scenario": "nope"}, id="message-and-scenario"),
+            pytest.param({"scenario": "nope"}, id="missing-message-and-scenario"),
+            pytest.param({"message": "", "scenario": "nope", "hiddenField": 1}, id="message-scenario-and-unknown-field"),
+        ],
+    )
+    def test_ac2_2_several_errors_report_only_the_first(client, payload):
+>       text = assert_validation_error(post_json(client, payload))
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests\test_recommendations.py:252: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+response = <Response [404 Not Found]>
+
+    def assert_validation_error(response):
+>       assert response.status_code == 422
+E       assert 404 == 422
+E        +  where 404 = <Response [404 Not Found]>.status_code
+
+tests\test_recommendations.py:133: AssertionError
+____________ test_ac2_3_success_returns_exactly_the_three_fixtures ____________
+
+client = <starlette.testclient.TestClient object at 0x000001A940A7BE60>
+
+    def test_ac2_3_success_returns_exactly_the_three_fixtures(client):
+        response = post_json(client, {"message": MSG, "scenario": "success"})
+>       assert response.status_code == 200
+E       assert 404 == 200
+E        +  where 404 = <Response [404 Not Found]>.status_code
+
+tests\test_recommendations.py:263: AssertionError
+________________ test_ac2_4_no_scenario_is_treated_as_success _________________
+
+client = <starlette.testclient.TestClient object at 0x000001A940A7B6B0>
+
+    def test_ac2_4_no_scenario_is_treated_as_success(client):
+        response = post_json(client, {"message": MSG})
+>       assert response.status_code == 200
+E       assert 404 == 200
+E        +  where 404 = <Response [404 Not Found]>.status_code
+
+tests\test_recommendations.py:269: AssertionError
+_________________ test_ac2_5_empty_scenario_returns_no_hotels _________________
+
+client = <starlette.testclient.TestClient object at 0x000001A940A411F0>
+
+    def test_ac2_5_empty_scenario_returns_no_hotels(client):
+        response = post_json(client, {"message": MSG, "scenario": "empty"})
+>       assert response.status_code == 200
+E       assert 404 == 200
+E        +  where 404 = <Response [404 Not Found]>.status_code
+
+tests\test_recommendations.py:275: AssertionError
+_______________ test_ac2_6_error_scenario_returns_retryable_503 _______________
+
+client = <starlette.testclient.TestClient object at 0x000001A940A429F0>
+
+    def test_ac2_6_error_scenario_returns_retryable_503(client):
+        response = post_json(client, {"message": MSG, "scenario": "error"})
+>       assert response.status_code == 503
+E       assert 404 == 503
+E        +  where 404 = <Response [404 Not Found]>.status_code
+
+tests\test_recommendations.py:281: AssertionError
+_ test_ac2_7_unknown_or_null_scenario_returns_422_naming_scenario[unknown-scenario] _
+
+client = <starlette.testclient.TestClient object at 0x000001A940A41970>
+payload = {'message': 'Find a Wellington hotel for two nights, up to NZD 250 per night; breakfast preferred.', 'scenario': 'nope'}
+
+    @pytest.mark.parametrize("payload", INVALID_SCENARIO_PAYLOADS)
+    def test_ac2_7_unknown_or_null_scenario_returns_422_naming_scenario(client, payload):
+>       assert "scenario" in assert_validation_error(post_json(client, payload))
+                             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests\test_recommendations.py:290: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+response = <Response [404 Not Found]>
+
+    def assert_validation_error(response):
+>       assert response.status_code == 422
+E       assert 404 == 422
+E        +  where 404 = <Response [404 Not Found]>.status_code
+
+tests\test_recommendations.py:133: AssertionError
+_ test_ac2_7_unknown_or_null_scenario_returns_422_naming_scenario[null-scenario] _
+
+client = <starlette.testclient.TestClient object at 0x000001A940A054F0>
+payload = {'message': 'Find a Wellington hotel for two nights, up to NZD 250 per night; breakfast preferred.', 'scenario': None}
+
+    @pytest.mark.parametrize("payload", INVALID_SCENARIO_PAYLOADS)
+    def test_ac2_7_unknown_or_null_scenario_returns_422_naming_scenario(client, payload):
+>       assert "scenario" in assert_validation_error(post_json(client, payload))
+                             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests\test_recommendations.py:290: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+response = <Response [404 Not Found]>
+
+    def assert_validation_error(response):
+>       assert response.status_code == 422
+E       assert 404 == 422
+E        +  where 404 = <Response [404 Not Found]>.status_code
+
+tests\test_recommendations.py:133: AssertionError
+___________ test_ac2_7_unknown_field_returns_422_without_echoing_it ___________
+
+client = <starlette.testclient.TestClient object at 0x000001A940A438C0>
+
+    def test_ac2_7_unknown_field_returns_422_without_echoing_it(client):
+>       assert assert_validation_error(post_json(client, UNKNOWN_FIELD_PAYLOAD)) == UNKNOWN_FIELD_MESSAGE
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests\test_recommendations.py:294: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+response = <Response [404 Not Found]>
+
+    def assert_validation_error(response):
+>       assert response.status_code == 422
+E       assert 404 == 422
+E        +  where 404 = <Response [404 Not Found]>.status_code
+
+tests\test_recommendations.py:133: AssertionError
+_____________ test_ac2_7_message_over_500_characters_returns_422 ______________
+
+client = <starlette.testclient.TestClient object at 0x000001A940A40950>
+
+    def test_ac2_7_message_over_500_characters_returns_422(client):
+>       assert "message" in assert_validation_error(post_json(client, {"message": "x" * 501}))
+                            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests\test_recommendations.py:298: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+response = <Response [404 Not Found]>
+
+    def assert_validation_error(response):
+>       assert response.status_code == 422
+E       assert 404 == 422
+E        +  where 404 = <Response [404 Not Found]>.status_code
+
+tests\test_recommendations.py:133: AssertionError
+__________ test_ac2_7_message_of_exactly_500_characters_is_accepted ___________
+
+client = <starlette.testclient.TestClient object at 0x000001A940A414F0>
+
+    def test_ac2_7_message_of_exactly_500_characters_is_accepted(client):
+        response = post_json(client, {"message": "x" * 500})
+>       assert response.status_code == 200
+E       assert 404 == 200
+E        +  where 404 = <Response [404 Not Found]>.status_code
+
+tests\test_recommendations.py:303: AssertionError
+_____ test_ac2_7_unreadable_body_returns_422_with_plain_message[non-json] _____
+
+client = <starlette.testclient.TestClient object at 0x000001A940A79E20>
+content = b'not json'
+
+    @pytest.mark.parametrize("content", UNREADABLE_BODIES)
+    def test_ac2_7_unreadable_body_returns_422_with_plain_message(client, content):
+>       assert assert_validation_error(post_raw(client, content)) == BODY_MESSAGE
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests\test_recommendations.py:309: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+response = <Response [404 Not Found]>
+
+    def assert_validation_error(response):
+>       assert response.status_code == 422
+E       assert 404 == 422
+E        +  where 404 = <Response [404 Not Found]>.status_code
+
+tests\test_recommendations.py:133: AssertionError
+___ test_ac2_7_unreadable_body_returns_422_with_plain_message[invalid-utf8] ___
+
+client = <starlette.testclient.TestClient object at 0x000001A940BAAED0>
+content = b'{"message": "caf\xff"}'
+
+    @pytest.mark.parametrize("content", UNREADABLE_BODIES)
+    def test_ac2_7_unreadable_body_returns_422_with_plain_message(client, content):
+>       assert assert_validation_error(post_raw(client, content)) == BODY_MESSAGE
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests\test_recommendations.py:309: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+response = <Response [404 Not Found]>
+
+    def assert_validation_error(response):
+>       assert response.status_code == 422
+E       assert 404 == 422
+E        +  where 404 = <Response [404 Not Found]>.status_code
+
+tests\test_recommendations.py:133: AssertionError
+_____ test_ac2_7_unreadable_body_returns_422_with_plain_message[no-body] ______
+
+client = <starlette.testclient.TestClient object at 0x000001A940AC7BC0>
+content = b''
+
+    @pytest.mark.parametrize("content", UNREADABLE_BODIES)
+    def test_ac2_7_unreadable_body_returns_422_with_plain_message(client, content):
+>       assert assert_validation_error(post_raw(client, content)) == BODY_MESSAGE
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests\test_recommendations.py:309: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+response = <Response [404 Not Found]>
+
+    def assert_validation_error(response):
+>       assert response.status_code == 422
+E       assert 404 == 422
+E        +  where 404 = <Response [404 Not Found]>.status_code
+
+tests\test_recommendations.py:133: AssertionError
+___ test_ac2_7_unreadable_body_returns_422_with_plain_message[empty-array] ____
+
+client = <starlette.testclient.TestClient object at 0x000001A940A0F1D0>
+content = b'[]'
+
+    @pytest.mark.parametrize("content", UNREADABLE_BODIES)
+    def test_ac2_7_unreadable_body_returns_422_with_plain_message(client, content):
+>       assert assert_validation_error(post_raw(client, content)) == BODY_MESSAGE
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests\test_recommendations.py:309: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+response = <Response [404 Not Found]>
+
+    def assert_validation_error(response):
+>       assert response.status_code == 422
+E       assert 404 == 422
+E        +  where 404 = <Response [404 Not Found]>.status_code
+
+tests\test_recommendations.py:133: AssertionError
+_ test_ac2_7_unreadable_body_returns_422_with_plain_message[array-of-object] __
+
+client = <starlette.testclient.TestClient object at 0x000001A940A0D550>
+content = b'[{"message": "hi"}]'
+
+    @pytest.mark.parametrize("content", UNREADABLE_BODIES)
+    def test_ac2_7_unreadable_body_returns_422_with_plain_message(client, content):
+>       assert assert_validation_error(post_raw(client, content)) == BODY_MESSAGE
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests\test_recommendations.py:309: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+response = <Response [404 Not Found]>
+
+    def assert_validation_error(response):
+>       assert response.status_code == 422
+E       assert 404 == 422
+E        +  where 404 = <Response [404 Not Found]>.status_code
+
+tests\test_recommendations.py:133: AssertionError
+_________ test_ac2_7_request_with_no_body_or_content_type_returns_422 _________
+
+client = <starlette.testclient.TestClient object at 0x000001A940AFB9E0>
+
+    def test_ac2_7_request_with_no_body_or_content_type_returns_422(client):
+>       assert assert_validation_error(client.post("/recommendations")) == BODY_MESSAGE
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests\test_recommendations.py:313: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+response = <Response [404 Not Found]>
+
+    def assert_validation_error(response):
+>       assert response.status_code == 422
+E       assert 404 == 422
+E        +  where 404 = <Response [404 Not Found]>.status_code
+
+tests\test_recommendations.py:133: AssertionError
+___________ test_ac2_7_validation_runs_before_the_scenario[success] ___________
+
+client = <starlette.testclient.TestClient object at 0x000001A940A05AC0>
+scenario = 'success'
+
+    @pytest.mark.parametrize("scenario", ["success", "empty", "error"])
+    def test_ac2_7_validation_runs_before_the_scenario(client, scenario):
+>       assert "message" in assert_validation_error(post_json(client, {"message": "", "scenario": scenario}))
+                            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests\test_recommendations.py:318: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+response = <Response [404 Not Found]>
+
+    def assert_validation_error(response):
+>       assert response.status_code == 422
+E       assert 404 == 422
+E        +  where 404 = <Response [404 Not Found]>.status_code
+
+tests\test_recommendations.py:133: AssertionError
+____________ test_ac2_7_validation_runs_before_the_scenario[empty] ____________
+
+client = <starlette.testclient.TestClient object at 0x000001A940A07DD0>
+scenario = 'empty'
+
+    @pytest.mark.parametrize("scenario", ["success", "empty", "error"])
+    def test_ac2_7_validation_runs_before_the_scenario(client, scenario):
+>       assert "message" in assert_validation_error(post_json(client, {"message": "", "scenario": scenario}))
+                            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests\test_recommendations.py:318: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+response = <Response [404 Not Found]>
+
+    def assert_validation_error(response):
+>       assert response.status_code == 422
+E       assert 404 == 422
+E        +  where 404 = <Response [404 Not Found]>.status_code
+
+tests\test_recommendations.py:133: AssertionError
+____________ test_ac2_7_validation_runs_before_the_scenario[error] ____________
+
+client = <starlette.testclient.TestClient object at 0x000001A940A89AC0>
+scenario = 'error'
+
+    @pytest.mark.parametrize("scenario", ["success", "empty", "error"])
+    def test_ac2_7_validation_runs_before_the_scenario(client, scenario):
+>       assert "message" in assert_validation_error(post_json(client, {"message": "", "scenario": scenario}))
+                            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests\test_recommendations.py:318: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+response = <Response [404 Not Found]>
+
+    def assert_validation_error(response):
+>       assert response.status_code == 422
+E       assert 404 == 422
+E        +  where 404 = <Response [404 Not Found]>.status_code
+
+tests\test_recommendations.py:133: AssertionError
+________ test_ac2_8_scenario_responses_match_the_contract[success-200] ________
+
+client = <starlette.testclient.TestClient object at 0x000001A940A073B0>
+scenario = 'success', status = 200
+
+    @pytest.mark.parametrize(
+        ("scenario", "status"),
+        [("success", 200), ("empty", 200), ("error", 503)],
+    )
+    def test_ac2_8_scenario_responses_match_the_contract(client, scenario, status):
+        response = post_json(client, {"message": MSG, "scenario": scenario})
+>       assert response.status_code == status
+E       assert 404 == 200
+E        +  where 404 = <Response [404 Not Found]>.status_code
+
+tests\test_recommendations.py:330: AssertionError
+_________ test_ac2_8_scenario_responses_match_the_contract[empty-200] _________
+
+client = <starlette.testclient.TestClient object at 0x000001A940A07230>
+scenario = 'empty', status = 200
+
+    @pytest.mark.parametrize(
+        ("scenario", "status"),
+        [("success", 200), ("empty", 200), ("error", 503)],
+    )
+    def test_ac2_8_scenario_responses_match_the_contract(client, scenario, status):
+        response = post_json(client, {"message": MSG, "scenario": scenario})
+>       assert response.status_code == status
+E       assert 404 == 200
+E        +  where 404 = <Response [404 Not Found]>.status_code
+
+tests\test_recommendations.py:330: AssertionError
+_________ test_ac2_8_scenario_responses_match_the_contract[error-503] _________
+
+client = <starlette.testclient.TestClient object at 0x000001A940A0D970>
+scenario = 'error', status = 503
+
+    @pytest.mark.parametrize(
+        ("scenario", "status"),
+        [("success", 200), ("empty", 200), ("error", 503)],
+    )
+    def test_ac2_8_scenario_responses_match_the_contract(client, scenario, status):
+        response = post_json(client, {"message": MSG, "scenario": scenario})
+>       assert response.status_code == status
+E       assert 404 == 503
+E        +  where 404 = <Response [404 Not Found]>.status_code
+
+tests\test_recommendations.py:330: AssertionError
+_______ test_ac2_8_rejected_json_responses_match_the_contract[missing] ________
+
+client = <starlette.testclient.TestClient object at 0x000001A940A0FE60>
+payload = {'scenario': 'success'}
+
+    @pytest.mark.parametrize("payload", REJECTED_JSON_PAYLOADS)
+    def test_ac2_8_rejected_json_responses_match_the_contract(client, payload):
+        response = post_json(client, payload)
+>       assert response.status_code == 422
+E       assert 404 == 422
+E        +  where 404 = <Response [404 Not Found]>.status_code
+
+tests\test_recommendations.py:337: AssertionError
+________ test_ac2_8_rejected_json_responses_match_the_contract[empty] _________
+
+client = <starlette.testclient.TestClient object at 0x000001A940B57590>
+payload = {'message': ''}
+
+    @pytest.mark.parametrize("payload", REJECTED_JSON_PAYLOADS)
+    def test_ac2_8_rejected_json_responses_match_the_contract(client, payload):
+        response = post_json(client, payload)
+>       assert response.status_code == 422
+E       assert 404 == 422
+E        +  where 404 = <Response [404 Not Found]>.status_code
+
+tests\test_recommendations.py:337: AssertionError
+________ test_ac2_8_rejected_json_responses_match_the_contract[spaces] ________
+
+client = <starlette.testclient.TestClient object at 0x000001A940AC6510>
+payload = {'message': '   '}
+
+    @pytest.mark.parametrize("payload", REJECTED_JSON_PAYLOADS)
+    def test_ac2_8_rejected_json_responses_match_the_contract(client, payload):
+        response = post_json(client, payload)
+>       assert response.status_code == 422
+E       assert 404 == 422
+E        +  where 404 = <Response [404 Not Found]>.status_code
+
+tests\test_recommendations.py:337: AssertionError
+_____ test_ac2_8_rejected_json_responses_match_the_contract[tab-newline] ______
+
+client = <starlette.testclient.TestClient object at 0x000001A940A78860>
+payload = {'message': '\t\n'}
+
+    @pytest.mark.parametrize("payload", REJECTED_JSON_PAYLOADS)
+    def test_ac2_8_rejected_json_responses_match_the_contract(client, payload):
+        response = post_json(client, payload)
+>       assert response.status_code == 422
+E       assert 404 == 422
+E        +  where 404 = <Response [404 Not Found]>.status_code
+
+tests\test_recommendations.py:337: AssertionError
+_________ test_ac2_8_rejected_json_responses_match_the_contract[null] _________
+
+client = <starlette.testclient.TestClient object at 0x000001A940A421B0>
+payload = {'message': None}
+
+    @pytest.mark.parametrize("payload", REJECTED_JSON_PAYLOADS)
+    def test_ac2_8_rejected_json_responses_match_the_contract(client, payload):
+        response = post_json(client, payload)
+>       assert response.status_code == 422
+E       assert 404 == 422
+E        +  where 404 = <Response [404 Not Found]>.status_code
+
+tests\test_recommendations.py:337: AssertionError
+________ test_ac2_8_rejected_json_responses_match_the_contract[number] ________
+
+client = <starlette.testclient.TestClient object at 0x000001A940A43920>
+payload = {'message': 42}
+
+    @pytest.mark.parametrize("payload", REJECTED_JSON_PAYLOADS)
+    def test_ac2_8_rejected_json_responses_match_the_contract(client, payload):
+        response = post_json(client, payload)
+>       assert response.status_code == 422
+E       assert 404 == 422
+E        +  where 404 = <Response [404 Not Found]>.status_code
+
+tests\test_recommendations.py:337: AssertionError
+_______ test_ac2_8_rejected_json_responses_match_the_contract[boolean] ________
+
+client = <starlette.testclient.TestClient object at 0x000001A940A8A4E0>
+payload = {'message': True}
+
+    @pytest.mark.parametrize("payload", REJECTED_JSON_PAYLOADS)
+    def test_ac2_8_rejected_json_responses_match_the_contract(client, payload):
+        response = post_json(client, payload)
+>       assert response.status_code == 422
+E       assert 404 == 422
+E        +  where 404 = <Response [404 Not Found]>.status_code
+
+tests\test_recommendations.py:337: AssertionError
+_________ test_ac2_8_rejected_json_responses_match_the_contract[list] _________
+
+client = <starlette.testclient.TestClient object at 0x000001A940A8BF20>
+payload = {'message': ['hi']}
+
+    @pytest.mark.parametrize("payload", REJECTED_JSON_PAYLOADS)
+    def test_ac2_8_rejected_json_responses_match_the_contract(client, payload):
+        response = post_json(client, payload)
+>       assert response.status_code == 422
+E       assert 404 == 422
+E        +  where 404 = <Response [404 Not Found]>.status_code
+
+tests\test_recommendations.py:337: AssertionError
+________ test_ac2_8_rejected_json_responses_match_the_contract[object] ________
+
+client = <starlette.testclient.TestClient object at 0x000001A940A8A660>
+payload = {'message': {'text': 'hi'}}
+
+    @pytest.mark.parametrize("payload", REJECTED_JSON_PAYLOADS)
+    def test_ac2_8_rejected_json_responses_match_the_contract(client, payload):
+        response = post_json(client, payload)
+>       assert response.status_code == 422
+E       assert 404 == 422
+E        +  where 404 = <Response [404 Not Found]>.status_code
+
+tests\test_recommendations.py:337: AssertionError
+____ test_ac2_8_rejected_json_responses_match_the_contract[over-500-chars] ____
+
+client = <starlette.testclient.TestClient object at 0x000001A940A89C70>
+payload = {'message': 'xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx...xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx'}
+
+    @pytest.mark.parametrize("payload", REJECTED_JSON_PAYLOADS)
+    def test_ac2_8_rejected_json_responses_match_the_contract(client, payload):
+        response = post_json(client, payload)
+>       assert response.status_code == 422
+E       assert 404 == 422
+E        +  where 404 = <Response [404 Not Found]>.status_code
+
+tests\test_recommendations.py:337: AssertionError
+___ test_ac2_8_rejected_json_responses_match_the_contract[unknown-scenario] ___
+
+client = <starlette.testclient.TestClient object at 0x000001A940A8AC90>
+payload = {'message': 'Find a Wellington hotel for two nights, up to NZD 250 per night; breakfast preferred.', 'scenario': 'nope'}
+
+    @pytest.mark.parametrize("payload", REJECTED_JSON_PAYLOADS)
+    def test_ac2_8_rejected_json_responses_match_the_contract(client, payload):
+        response = post_json(client, payload)
+>       assert response.status_code == 422
+E       assert 404 == 422
+E        +  where 404 = <Response [404 Not Found]>.status_code
+
+tests\test_recommendations.py:337: AssertionError
+____ test_ac2_8_rejected_json_responses_match_the_contract[null-scenario] _____
+
+client = <starlette.testclient.TestClient object at 0x000001A940A429F0>
+payload = {'message': 'Find a Wellington hotel for two nights, up to NZD 250 per night; breakfast preferred.', 'scenario': None}
+
+    @pytest.mark.parametrize("payload", REJECTED_JSON_PAYLOADS)
+    def test_ac2_8_rejected_json_responses_match_the_contract(client, payload):
+        response = post_json(client, payload)
+>       assert response.status_code == 422
+E       assert 404 == 422
+E        +  where 404 = <Response [404 Not Found]>.status_code
+
+tests\test_recommendations.py:337: AssertionError
+____ test_ac2_8_rejected_json_responses_match_the_contract[unknown-field] _____
+
+client = <starlette.testclient.TestClient object at 0x000001A940A42A50>
+payload = {'hiddenField': 1, 'message': 'Find a Wellington hotel for two nights, up to NZD 250 per night; breakfast preferred.'}
+
+    @pytest.mark.parametrize("payload", REJECTED_JSON_PAYLOADS)
+    def test_ac2_8_rejected_json_responses_match_the_contract(client, payload):
+        response = post_json(client, payload)
+>       assert response.status_code == 422
+E       assert 404 == 422
+E        +  where 404 = <Response [404 Not Found]>.status_code
+
+tests\test_recommendations.py:337: AssertionError
+_____ test_ac2_8_rejected_json_responses_match_the_contract[empty-array] ______
+
+client = <starlette.testclient.TestClient object at 0x000001A940A7AE70>
+payload = []
+
+    @pytest.mark.parametrize("payload", REJECTED_JSON_PAYLOADS)
+    def test_ac2_8_rejected_json_responses_match_the_contract(client, payload):
+        response = post_json(client, payload)
+>       assert response.status_code == 422
+E       assert 404 == 422
+E        +  where 404 = <Response [404 Not Found]>.status_code
+
+tests\test_recommendations.py:337: AssertionError
+___ test_ac2_8_rejected_json_responses_match_the_contract[array-of-object] ____
+
+client = <starlette.testclient.TestClient object at 0x000001A940AC7CB0>
+payload = [{'message': 'hi'}]
+
+    @pytest.mark.parametrize("payload", REJECTED_JSON_PAYLOADS)
+    def test_ac2_8_rejected_json_responses_match_the_contract(client, payload):
+        response = post_json(client, payload)
+>       assert response.status_code == 422
+E       assert 404 == 422
+E        +  where 404 = <Response [404 Not Found]>.status_code
+
+tests\test_recommendations.py:337: AssertionError
+______ test_ac2_8_unreadable_body_responses_match_the_contract[non-json] ______
+
+client = <starlette.testclient.TestClient object at 0x000001A940AFAEA0>
+content = b'not json'
+
+    @pytest.mark.parametrize("content", UNREADABLE_BODIES)
+    def test_ac2_8_unreadable_body_responses_match_the_contract(client, content):
+        response = post_raw(client, content)
+>       assert response.status_code == 422
+E       assert 404 == 422
+E        +  where 404 = <Response [404 Not Found]>.status_code
+
+tests\test_recommendations.py:344: AssertionError
+____ test_ac2_8_unreadable_body_responses_match_the_contract[invalid-utf8] ____
+
+client = <starlette.testclient.TestClient object at 0x000001A940A0FE60>
+content = b'{"message": "caf\xff"}'
+
+    @pytest.mark.parametrize("content", UNREADABLE_BODIES)
+    def test_ac2_8_unreadable_body_responses_match_the_contract(client, content):
+        response = post_raw(client, content)
+>       assert response.status_code == 422
+E       assert 404 == 422
+E        +  where 404 = <Response [404 Not Found]>.status_code
+
+tests\test_recommendations.py:344: AssertionError
+______ test_ac2_8_unreadable_body_responses_match_the_contract[no-body] _______
+
+client = <starlette.testclient.TestClient object at 0x000001A940A07CB0>
+content = b''
+
+    @pytest.mark.parametrize("content", UNREADABLE_BODIES)
+    def test_ac2_8_unreadable_body_responses_match_the_contract(client, content):
+        response = post_raw(client, content)
+>       assert response.status_code == 422
+E       assert 404 == 422
+E        +  where 404 = <Response [404 Not Found]>.status_code
+
+tests\test_recommendations.py:344: AssertionError
+____ test_ac2_8_unreadable_body_responses_match_the_contract[empty-array] _____
+
+client = <starlette.testclient.TestClient object at 0x000001A940A9AF60>
+content = b'[]'
+
+    @pytest.mark.parametrize("content", UNREADABLE_BODIES)
+    def test_ac2_8_unreadable_body_responses_match_the_contract(client, content):
+        response = post_raw(client, content)
+>       assert response.status_code == 422
+E       assert 404 == 422
+E        +  where 404 = <Response [404 Not Found]>.status_code
+
+tests\test_recommendations.py:344: AssertionError
+__ test_ac2_8_unreadable_body_responses_match_the_contract[array-of-object] ___
+
+client = <starlette.testclient.TestClient object at 0x000001A940A9AD80>
+content = b'[{"message": "hi"}]'
+
+    @pytest.mark.parametrize("content", UNREADABLE_BODIES)
+    def test_ac2_8_unreadable_body_responses_match_the_contract(client, content):
+        response = post_raw(client, content)
+>       assert response.status_code == 422
+E       assert 404 == 422
+E        +  where 404 = <Response [404 Not Found]>.status_code
+
+tests\test_recommendations.py:344: AssertionError
+____ test_ac2_9_every_scenario_waits_for_the_configured_delay[success-200] ____
+
+client = <starlette.testclient.TestClient object at 0x000001A940D6CC50>
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x000001A940D6C6B0>
+scenario = 'success', status = 200
+
+    @pytest.mark.parametrize(("scenario", "status"), [("success", 200), ("empty", 200), ("error", 503)])
+    def test_ac2_9_every_scenario_waits_for_the_configured_delay(client, monkeypatch, scenario, status):
+        monkeypatch.setenv("FIXTURE_DELAY_MS", "100")
+        started = time.perf_counter()
+        response = post_json(client, {"message": MSG, "scenario": scenario})
+        elapsed = time.perf_counter() - started
+>       assert response.status_code == status
+E       assert 404 == 200
+E        +  where 404 = <Response [404 Not Found]>.status_code
+
+tests\test_recommendations.py:369: AssertionError
+_____ test_ac2_9_every_scenario_waits_for_the_configured_delay[empty-200] _____
+
+client = <starlette.testclient.TestClient object at 0x000001A940A998B0>
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x000001A940A98C50>
+scenario = 'empty', status = 200
+
+    @pytest.mark.parametrize(("scenario", "status"), [("success", 200), ("empty", 200), ("error", 503)])
+    def test_ac2_9_every_scenario_waits_for_the_configured_delay(client, monkeypatch, scenario, status):
+        monkeypatch.setenv("FIXTURE_DELAY_MS", "100")
+        started = time.perf_counter()
+        response = post_json(client, {"message": MSG, "scenario": scenario})
+        elapsed = time.perf_counter() - started
+>       assert response.status_code == status
+E       assert 404 == 200
+E        +  where 404 = <Response [404 Not Found]>.status_code
+
+tests\test_recommendations.py:369: AssertionError
+_____ test_ac2_9_every_scenario_waits_for_the_configured_delay[error-503] _____
+
+client = <starlette.testclient.TestClient object at 0x000001A940A991F0>
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x000001A940A99D90>
+scenario = 'error', status = 503
+
+    @pytest.mark.parametrize(("scenario", "status"), [("success", 200), ("empty", 200), ("error", 503)])
+    def test_ac2_9_every_scenario_waits_for_the_configured_delay(client, monkeypatch, scenario, status):
+        monkeypatch.setenv("FIXTURE_DELAY_MS", "100")
+        started = time.perf_counter()
+        response = post_json(client, {"message": MSG, "scenario": scenario})
+        elapsed = time.perf_counter() - started
+>       assert response.status_code == status
+E       assert 404 == 503
+E        +  where 404 = <Response [404 Not Found]>.status_code
+
+tests\test_recommendations.py:369: AssertionError
+__________________ test_ac2_9_delay_is_read_on_each_request ___________________
+
+client = <starlette.testclient.TestClient object at 0x000001A940A9B620>
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x000001A940A9A750>
+
+    def test_ac2_9_delay_is_read_on_each_request(client, monkeypatch):
+        monkeypatch.setenv("FIXTURE_DELAY_MS", "400")
+        started = time.perf_counter()
+>       assert post_json(client, {"message": MSG}).status_code == 200
+E       AssertionError: assert 404 == 200
+E        +  where 404 = <Response [404 Not Found]>.status_code
+E        +    where <Response [404 Not Found]> = post_json(<starlette.testclient.TestClient object at 0x000001A940A9B620>, {'message': 'Find a Wellington hotel for two nights, up to NZD 250 per night; breakfast preferred.'})
+
+tests\test_recommendations.py:376: AssertionError
+________________ test_ac2_9_default_delay_is_800ms_when_unset _________________
+
+client = <starlette.testclient.TestClient object at 0x000001A940A07020>
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x000001A940A04740>
+
+    def test_ac2_9_default_delay_is_800ms_when_unset(client, monkeypatch):
+        monkeypatch.delenv("FIXTURE_DELAY_MS")
+        started = time.perf_counter()
+        response = post_json(client, {"message": MSG})
+        elapsed = time.perf_counter() - started
+>       assert response.status_code == 200
+E       assert 404 == 200
+E        +  where 404 = <Response [404 Not Found]>.status_code
+
+tests\test_recommendations.py:390: AssertionError
+______ test_ac2_9_non_numeric_or_negative_delay_falls_back_to_800ms[abc] ______
+
+client = <starlette.testclient.TestClient object at 0x000001A940A06540>
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x000001A940A07500>
+value = 'abc'
+
+    @pytest.mark.parametrize("value", ["abc", "", "-1"])
+    def test_ac2_9_non_numeric_or_negative_delay_falls_back_to_800ms(client, monkeypatch, value):
+        monkeypatch.setenv("FIXTURE_DELAY_MS", value)
+        started = time.perf_counter()
+        response = post_json(client, {"message": MSG})
+        elapsed = time.perf_counter() - started
+>       assert response.status_code == 200
+E       assert 404 == 200
+E        +  where 404 = <Response [404 Not Found]>.status_code
+
+tests\test_recommendations.py:400: AssertionError
+_______ test_ac2_9_non_numeric_or_negative_delay_falls_back_to_800ms[] ________
+
+client = <starlette.testclient.TestClient object at 0x000001A940A0C860>
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x000001A940A0C9E0>
+value = ''
+
+    @pytest.mark.parametrize("value", ["abc", "", "-1"])
+    def test_ac2_9_non_numeric_or_negative_delay_falls_back_to_800ms(client, monkeypatch, value):
+        monkeypatch.setenv("FIXTURE_DELAY_MS", value)
+        started = time.perf_counter()
+        response = post_json(client, {"message": MSG})
+        elapsed = time.perf_counter() - started
+>       assert response.status_code == 200
+E       assert 404 == 200
+E        +  where 404 = <Response [404 Not Found]>.status_code
+
+tests\test_recommendations.py:400: AssertionError
+______ test_ac2_9_non_numeric_or_negative_delay_falls_back_to_800ms[-1] _______
+
+client = <starlette.testclient.TestClient object at 0x000001A940AEE690>
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x000001A940AEECC0>
+value = '-1'
+
+    @pytest.mark.parametrize("value", ["abc", "", "-1"])
+    def test_ac2_9_non_numeric_or_negative_delay_falls_back_to_800ms(client, monkeypatch, value):
+        monkeypatch.setenv("FIXTURE_DELAY_MS", value)
+        started = time.perf_counter()
+        response = post_json(client, {"message": MSG})
+        elapsed = time.perf_counter() - started
+>       assert response.status_code == 200
+E       assert 404 == 200
+E        +  where 404 = <Response [404 Not Found]>.status_code
+
+tests\test_recommendations.py:400: AssertionError
+___________ test_ac2_9_a_422_returns_without_waiting[blank-message] ___________
+
+client = <starlette.testclient.TestClient object at 0x000001A940AC5760>
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x000001A940AC5F10>
+send = <function <lambda> at 0x000001A940BB8720>
+
+    @pytest.mark.parametrize(
+        "send",
+        [
+            pytest.param(lambda c: post_json(c, {"message": ""}), id="blank-message"),
+            pytest.param(lambda c: post_raw(c, b"not json"), id="non-json"),
+        ],
+    )
+    def test_ac2_9_a_422_returns_without_waiting(client, monkeypatch, send):
+        monkeypatch.setenv("FIXTURE_DELAY_MS", "2000")
+        started = time.perf_counter()
+        response = send(client)
+        elapsed = time.perf_counter() - started
+>       assert response.status_code == 422
+E       assert 404 == 422
+E        +  where 404 = <Response [404 Not Found]>.status_code
+
+tests\test_recommendations.py:416: AssertionError
+_____________ test_ac2_9_a_422_returns_without_waiting[non-json] ______________
+
+client = <starlette.testclient.TestClient object at 0x000001A940A7BA40>
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x000001A940A7A210>
+send = <function <lambda> at 0x000001A940BB87C0>
+
+    @pytest.mark.parametrize(
+        "send",
+        [
+            pytest.param(lambda c: post_json(c, {"message": ""}), id="blank-message"),
+            pytest.param(lambda c: post_raw(c, b"not json"), id="non-json"),
+        ],
+    )
+    def test_ac2_9_a_422_returns_without_waiting(client, monkeypatch, send):
+        monkeypatch.setenv("FIXTURE_DELAY_MS", "2000")
+        started = time.perf_counter()
+        response = send(client)
+        elapsed = time.perf_counter() - started
+>       assert response.status_code == 422
+E       assert 404 == 422
+E        +  where 404 = <Response [404 Not Found]>.status_code
+
+tests\test_recommendations.py:416: AssertionError
+_ test_ac2_10_preflight_allows_the_default_origin_for_post_with_content_type __
+
+client_with_origins = <function client_with_origins.<locals>.build at 0x000001A940A3CE00>
+
+    def test_ac2_10_preflight_allows_the_default_origin_for_post_with_content_type(client_with_origins):
+        response = preflight(client_with_origins(None))
+>       assert response.status_code == 200
+E       assert 404 == 200
+E        +  where 404 = <Response [404 Not Found]>.status_code
+
+tests\test_recommendations.py:425: AssertionError
+_ test_ac2_10_allowed_origins_are_comma_separated_with_spaces_trimmed[https://a.example] _
+
+client_with_origins = <function client_with_origins.<locals>.build at 0x000001A940A3CA40>
+origin = 'https://a.example'
+
+    @pytest.mark.parametrize("origin", ["https://a.example", "https://b.example"])
+    def test_ac2_10_allowed_origins_are_comma_separated_with_spaces_trimmed(client_with_origins, origin):
+        client = client_with_origins(" https://a.example , https://b.example ")
+>       assert preflight(client, origin=origin).headers.get("access-control-allow-origin") == origin
+E       AssertionError: assert None == 'https://a.example'
+E        +  where None = get('access-control-allow-origin')
+E        +    where get = Headers({'content-length': '22', 'content-type': 'application/json'}).get
+E        +      where Headers({'content-length': '22', 'content-type': 'application/json'}) = <Response [404 Not Found]>.headers
+E        +        where <Response [404 Not Found]> = preflight(<starlette.testclient.TestClient object at 0x000001A940A79700>, origin='https://a.example')
+
+tests\test_recommendations.py:434: AssertionError
+_ test_ac2_10_allowed_origins_are_comma_separated_with_spaces_trimmed[https://b.example] _
+
+client_with_origins = <function client_with_origins.<locals>.build at 0x000001A940A3FF60>
+origin = 'https://b.example'
+
+    @pytest.mark.parametrize("origin", ["https://a.example", "https://b.example"])
+    def test_ac2_10_allowed_origins_are_comma_separated_with_spaces_trimmed(client_with_origins, origin):
+        client = client_with_origins(" https://a.example , https://b.example ")
+>       assert preflight(client, origin=origin).headers.get("access-control-allow-origin") == origin
+E       AssertionError: assert None == 'https://b.example'
+E        +  where None = get('access-control-allow-origin')
+E        +    where get = Headers({'content-length': '22', 'content-type': 'application/json'}).get
+E        +      where Headers({'content-length': '22', 'content-type': 'application/json'}) = <Response [404 Not Found]>.headers
+E        +        where <Response [404 Not Found]> = preflight(<starlette.testclient.TestClient object at 0x000001A940A42D80>, origin='https://b.example')
+
+tests\test_recommendations.py:434: AssertionError
+__________ test_ac2_10_setting_allowed_origins_replaces_the_default ___________
+
+client_with_origins = <function client_with_origins.<locals>.build at 0x000001A940A14E00>
+
+    def test_ac2_10_setting_allowed_origins_replaces_the_default(client_with_origins):
+        client = client_with_origins("https://a.example")
+>       assert preflight(client, origin="https://a.example").headers.get("access-control-allow-origin") == "https://a.example"
+E       AssertionError: assert None == 'https://a.example'
+E        +  where None = get('access-control-allow-origin')
+E        +    where get = Headers({'content-length': '22', 'content-type': 'application/json'}).get
+E        +      where Headers({'content-length': '22', 'content-type': 'application/json'}) = <Response [404 Not Found]>.headers
+E        +        where <Response [404 Not Found]> = preflight(<starlette.testclient.TestClient object at 0x000001A940A05940>, origin='https://a.example')
+
+tests\test_recommendations.py:439: AssertionError
+____________________ test_ac2_10_other_origins_are_refused ____________________
+
+client_with_origins = <function client_with_origins.<locals>.build at 0x000001A940A3E520>
+
+    def test_ac2_10_other_origins_are_refused(client_with_origins):
+        client = client_with_origins(None)
+>       assert preflight(client).headers.get("access-control-allow-origin") == LOCAL_ORIGIN
+E       AssertionError: assert None == 'http://localhost:3000'
+E        +  where None = get('access-control-allow-origin')
+E        +    where get = Headers({'content-length': '22', 'content-type': 'application/json'}).get
+E        +      where Headers({'content-length': '22', 'content-type': 'application/json'}) = <Response [404 Not Found]>.headers
+E        +        where <Response [404 Not Found]> = preflight(<starlette.testclient.TestClient object at 0x000001A940A8A240>)
+
+tests\test_recommendations.py:445: AssertionError
+____________________ test_ac2_10_only_post_is_allowed[GET] ____________________
+
+client_with_origins = <function client_with_origins.<locals>.build at 0x000001A940A3E980>
+method = 'GET'
+
+    @pytest.mark.parametrize("method", ["GET", "PUT", "DELETE"])
+    def test_ac2_10_only_post_is_allowed(client_with_origins, method):
+        client = client_with_origins(None)
+>       assert "POST" in preflight(client).headers.get("access-control-allow-methods", "")
+E       AssertionError: assert 'POST' in ''
+E        +  where '' = get('access-control-allow-methods', '')
+E        +    where get = Headers({'content-length': '22', 'content-type': 'application/json'}).get
+E        +      where Headers({'content-length': '22', 'content-type': 'application/json'}) = <Response [404 Not Found]>.headers
+E        +        where <Response [404 Not Found]> = preflight(<starlette.testclient.TestClient object at 0x000001A940A88E30>)
+
+tests\test_recommendations.py:457: AssertionError
+____________________ test_ac2_10_only_post_is_allowed[PUT] ____________________
+
+client_with_origins = <function client_with_origins.<locals>.build at 0x000001A940A3E8E0>
+method = 'PUT'
+
+    @pytest.mark.parametrize("method", ["GET", "PUT", "DELETE"])
+    def test_ac2_10_only_post_is_allowed(client_with_origins, method):
+        client = client_with_origins(None)
+>       assert "POST" in preflight(client).headers.get("access-control-allow-methods", "")
+E       AssertionError: assert 'POST' in ''
+E        +  where '' = get('access-control-allow-methods', '')
+E        +    where get = Headers({'content-length': '22', 'content-type': 'application/json'}).get
+E        +      where Headers({'content-length': '22', 'content-type': 'application/json'}) = <Response [404 Not Found]>.headers
+E        +        where <Response [404 Not Found]> = preflight(<starlette.testclient.TestClient object at 0x000001A940A8BB00>)
+
+tests\test_recommendations.py:457: AssertionError
+__________________ test_ac2_10_only_post_is_allowed[DELETE] ___________________
+
+client_with_origins = <function client_with_origins.<locals>.build at 0x000001A940A3EF20>
+method = 'DELETE'
+
+    @pytest.mark.parametrize("method", ["GET", "PUT", "DELETE"])
+    def test_ac2_10_only_post_is_allowed(client_with_origins, method):
+        client = client_with_origins(None)
+>       assert "POST" in preflight(client).headers.get("access-control-allow-methods", "")
+E       AssertionError: assert 'POST' in ''
+E        +  where '' = get('access-control-allow-methods', '')
+E        +    where get = Headers({'content-length': '22', 'content-type': 'application/json'}).get
+E        +      where Headers({'content-length': '22', 'content-type': 'application/json'}) = <Response [404 Not Found]>.headers
+E        +        where <Response [404 Not Found]> = preflight(<starlette.testclient.TestClient object at 0x000001A940AB7BC0>)
+
+tests\test_recommendations.py:457: AssertionError
+_____ test_ac2_10_only_content_type_is_allowed_as_a_header[authorization] _____
+
+client_with_origins = <function client_with_origins.<locals>.build at 0x000001A940A16160>
+header = 'authorization'
+
+    @pytest.mark.parametrize("header", ["authorization", "x-custom"])
+    def test_ac2_10_only_content_type_is_allowed_as_a_header(client_with_origins, header):
+        client = client_with_origins(None)
+>       assert "content-type" in preflight(client).headers.get("access-control-allow-headers", "").lower()
+E       AssertionError: assert 'content-type' in ''
+E        +  where '' = <built-in method lower of str object at 0x00007FFFE3473CA0>()
+E        +    where <built-in method lower of str object at 0x00007FFFE3473CA0> = ''.lower
+E        +      where '' = get('access-control-allow-headers', '')
+E        +        where get = Headers({'content-length': '22', 'content-type': 'application/json'}).get
+E        +          where Headers({'content-length': '22', 'content-type': 'application/json'}) = <Response [404 Not Found]>.headers
+E        +            where <Response [404 Not Found]> = preflight(<starlette.testclient.TestClient object at 0x000001A940AB7B00>)
+
+tests\test_recommendations.py:465: AssertionError
+_______ test_ac2_10_only_content_type_is_allowed_as_a_header[x-custom] ________
+
+client_with_origins = <function client_with_origins.<locals>.build at 0x000001A940A3EC00>
+header = 'x-custom'
+
+    @pytest.mark.parametrize("header", ["authorization", "x-custom"])
+    def test_ac2_10_only_content_type_is_allowed_as_a_header(client_with_origins, header):
+        client = client_with_origins(None)
+>       assert "content-type" in preflight(client).headers.get("access-control-allow-headers", "").lower()
+E       AssertionError: assert 'content-type' in ''
+E        +  where '' = <built-in method lower of str object at 0x00007FFFE3473CA0>()
+E        +    where <built-in method lower of str object at 0x00007FFFE3473CA0> = ''.lower
+E        +      where '' = get('access-control-allow-headers', '')
+E        +        where get = Headers({'content-length': '22', 'content-type': 'application/json'}).get
+E        +          where Headers({'content-length': '22', 'content-type': 'application/json'}) = <Response [404 Not Found]>.headers
+E        +            where <Response [404 Not Found]> = preflight(<starlette.testclient.TestClient object at 0x000001A940A0C8F0>)
+
+tests\test_recommendations.py:465: AssertionError
+___________________ test_ac2_10_credentials_are_not_allowed ___________________
+
+client_with_origins = <function client_with_origins.<locals>.build at 0x000001A940A3FA60>
+
+    def test_ac2_10_credentials_are_not_allowed(client_with_origins):
+        client = client_with_origins(None)
+        before = preflight(client)
+>       assert before.headers.get("access-control-allow-origin") == LOCAL_ORIGIN
+E       AssertionError: assert None == 'http://localhost:3000'
+E        +  where None = get('access-control-allow-origin')
+E        +    where get = Headers({'content-length': '22', 'content-type': 'application/json'}).get
+E        +      where Headers({'content-length': '22', 'content-type': 'application/json'}) = <Response [404 Not Found]>.headers
+
+tests\test_recommendations.py:473: AssertionError
+_______ test_ac2_10_error_responses_carry_the_allow_origin_header[422] ________
+
+client_with_origins = <function client_with_origins.<locals>.build at 0x000001A940A17EC0>
+payload = {'message': ''}, status = 422
+
+    @pytest.mark.parametrize(
+        ("payload", "status"),
+        [
+            pytest.param({"message": ""}, 422, id="422"),
+            pytest.param({"message": MSG, "scenario": "error"}, 503, id="503"),
+        ],
+    )
+    def test_ac2_10_error_responses_carry_the_allow_origin_header(client_with_origins, payload, status):
+        response = client_with_origins(None).post("/recommendations", json=payload, headers={"Origin": LOCAL_ORIGIN})
+>       assert response.status_code == status
+E       assert 404 == 422
+E        +  where 404 = <Response [404 Not Found]>.status_code
+
+tests\test_recommendations.py:489: AssertionError
+_______ test_ac2_10_error_responses_carry_the_allow_origin_header[503] ________
+
+client_with_origins = <function client_with_origins.<locals>.build at 0x000001A940A144A0>
+payload = {'message': 'Find a Wellington hotel for two nights, up to NZD 250 per night; breakfast preferred.', 'scenario': 'error'}
+status = 503
+
+    @pytest.mark.parametrize(
+        ("payload", "status"),
+        [
+            pytest.param({"message": ""}, 422, id="422"),
+            pytest.param({"message": MSG, "scenario": "error"}, 503, id="503"),
+        ],
+    )
+    def test_ac2_10_error_responses_carry_the_allow_origin_header(client_with_origins, payload, status):
+        response = client_with_origins(None).post("/recommendations", json=payload, headers={"Origin": LOCAL_ORIGIN})
+>       assert response.status_code == status
+E       assert 404 == 503
+E        +  where 404 = <Response [404 Not Found]>.status_code
+
+tests\test_recommendations.py:489: AssertionError
+_______ test_ac2_10_unreadable_body_422_carries_the_allow_origin_header _______
+
+client_with_origins = <function client_with_origins.<locals>.build at 0x000001A940A17CE0>
+
+    def test_ac2_10_unreadable_body_422_carries_the_allow_origin_header(client_with_origins):
+        response = client_with_origins(None).post(
+            "/recommendations",
+            content=b'{"message": "caf\xff"}',
+            headers={"Origin": LOCAL_ORIGIN, "Content-Type": "application/json"},
+        )
+>       assert response.status_code == 422
+E       assert 404 == 422
+E        +  where 404 = <Response [404 Not Found]>.status_code
+
+tests\test_recommendations.py:499: AssertionError
+____________ test_ac2_10_only_real_environment_variables_are_read _____________
+
+tmp_path = WindowsPath('C:/Users/<user>/AppData/Local/Temp/pytest-of-<user>/pytest-3/test_ac2_10_only_real_environm0')
+
+    def test_ac2_10_only_real_environment_variables_are_read(tmp_path):
+        app_dir = copy_app(tmp_path)
+        (app_dir / ".env").write_text("ALLOWED_ORIGINS=https://from-dotenv.example\n", encoding="utf-8")
+        code = (
+            "import json\n"
+            "from fastapi.testclient import TestClient\n"
+            "from app.main import app\n"
+            "client = TestClient(app)\n"
+            "seen = {}\n"
+            "for origin in ('http://localhost:3000', 'https://from-dotenv.example'):\n"
+            "    r = client.options('/recommendations', headers={'Origin': origin, 'Access-Control-Request-Method': 'POST'})\n"
+            "    seen[origin] = r.headers.get('access-control-allow-origin')\n"
+            "print(json.dumps(seen))\n"
+        )
+        result = run_python(code, app_dir, unset=("ALLOWED_ORIGINS",))
+        assert result.returncode == 0, result.stderr
+>       assert json.loads(result.stdout) == {LOCAL_ORIGIN: LOCAL_ORIGIN, "https://from-dotenv.example": None}
+E       AssertionError: assert {'http://loca...xample': None} == {'http://loca...xample': None}
+E         
+E         Omitting 1 identical items, use -vv to show
+E         Differing items:
+E         {'http://localhost:3000': None} != {'http://localhost:3000': 'http://localhost:3000'}
+E         Use -v to get more diff
+
+tests\test_recommendations.py:519: AssertionError
+______________ test_ac2_11_generated_docs_routes_are_off[/docs] _______________
+
+client = <starlette.testclient.TestClient object at 0x000001A940D553A0>
+path = '/docs'
+
+    @pytest.mark.parametrize("path", ["/docs", "/redoc", "/openapi.json"])
+    def test_ac2_11_generated_docs_routes_are_off(client, path):
+>       assert client.get(path).status_code == 404
+E       AssertionError: assert 200 == 404
+E        +  where 200 = <Response [200 OK]>.status_code
+E        +    where <Response [200 OK]> = get('/docs')
+E        +      where get = <starlette.testclient.TestClient object at 0x000001A940D553A0>.get
+
+tests\test_recommendations.py:527: AssertionError
+______________ test_ac2_11_generated_docs_routes_are_off[/redoc] ______________
+
+client = <starlette.testclient.TestClient object at 0x000001A940D26E70>
+path = '/redoc'
+
+    @pytest.mark.parametrize("path", ["/docs", "/redoc", "/openapi.json"])
+    def test_ac2_11_generated_docs_routes_are_off(client, path):
+>       assert client.get(path).status_code == 404
+E       AssertionError: assert 200 == 404
+E        +  where 200 = <Response [200 OK]>.status_code
+E        +    where <Response [200 OK]> = get('/redoc')
+E        +      where get = <starlette.testclient.TestClient object at 0x000001A940D26E70>.get
+
+tests\test_recommendations.py:527: AssertionError
+__________ test_ac2_11_generated_docs_routes_are_off[/openapi.json] ___________
+
+client = <starlette.testclient.TestClient object at 0x000001A940D25730>
+path = '/openapi.json'
+
+    @pytest.mark.parametrize("path", ["/docs", "/redoc", "/openapi.json"])
+    def test_ac2_11_generated_docs_routes_are_off(client, path):
+>       assert client.get(path).status_code == 404
+E       AssertionError: assert 200 == 404
+E        +  where 200 = <Response [200 OK]>.status_code
+E        +    where <Response [200 OK]> = get('/openapi.json')
+E        +      where get = <starlette.testclient.TestClient object at 0x000001A940D25730>.get
+
+tests\test_recommendations.py:527: AssertionError
+============================== warnings summary ===============================
+.venv\Lib\site-packages\starlette\testclient.py:37
+  <repo>\api\.venv\Lib\site-packages\starlette\testclient.py:37: DeprecationWarning: The anyio.abc.BlockingPortal alias is deprecated, use anyio.from_thread.BlockingPortal instead.
+    _PortalFactoryType = typing.Callable[[], typing.ContextManager[anyio.abc.BlockingPortal]]
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+=========================== short test summary info ===========================
+FAILED tests/test_recommendations.py::test_ac2_1_load_fixtures_parses_csv_with_exact_values_and_types
+FAILED tests/test_recommendations.py::test_ac2_1_load_fixtures_finds_the_csv_from_any_working_directory
+FAILED tests/test_recommendations.py::test_ac2_1_whole_prices_stay_integers_and_others_stay_decimal[220-220]
+FAILED tests/test_recommendations.py::test_ac2_1_whole_prices_stay_integers_and_others_stay_decimal[219.5-219.5]
+FAILED tests/test_recommendations.py::test_ac2_1_true_and_false_become_booleans[true-True]
+FAILED tests/test_recommendations.py::test_ac2_1_true_and_false_become_booleans[false-False]
+FAILED tests/test_recommendations.py::test_ac2_1_invalid_boolean_raises[yes]
+FAILED tests/test_recommendations.py::test_ac2_1_invalid_boolean_raises[1] - ...
+FAILED tests/test_recommendations.py::test_ac2_1_invalid_boolean_raises[] - N...
+FAILED tests/test_recommendations.py::test_ac2_1_invalid_boolean_raises[True]
+FAILED tests/test_recommendations.py::test_ac2_1_invalid_boolean_raises[FALSE]
+FAILED tests/test_recommendations.py::test_ac2_1_non_numeric_nan_or_inf_price_raises[abc]
+FAILED tests/test_recommendations.py::test_ac2_1_non_numeric_nan_or_inf_price_raises[]
+FAILED tests/test_recommendations.py::test_ac2_1_non_numeric_nan_or_inf_price_raises[nan]
+FAILED tests/test_recommendations.py::test_ac2_1_non_numeric_nan_or_inf_price_raises[inf]
+FAILED tests/test_recommendations.py::test_ac2_1_non_numeric_nan_or_inf_price_raises[-inf]
+FAILED tests/test_recommendations.py::test_ac2_1_bad_fixture_data_stops_the_app_importing[bad-boolean]
+FAILED tests/test_recommendations.py::test_ac2_1_bad_fixture_data_stops_the_app_importing[bad-price]
+FAILED tests/test_recommendations.py::test_ac2_2_invalid_message_returns_422_naming_the_field[missing]
+FAILED tests/test_recommendations.py::test_ac2_2_invalid_message_returns_422_naming_the_field[empty]
+FAILED tests/test_recommendations.py::test_ac2_2_invalid_message_returns_422_naming_the_field[spaces]
+FAILED tests/test_recommendations.py::test_ac2_2_invalid_message_returns_422_naming_the_field[tab-newline]
+FAILED tests/test_recommendations.py::test_ac2_2_invalid_message_returns_422_naming_the_field[null]
+FAILED tests/test_recommendations.py::test_ac2_2_invalid_message_returns_422_naming_the_field[number]
+FAILED tests/test_recommendations.py::test_ac2_2_invalid_message_returns_422_naming_the_field[boolean]
+FAILED tests/test_recommendations.py::test_ac2_2_invalid_message_returns_422_naming_the_field[list]
+FAILED tests/test_recommendations.py::test_ac2_2_invalid_message_returns_422_naming_the_field[object]
+FAILED tests/test_recommendations.py::test_ac2_2_several_errors_report_only_the_first[message-and-scenario]
+FAILED tests/test_recommendations.py::test_ac2_2_several_errors_report_only_the_first[missing-message-and-scenario]
+FAILED tests/test_recommendations.py::test_ac2_2_several_errors_report_only_the_first[message-scenario-and-unknown-field]
+FAILED tests/test_recommendations.py::test_ac2_3_success_returns_exactly_the_three_fixtures
+FAILED tests/test_recommendations.py::test_ac2_4_no_scenario_is_treated_as_success
+FAILED tests/test_recommendations.py::test_ac2_5_empty_scenario_returns_no_hotels
+FAILED tests/test_recommendations.py::test_ac2_6_error_scenario_returns_retryable_503
+FAILED tests/test_recommendations.py::test_ac2_7_unknown_or_null_scenario_returns_422_naming_scenario[unknown-scenario]
+FAILED tests/test_recommendations.py::test_ac2_7_unknown_or_null_scenario_returns_422_naming_scenario[null-scenario]
+FAILED tests/test_recommendations.py::test_ac2_7_unknown_field_returns_422_without_echoing_it
+FAILED tests/test_recommendations.py::test_ac2_7_message_over_500_characters_returns_422
+FAILED tests/test_recommendations.py::test_ac2_7_message_of_exactly_500_characters_is_accepted
+FAILED tests/test_recommendations.py::test_ac2_7_unreadable_body_returns_422_with_plain_message[non-json]
+FAILED tests/test_recommendations.py::test_ac2_7_unreadable_body_returns_422_with_plain_message[invalid-utf8]
+FAILED tests/test_recommendations.py::test_ac2_7_unreadable_body_returns_422_with_plain_message[no-body]
+FAILED tests/test_recommendations.py::test_ac2_7_unreadable_body_returns_422_with_plain_message[empty-array]
+FAILED tests/test_recommendations.py::test_ac2_7_unreadable_body_returns_422_with_plain_message[array-of-object]
+FAILED tests/test_recommendations.py::test_ac2_7_request_with_no_body_or_content_type_returns_422
+FAILED tests/test_recommendations.py::test_ac2_7_validation_runs_before_the_scenario[success]
+FAILED tests/test_recommendations.py::test_ac2_7_validation_runs_before_the_scenario[empty]
+FAILED tests/test_recommendations.py::test_ac2_7_validation_runs_before_the_scenario[error]
+FAILED tests/test_recommendations.py::test_ac2_8_scenario_responses_match_the_contract[success-200]
+FAILED tests/test_recommendations.py::test_ac2_8_scenario_responses_match_the_contract[empty-200]
+FAILED tests/test_recommendations.py::test_ac2_8_scenario_responses_match_the_contract[error-503]
+FAILED tests/test_recommendations.py::test_ac2_8_rejected_json_responses_match_the_contract[missing]
+FAILED tests/test_recommendations.py::test_ac2_8_rejected_json_responses_match_the_contract[empty]
+FAILED tests/test_recommendations.py::test_ac2_8_rejected_json_responses_match_the_contract[spaces]
+FAILED tests/test_recommendations.py::test_ac2_8_rejected_json_responses_match_the_contract[tab-newline]
+FAILED tests/test_recommendations.py::test_ac2_8_rejected_json_responses_match_the_contract[null]
+FAILED tests/test_recommendations.py::test_ac2_8_rejected_json_responses_match_the_contract[number]
+FAILED tests/test_recommendations.py::test_ac2_8_rejected_json_responses_match_the_contract[boolean]
+FAILED tests/test_recommendations.py::test_ac2_8_rejected_json_responses_match_the_contract[list]
+FAILED tests/test_recommendations.py::test_ac2_8_rejected_json_responses_match_the_contract[object]
+FAILED tests/test_recommendations.py::test_ac2_8_rejected_json_responses_match_the_contract[over-500-chars]
+FAILED tests/test_recommendations.py::test_ac2_8_rejected_json_responses_match_the_contract[unknown-scenario]
+FAILED tests/test_recommendations.py::test_ac2_8_rejected_json_responses_match_the_contract[null-scenario]
+FAILED tests/test_recommendations.py::test_ac2_8_rejected_json_responses_match_the_contract[unknown-field]
+FAILED tests/test_recommendations.py::test_ac2_8_rejected_json_responses_match_the_contract[empty-array]
+FAILED tests/test_recommendations.py::test_ac2_8_rejected_json_responses_match_the_contract[array-of-object]
+FAILED tests/test_recommendations.py::test_ac2_8_unreadable_body_responses_match_the_contract[non-json]
+FAILED tests/test_recommendations.py::test_ac2_8_unreadable_body_responses_match_the_contract[invalid-utf8]
+FAILED tests/test_recommendations.py::test_ac2_8_unreadable_body_responses_match_the_contract[no-body]
+FAILED tests/test_recommendations.py::test_ac2_8_unreadable_body_responses_match_the_contract[empty-array]
+FAILED tests/test_recommendations.py::test_ac2_8_unreadable_body_responses_match_the_contract[array-of-object]
+FAILED tests/test_recommendations.py::test_ac2_9_every_scenario_waits_for_the_configured_delay[success-200]
+FAILED tests/test_recommendations.py::test_ac2_9_every_scenario_waits_for_the_configured_delay[empty-200]
+FAILED tests/test_recommendations.py::test_ac2_9_every_scenario_waits_for_the_configured_delay[error-503]
+FAILED tests/test_recommendations.py::test_ac2_9_delay_is_read_on_each_request
+FAILED tests/test_recommendations.py::test_ac2_9_default_delay_is_800ms_when_unset
+FAILED tests/test_recommendations.py::test_ac2_9_non_numeric_or_negative_delay_falls_back_to_800ms[abc]
+FAILED tests/test_recommendations.py::test_ac2_9_non_numeric_or_negative_delay_falls_back_to_800ms[]
+FAILED tests/test_recommendations.py::test_ac2_9_non_numeric_or_negative_delay_falls_back_to_800ms[-1]
+FAILED tests/test_recommendations.py::test_ac2_9_a_422_returns_without_waiting[blank-message]
+FAILED tests/test_recommendations.py::test_ac2_9_a_422_returns_without_waiting[non-json]
+FAILED tests/test_recommendations.py::test_ac2_10_preflight_allows_the_default_origin_for_post_with_content_type
+FAILED tests/test_recommendations.py::test_ac2_10_allowed_origins_are_comma_separated_with_spaces_trimmed[https://a.example]
+FAILED tests/test_recommendations.py::test_ac2_10_allowed_origins_are_comma_separated_with_spaces_trimmed[https://b.example]
+FAILED tests/test_recommendations.py::test_ac2_10_setting_allowed_origins_replaces_the_default
+FAILED tests/test_recommendations.py::test_ac2_10_other_origins_are_refused
+FAILED tests/test_recommendations.py::test_ac2_10_only_post_is_allowed[GET]
+FAILED tests/test_recommendations.py::test_ac2_10_only_post_is_allowed[PUT]
+FAILED tests/test_recommendations.py::test_ac2_10_only_post_is_allowed[DELETE]
+FAILED tests/test_recommendations.py::test_ac2_10_only_content_type_is_allowed_as_a_header[authorization]
+FAILED tests/test_recommendations.py::test_ac2_10_only_content_type_is_allowed_as_a_header[x-custom]
+FAILED tests/test_recommendations.py::test_ac2_10_credentials_are_not_allowed
+FAILED tests/test_recommendations.py::test_ac2_10_error_responses_carry_the_allow_origin_header[422]
+FAILED tests/test_recommendations.py::test_ac2_10_error_responses_carry_the_allow_origin_header[503]
+FAILED tests/test_recommendations.py::test_ac2_10_unreadable_body_422_carries_the_allow_origin_header
+FAILED tests/test_recommendations.py::test_ac2_10_only_real_environment_variables_are_read
+FAILED tests/test_recommendations.py::test_ac2_11_generated_docs_routes_are_off[/docs]
+FAILED tests/test_recommendations.py::test_ac2_11_generated_docs_routes_are_off[/redoc]
+FAILED tests/test_recommendations.py::test_ac2_11_generated_docs_routes_are_off[/openapi.json]
+99 failed, 17 passed, 1 warning in 11.66s
