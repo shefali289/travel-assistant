@@ -25,7 +25,8 @@ A traveller asks for a hotel, reviews the assistant's recommendations, and choos
 
 ## API contract (summary; the YAML is authoritative once written)
 `POST /recommendations` with body `{ message: string (non-blank), scenario?: "success"|"empty"|"error" }`
-- `success` → 200 `{ message, hotels: [h1,h2,h3], source: "fixture" }` after a short delay (`FIXTURE_DELAY_MS`, default 800)
+- All three scenarios respond after a short delay (`FIXTURE_DELAY_MS`, default 800). Invalid requests do not wait.
+- `success` → 200 `{ message, hotels: [h1,h2,h3], source: "fixture" }`
 - `empty` → 200 `{ message, hotels: [], source: "fixture" }`
 - `error` → 503 `{ code, message, retryable: true }`
 - invalid → 422 `{ code, message, retryable: false }`
