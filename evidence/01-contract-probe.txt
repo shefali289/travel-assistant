@@ -1,0 +1,24 @@
+  ok   openapi\openapi.yaml exists
+  ok   document is valid OpenAPI
+  ok   POST /recommendations is defined
+  ok   request: message is required
+  ok   request: message is a non-empty string (minLength>=1 or pattern)
+  ok   request: scenario enum is success|empty|error
+  ok   scenario documented as a demo control
+  ok   response 200 declared
+  ok   response 200 has a JSON schema
+  ok   response 422 declared
+  ok   response 422 has a JSON schema
+  ok   response 503 declared
+  ok   response 503 has a JSON schema
+  ok   200: message and hotels required
+  ok   Hotel.id is string
+  ok   Hotel.name is string
+  ok   Hotel.nightlyPrice is number
+  ok   Hotel.currency is string
+  ok   Hotel.breakfastIncluded is boolean
+  ok   Hotel.explanation is string
+  ok   Hotel: all six fields required
+  ok   200: response labelled as fixture data
+
+0 failure(s)

@@ -77,9 +77,20 @@ Gate passes. The contract is committed before any `/recommendations` implementat
 - No `test` or `feat` commits for this task: it is probe-verified, so `/implement` skips red and green.
 - `contract_shape.py` does not check `maxLength`, examples, the three scenario behaviours or `/health`, so the gate can pass without them (see the probe coverage question in the Plan section).
 - All plan recommendations accepted by the human. The answers on unknown fields and the delay also settle the matching questions in `tasks/02-api.md`, so carry them into `/plan 02-api`.
+- Every `/recommendations` response schema is a direct `$ref` to `components/schemas`, because `api_contract.py` builds `spec#/components/schemas/X` from it. `Scenario` holds its own enum, default and description, because `contract_shape.py`'s `resolve` drops siblings of a `$ref`.
+- The `/health` response schema is inline, not a sixth entry under `components/schemas`, because the plan and section 3 name exactly five schemas and neither probe reads it. It has `additionalProperties: false` and `const: ok`, following the answer on response schemas.
+- `source` and `status` use `const` for "only value". `code` uses `enum`, as AC1.3 says.
+- The contract states a short delay with no duration, so `FIXTURE_DELAY_MS` and its 800 ms default stay out of the YAML. The operation description puts validation before the delay, so a 422 returns without waiting. The answer on the delay covers the three scenarios only, and FastAPI validates before the handler that task 02 puts the delay in.
+- `APPROACH.md` "Contract revisions" lists the six additions in AC1.8, plus three more: non-blank and `maxLength: 500`, `additionalProperties: false`, and the delay on all three scenarios. Section 5 of this doc says anything the brief did not ask for is recorded there.
+- The example message texts are written to fit AC2.2 and AC2.6 (the 422 names the field, the 503 says to try again). They are illustrations, not exact strings for task 02.
+- The checks the probe misses were run once with a throwaway script outside the repo (no new test files, per the plan). `/review` still checks them line by line.
+- Open, for the human: the gate's BRANCH step fails on commit naming because harness commit `0c7c4b2` (`chore: one branch per task...`) is on this branch and not on `main`. Committing this work does not clear it. Fast-forwarding `main` to `0c7c4b2` does. The agent has not moved `main`.
 
 ## Status log (updated automatically)
 - 2026-10-31 08:50 UTC - next: plan (agent)
 - 2026-11-01 07:02 UTC - on branch task/01-contract
 - 2026-11-01 07:06 UTC - next: answers (human)
 - 2026-11-01 07:10 UTC - next: commit-plan (human)
+- 2026-11-01 07:11 UTC - next: implement (agent)
+- 2026-11-01 07:15 UTC - gate FAILED [BRANCH,REVIEW] 15 passed, 3 failed: uncommitted changes: commit them, then re-run the gate (see git status); commits not named type(01-contract): chore: one branch per task, gate rebases on main and checks the branch; no review: run /review 01-contract (writes reviews/01-contract.md)
+- 2026-11-01 07:16 UTC - next: commit-work (human)

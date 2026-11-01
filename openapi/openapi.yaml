@@ -1,0 +1,208 @@
+openapi: 3.1.0
+info:
+  title: Hotel Recommendation Assistant API
+  version: 1.0.0
+  description: |
+    Local fixture API for a demo in which a traveller asks for a hotel, reviews
+    the recommendations and chooses one. All hotel data is synthetic fixture data
+    and every 200 recommendation response is labelled with source "fixture".
+    The message text is not interpreted.
+
+    The request field "scenario" is a demo control that selects the outcome. It
+    is not a traveller preference. See the Scenario schema for its behaviours.
+servers:
+  - url: http://localhost:8000
+    description: Local development
+paths:
+  /recommendations:
+    post:
+      operationId: createRecommendations
+      summary: Get hotel recommendations for a traveller's message
+      description: |
+        Validates the request, waits for a short delay, then responds according
+        to the "scenario" demo control:
+
+        - success: 200 with all three fixture hotels.
+        - empty: 200 with an empty hotels list.
+        - error: 503 with a retryable error.
+
+        Invalid requests get a 422 with the ErrorResponse shape.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/RecommendationRequest"
+      responses:
+        "200":
+          description: Fixture recommendations, for the success and empty scenarios.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/RecommendationResponse"
+              examples:
+                success:
+                  summary: scenario=success returns all three fixture hotels
+                  value:
+                    message: Here are three Wellington hotels to consider.
+                    hotels:
+                      - id: h1
+                        name: Harbour House
+                        nightlyPrice: 220
+                        currency: NZD
+                        breakfastIncluded: true
+                        explanation: Within budget; breakfast included.
+                      - id: h2
+                        name: City Garden
+                        nightlyPrice: 245
+                        currency: NZD
+                        breakfastIncluded: true
+                        explanation: Near the meeting district.
+                      - id: h3
+                        name: Quay Rooms
+                        nightlyPrice: 195
+                        currency: NZD
+                        breakfastIncluded: false
+                        explanation: Lower price; breakfast costs extra.
+                    source: fixture
+                empty:
+                  summary: scenario=empty returns no hotels
+                  value:
+                    message: I could not find any hotels for that request. Try changing your request.
+                    hotels: []
+                    source: fixture
+        "422":
+          description: |
+            Invalid request: message missing, blank, not a string or too long;
+            unknown scenario; unknown field; or a body that is not valid JSON.
+            Not retryable, because the same request fails the same way.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+              example:
+                code: validation_error
+                message: The message field must not be blank. Describe the hotel you need.
+                retryable: false
+        "503":
+          description: Recoverable failure, returned for the error scenario.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+              example:
+                code: service_unavailable
+                message: Hotel recommendations are unavailable right now. Please try again.
+                retryable: true
+  /health:
+    get:
+      operationId: getHealth
+      summary: Liveness check for scripts
+      responses:
+        "200":
+          description: The API is running.
+          content:
+            application/json:
+              schema:
+                type: object
+                required:
+                  - status
+                properties:
+                  status:
+                    type: string
+                    const: ok
+                additionalProperties: false
+components:
+  schemas:
+    Scenario:
+      type: string
+      enum:
+        - success
+        - empty
+        - error
+      default: success
+      description: |
+        Demo control that selects the outcome of the request, so each state can
+        be shown on demand. A short delay applies to all three scenarios.
+
+        - success: after a short delay, HTTP 200 with message, all three fixture
+          hotels and source "fixture".
+        - empty: after a short delay, HTTP 200 with message, hotels [] and source
+          "fixture".
+        - error: after a short delay, HTTP 503 with an ErrorResponse that has a
+          useful message and retryable true.
+    RecommendationRequest:
+      type: object
+      required:
+        - message
+      properties:
+        message:
+          type: string
+          minLength: 1
+          maxLength: 500
+          pattern: "\\S"
+          description: The traveller's request. Must contain a non-whitespace character.
+        scenario:
+          $ref: "#/components/schemas/Scenario"
+      additionalProperties: false
+    Hotel:
+      type: object
+      required:
+        - id
+        - name
+        - nightlyPrice
+        - currency
+        - breakfastIncluded
+        - explanation
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+        nightlyPrice:
+          type: number
+        currency:
+          type: string
+        breakfastIncluded:
+          type: boolean
+        explanation:
+          type: string
+      additionalProperties: false
+    RecommendationResponse:
+      type: object
+      required:
+        - message
+        - hotels
+        - source
+      properties:
+        message:
+          type: string
+          description: The assistant's message to the traveller.
+        hotels:
+          type: array
+          items:
+            $ref: "#/components/schemas/Hotel"
+        source:
+          type: string
+          const: fixture
+          description: Labels the response as fixture data.
+      additionalProperties: false
+    ErrorResponse:
+      type: object
+      required:
+        - code
+        - message
+        - retryable
+      properties:
+        code:
+          type: string
+          enum:
+            - validation_error
+            - service_unavailable
+        message:
+          type: string
+          description: A message that can be shown to the traveller.
+        retryable:
+          type: boolean
+          description: Whether the client should offer a retry of the same request.
+      additionalProperties: false
