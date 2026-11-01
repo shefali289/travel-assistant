@@ -10,21 +10,22 @@ Six tasks, each one logically separate outcome. You implement them yourself (VS 
 | Handoff | `scripts/handoff.sh`, hooks in `.claude/settings.json` | Works out the next action from repo state and passes it to the next agent |
 | Short-term memory | `CURRENT_TASK.md` (git-ignored, from `tasks/CURRENT_TASK.template.md`) | Active task, phase, next steps, open questions, scratch notes |
 | Phase commands | `.claude/commands/plan.md`, `implement.md`, `review.md` | `/plan NN`, `/implement NN`, `/review NN` in Claude Code |
-| Gate | `scripts/gate.sh NN` | PLAN, SPEC trace, BUILD (red→green), TEST (+ independent probes), REVIEW, HYGIENE |
+| Gate | `scripts/gate.sh NN` | BRANCH (rebase on main + branch checks), PLAN, SPEC trace, BUILD (red→green), TEST (+ independent probes), REVIEW, HYGIENE |
 | Probes | `scripts/probes/` | Harness-owned acceptance checks: contract shape, API behaviour vs OpenAPI, Playwright journey on the real app |
 
 ## Lifecycle per task
 | Phase | Who | How | Output |
 |---|---|---|---|
+| 0. Branch | script | automatic (hooks), or `scripts/handoff.sh branch` | `task/NN-name` created from `main`. All of the task's commits go here |
 | 1. Plan | agent proposes, **you decide** | `/plan 02-api` | Questions (`- Q:` / `A:`) and a short plan in the task doc's Plan section. The agent **stops and asks** when anything is unclear. |
 | 2. Spec | you | Edit the ACs in the task doc if your answers changed scope | **You commit** the task doc (`docs(NN): plan and spec`) |
 | 3. Implement (red) | agent or you | `/implement 02-api` | Failing tests that carry AC ids. `evidence/NN-red.txt`. **You commit** `test(NN): ...` |
 | 3. Implement (green) | agent or you | same command | Minimal code to pass. `evidence/NN-green.txt`. **You commit** `feat(NN): ...` |
-| 4. Verify | script | `scripts/gate.sh 02-api` | Every check green. The result is added to the task doc's Status log |
+| 4. Verify | script | `scripts/gate.sh 02-api` | Every check green. If `main` moved, the gate rebases the branch on it first (it stops on conflicts). The result is added to the task doc's Status log |
 | 5. Review | agent reviews, **you triage** | `/review 02-api` | `reviews/NN.md` with findings and a verdict. Fixes go in `fix(NN): ...` commits. **You commit** `review(NN): ...` |
-| 6. Done | script, then you | gate passes | The task doc moves to `tasks/done/` and the board below is ticked. **You commit and push** `chore(NN): mark task done`. Copy notable agent challenges into APPROACH.md |
+| 6. Done | script, then you | gate passes | The task doc moves to `tasks/done/` and the board below is ticked. **You commit** `chore(NN): mark task done`, **fast-forward `main`** to the branch and **push** both. Copy notable agent challenges into APPROACH.md |
 
-Expected history per task: `docs(NN)` → `test(NN)` → `feat(NN)` → (`fix(NN)`) → `review(NN)` → `chore(NN)`.
+Expected history per task, on `task/NN-name`: `docs(NN)` → `test(NN)` → `feat(NN)` → (`fix(NN)`) → `review(NN)` → `chore(NN)`. The gate's BRANCH step checks that you're on the task branch, the tree is clean, the branch is rebased on `main` with no merge commits, and every commit is named `type(NN): ...`.
 
 ## Automatic handoff
 `scripts/handoff.sh status` works out the next action from the task docs, `CURRENT_TASK.md`, `reviews/` and git history.

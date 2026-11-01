@@ -16,6 +16,7 @@ A traveller asks for a hotel, reviews the assistant's recommendations, and choos
 ## Workflow (spec-driven, test-first)
 `/plan <task>` (ask questions) → human answers and approves → `/implement <task>` (red commit → green commit) → `scripts/gate.sh <task>` → `/review <task>` → fix → gate passes → Done.
 - **At session start, run `scripts/handoff.sh status` (Claude Code injects this automatically) and read `CURRENT_TASK.md` if it exists. Update it at every phase change. Never commit it.**
+- **One branch per task:** `task/<id>`, created from `main` by `scripts/handoff.sh` (automatic in hooks). Never commit a task on `main`. The final gate rebases on `main` and checks the branch. The human fast-forwards `main` to it.
 - **Never commit or push without asking.** Give the human the exact commands. Run one only if they approve that specific commit or push.
 - **Keep the task doc current.** Add every decision to its "Decisions & agent notes" as you make it. The Status log section is written by scripts: use `scripts/handoff.sh log <task> "<text>"` to add to it.
 - **If anything is unclear or the spec conflicts with the brief, stop and ask. Do not guess.** Record each question and answer in the task doc's Plan section.
@@ -66,4 +67,5 @@ scripts/gate.sh <task-id>                       # from repo root
 - Next.js dev renders its own empty `role="alert"` route announcer. In browser checks, filter alerts by text.
 - The API needs CORS for `http://localhost:3000` (`ALLOWED_ORIGINS`).
 - `jsdom` is pinned to 26 because newer versions crash Vitest on Node 23 (their `undici` needs a newer Node).
+- On Git for Windows 2.40, `git rebase` fails with "failed to stat '<sha>...<sha>'". Use `git rebase --apply main`.
 - Behind a corporate proxy, use `curl --noproxy '*'` for localhost, or it returns a 403 from the proxy.

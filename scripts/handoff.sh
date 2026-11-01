@@ -5,6 +5,7 @@
 #   status                          print the handoff brief (any agent can run this)
 #   session-start                   SessionStart hook: same brief, injected into the new session
 #   stop                            Stop hook: when the phase just changed, hand off once; otherwise do nothing
+#   branch                          switch to the active task's branch task/<id>, creating it from main if needed
 #   log <task-id> <text>            append a line to the task doc's Status log
 #   gate-result <task-id> pass|fail <summary>   called by scripts/gate.sh; a pass moves the doc to tasks/done/
 set -uo pipefail
@@ -33,12 +34,23 @@ resolve() {
   finished="$(git status --porcelain -uall -- tasks/done 2>/dev/null | sed -nE 's#.*tasks/done/([^ "]+)\.md.*#\1#p' | head -1)"
   if [ -n "$finished" ]; then
     ID="$finished"; DOC="tasks/done/$ID.md"
-    next human commit-done "Task $ID passed the gate and moved to tasks/done/. Ask the person to commit and push it, giving them: git add -A && git commit -m 'chore($ID): mark task done' && git push"
+    next human commit-done "Task $ID passed the gate and moved to tasks/done/. Ask the person to commit it, merge it into main and push, giving them: $(merge_cmds "git add -A && git commit -m 'chore($ID): mark task done' && ")"
+    return
+  fi
+  # Each task lives on its own branch. A finished task's branch must be merged into main before the next one starts.
+  BRANCH="$(git branch --show-current)"
+  if [ -f "tasks/done/${BRANCH#task/}.md" ]; then
+    ID="${BRANCH#task/}"; DOC="tasks/done/$ID.md"
+    next human merge "Task $ID is done but its branch is not merged. Ask the person to merge it into main and push, giving them: $(merge_cmds)"
     return
   fi
   # The active task is the lowest-numbered doc still in tasks/.
   ID=""; for f in tasks/[0-9][0-9]-*.md; do [ -f "$f" ] && { ID="$(basename "$f" .md)"; DOC="$f"; break; }; done
   if [ -z "$ID" ]; then ID="all"; DOC=""; next none finished "All tasks are done and in tasks/done/."; return; fi
+  if [ "$BRANCH" != "task/$ID" ]; then
+    next agent branch "Run scripts/handoff.sh branch to get onto task/$ID. If it refuses, tell the person why."
+    return
+  fi
 
   # Plan: agent asks, human answers, human commits. Same checks as the gate's PLAN step.
   plan="$(section "$DOC" "1[.] Plan")"
@@ -67,7 +79,8 @@ resolve() {
     fi
   fi
   # /implement ends with a gate run. Only REVIEW may still be failing before the task can be reviewed.
-  if ! grep -E ' - gate ' "$DOC" | tail -1 | grep -qE 'gate (PASSED|FAILED \[REVIEW\])'; then
+  # BRANCH may fail too, because the tree is not clean until the work is committed for review.
+  if ! grep -E ' - gate ' "$DOC" | tail -1 | grep -qE 'gate (PASSED|FAILED \[(BRANCH,)?REVIEW\])'; then
     next agent implement "$(fresh_agent implement)"; return
   fi
 
@@ -86,8 +99,23 @@ resolve() {
     next human commit-review "Review of $ID is approved. Ask the person to commit it, giving them: git add reviews/$ID.md && git commit -m 'review($ID): APPROVE'"
     return
   fi
-  next agent gate "Run scripts/gate.sh $ID. A pass moves the task doc to tasks/done/."
+  next agent gate "Run scripts/gate.sh $ID. It rebases task/$ID on main if needed. A pass moves the task doc to tasks/done/."
 }
+
+# Commands for the person: optional prefix (the done commit), then fast-forward main and push main plus the task branch.
+merge_cmds() { echo "${1:-}git switch main && git merge --ff-only task/$ID && git push origin main task/$ID"; }
+
+# Get onto task/<id>: switch if it exists, otherwise create it from main. Never leaves another task's branch.
+switch_branch() {
+  local want="task/$ID"
+  [ "$BRANCH" = "$want" ] && return 0
+  if git show-ref --verify -q "refs/heads/$want"; then git switch -q "$want"
+  elif [ "$BRANCH" = main ]; then git switch -q -c "$want"
+  else echo "Not switching to $want: on '$BRANCH', not main. Commit or stash, then: git switch main"; return 1; fi \
+    && log "$ID" "on branch $want" && echo "On branch $want."
+}
+# Hooks call this, so a new task's branch is made without anyone asking.
+auto_branch() { resolve; [ "$ACTION" = branch ] && switch_branch >&2; resolve; }
 
 # True when the phase changed since the last look. The first look only records it.
 advanced() {
@@ -127,18 +155,19 @@ complete() {
 
 case "${1:-status}" in
   status) resolve; brief ;;
+  branch) resolve; [ "$ACTION" = branch ] && { switch_branch || exit 1; } || echo "Nothing to do: $TEXT" ;;
   session-start)
-    resolve; advanced
+    auto_branch 2>&1; advanced
     brief
     echo; echo "When the person asks to continue, carry out Next. If Next waits on them, tell them exactly what is needed." ;;
   stop)
-    resolve
+    auto_branch 2>/dev/null
     advanced || exit 0
     printf '{"decision":"block","reason":"Phase changed for %s. Record any decisions under Decisions and agent notes in the task doc, then: %s"}\n' "$ID" "$TEXT" ;;
   log) log "$2" "$3" ;;
   gate-result)
     if [ "$3" = pass ]; then log "$2" "gate PASSED ($4)"; complete "$2"
     else log "$2" "gate FAILED $4"; fi ;;
-  *) echo "usage: scripts/handoff.sh status|session-start|stop|log|gate-result"; exit 2 ;;
+  *) echo "usage: scripts/handoff.sh status|branch|session-start|stop|log|gate-result"; exit 2 ;;
 esac
 exit 0

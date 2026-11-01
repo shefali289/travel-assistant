@@ -4,7 +4,7 @@ argument-hint: <task-id e.g. 02-api>
 ---
 You are reviewing task `$ARGUMENTS` as a skeptical senior reviewer. Do not modify code.
 
-1. Find the diff: from the commit before the first `test($ARGUMENTS)` commit (or `docs($ARGUMENTS)`) to HEAD. Read `tasks/$ARGUMENTS.md` (ACs and its "Review" section), `openapi/openapi.yaml` and `AGENTS.md`.
+1. Find the diff: `git diff main...HEAD` on branch `task/$ARGUMENTS`. Read `tasks/$ARGUMENTS.md` (ACs and its "Review" section), `openapi/openapi.yaml` and `AGENTS.md`.
 2. Copy `tasks/REVIEW.template.md` to `reviews/$ARGUMENTS.md` and fill it in:
    - Spec compliance: one row per AC, with Met yes/no and concrete evidence (test name, probe line, file:line).
    - Findings: each with severity BLOCKER / MAJOR / MINOR / NIT, file:line, the failure scenario, and a suggested fix. Check correctness against the spec and OpenAPI, test quality (asserts behaviour, failure paths covered, nothing weakened, mock boundary sensible), accessibility, security/hygiene, and simplicity.
