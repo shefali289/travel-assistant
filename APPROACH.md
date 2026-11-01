@@ -4,7 +4,7 @@
 _TODO_
 
 ## Assumptions
-_TODO_ (copy the answered questions from tasks/*.md Plan sections)
+_TODO_ (copy the answered questions from the Plan sections in tasks/done/*.md)
 
 ## Decisions
 _TODO_
@@ -35,7 +35,7 @@ _TODO_
 | _TODO_ | | | |
 
 ## Agent interactions
-Harness: `AGENTS.md` (loaded via `CLAUDE.md`), `/plan`, `/implement`, `/review`, `scripts/gate.sh`. The full record is in `tasks/*.md` (Q/A and decisions) and `reviews/*.md`.
+Harness: `AGENTS.md` (loaded via `CLAUDE.md`), `/plan`, `/implement`, `/review`, `scripts/gate.sh`. The full record is in `tasks/` and `tasks/done/` (Q/A, decisions, status log) and `reviews/*.md`.
 
 _TODO_ 2–3 entries, each starting with **Exact excerpt** or **Retrospective summary**: what you asked, what the agent did, what you accepted or challenged, and why.
 

@@ -6,15 +6,18 @@
 A traveller asks for a hotel, reviews the assistant's recommendations, and chooses one. Local fixture data only. There is no NL parsing, live model, streaming, booking, auth, database or deployment.
 
 ## Repo map
+- `BRIEF.md`: the assignment, git-ignored and local only. Check plans and reviews against it. `tasks/README.md` traces each brief criterion to a task.
 - `openapi/openapi.yaml`: the API contract and **source of truth**. Change it first, then code, then record the revision in `APPROACH.md` under "Contract revisions".
 - `api/`: FastAPI (`app/main.py`), fixtures in `fixtures/hotels.csv`, pytest in `tests/`.
 - `web/`: Next.js App Router + TypeScript + Tailwind. Put components in `web/components/`, the API client in `web/lib/`, and Vitest tests next to the code as `*.test.ts(x)`.
-- `tasks/`: the harness. Task docs are long-term, committed memory. `CURRENT_TASK.md` at the repo root is short-term, **git-ignored** memory.
-- `scripts/gate.sh <task>`: the quality gate. `scripts/probes/` holds independent acceptance probes. `reviews/` holds AI code reviews. `evidence/` holds saved test runs and screenshots.
+- `tasks/`: the harness. Task docs are long-term, committed memory; finished ones move to `tasks/done/`. `CURRENT_TASK.md` at the repo root is short-term, **git-ignored** memory.
+- `scripts/handoff.sh`: works out the next action from repo state. `scripts/gate.sh <task>`: the quality gate. `scripts/probes/` holds independent acceptance probes. `reviews/` holds AI code reviews. `evidence/` holds saved test runs and screenshots.
 
 ## Workflow (spec-driven, test-first)
 `/plan <task>` (ask questions) → human answers and approves → `/implement <task>` (red commit → green commit) → `scripts/gate.sh <task>` → `/review <task>` → fix → gate passes → Done.
-- **At session start, read `CURRENT_TASK.md` if it exists. Update it at every phase change. Never commit it.**
+- **At session start, run `scripts/handoff.sh status` (Claude Code injects this automatically) and read `CURRENT_TASK.md` if it exists. Update it at every phase change. Never commit it.**
+- **Never commit or push without asking.** Give the human the exact commands. Run one only if they approve that specific commit or push.
+- **Keep the task doc current.** Add every decision to its "Decisions & agent notes" as you make it. The Status log section is written by scripts: use `scripts/handoff.sh log <task> "<text>"` to add to it.
 - **If anything is unclear or the spec conflicts with the brief, stop and ask. Do not guess.** Record each question and answer in the task doc's Plan section.
 - Write tests from the acceptance criteria only, and put the AC id in the test title (`AC3.2 ...` or pytest `test_ac2_3_...`).
 - Never weaken or delete a test to get green. If a test is wrong, explain why and fix it in its own commit.
@@ -62,3 +65,5 @@ scripts/gate.sh <task-id>                       # from repo root
 - Vitest needs `esbuild.jsx = "automatic"` (already set in `web/vitest.config.mts`). Otherwise tests fail with "React is not defined", which is the wrong reason for a red run.
 - Next.js dev renders its own empty `role="alert"` route announcer. In browser checks, filter alerts by text.
 - The API needs CORS for `http://localhost:3000` (`ALLOWED_ORIGINS`).
+- `jsdom` is pinned to 26 because newer versions crash Vitest on Node 23 (their `undici` needs a newer Node).
+- Behind a corporate proxy, use `curl --noproxy '*'` for localhost, or it returns a 403 from the proxy.

@@ -6,7 +6,8 @@ Six tasks, each one logically separate outcome. You implement them yourself (VS 
 | Piece | Where | Purpose |
 |---|---|---|
 | Context | `AGENTS.md` (loaded via `CLAUDE.md` → `@AGENTS.md`) | Repo map, API + UI contract, commands, constraints, gotchas |
-| Long-term memory | `tasks/NN-*.md` (committed) | Plan, spec (acceptance criteria), implementation guide, verify, review checklist, decisions |
+| Long-term memory | `tasks/NN-*.md`, then `tasks/done/NN-*.md` when finished (committed) | Plan, spec (acceptance criteria), implementation guide, verify, review checklist, decisions, status log |
+| Handoff | `scripts/handoff.sh`, hooks in `.claude/settings.json` | Works out the next action from repo state and passes it to the next agent |
 | Short-term memory | `CURRENT_TASK.md` (git-ignored, from `tasks/CURRENT_TASK.template.md`) | Active task, phase, next steps, open questions, scratch notes |
 | Phase commands | `.claude/commands/plan.md`, `implement.md`, `review.md` | `/plan NN`, `/implement NN`, `/review NN` in Claude Code |
 | Gate | `scripts/gate.sh NN` | PLAN, SPEC trace, BUILD (red→green), TEST (+ independent probes), REVIEW, HYGIENE |
@@ -16,14 +17,21 @@ Six tasks, each one logically separate outcome. You implement them yourself (VS 
 | Phase | Who | How | Output |
 |---|---|---|---|
 | 1. Plan | agent proposes, **you decide** | `/plan 02-api` | Questions (`- Q:` / `A:`) and a short plan in the task doc's Plan section. The agent **stops and asks** when anything is unclear. |
-| 2. Spec | you | Edit the ACs in the task doc if your answers changed scope | Committed task doc (`docs(NN): plan and spec`) |
-| 3. Implement (red) | agent or you | `/implement 02-api` | Failing tests that carry AC ids. `evidence/NN-red.txt`. Commit `test(NN): ...` |
-| 3. Implement (green) | agent or you | same command | Minimal code to pass. `evidence/NN-green.txt`. Commit `feat(NN): ...` |
-| 4. Verify | script | `scripts/gate.sh 02-api` | Every check green |
-| 5. Review | agent reviews, **you triage** | `/review 02-api` | `reviews/NN.md` with findings and a verdict. Fixes go in `fix(NN): ...` commits |
-| 6. Done | you | gate passes | Tick the board below. Copy notable agent challenges into APPROACH.md |
+| 2. Spec | you | Edit the ACs in the task doc if your answers changed scope | **You commit** the task doc (`docs(NN): plan and spec`) |
+| 3. Implement (red) | agent or you | `/implement 02-api` | Failing tests that carry AC ids. `evidence/NN-red.txt`. **You commit** `test(NN): ...` |
+| 3. Implement (green) | agent or you | same command | Minimal code to pass. `evidence/NN-green.txt`. **You commit** `feat(NN): ...` |
+| 4. Verify | script | `scripts/gate.sh 02-api` | Every check green. The result is added to the task doc's Status log |
+| 5. Review | agent reviews, **you triage** | `/review 02-api` | `reviews/NN.md` with findings and a verdict. Fixes go in `fix(NN): ...` commits. **You commit** `review(NN): ...` |
+| 6. Done | script, then you | gate passes | The task doc moves to `tasks/done/` and the board below is ticked. **You commit and push** `chore(NN): mark task done`. Copy notable agent challenges into APPROACH.md |
 
-Expected history per task: `docs(NN)` → `test(NN)` → `feat(NN)` → (`fix(NN)`) → `review(NN)`.
+Expected history per task: `docs(NN)` → `test(NN)` → `feat(NN)` → (`fix(NN)`) → `review(NN)` → `chore(NN)`.
+
+## Automatic handoff
+`scripts/handoff.sh status` works out the next action from the task docs, `CURRENT_TASK.md`, `reviews/` and git history.
+- **New session:** a SessionStart hook gives the agent the brief: active task, next action, decisions so far, recent status.
+- **Phase finished:** a Stop hook hands off once when the next action changes. `/implement` and `/review` go to a fresh agent. `/plan` and the gate stay in the current session. If nothing changed, it does nothing, so ordinary chat and repeated failures never loop.
+- **Approvals:** the chain stops at plan answers, review triage and every commit or push, and the agent gives you the exact commands. `.claude/settings.json` also makes Claude Code prompt on `git commit` and `git push`.
+- **After you act:** tell the agent to continue. A session cannot start itself.
 
 ## Task board
 | # | Task | Outcome | Verified by | Status |

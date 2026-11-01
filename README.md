@@ -14,6 +14,7 @@ cd api && python -m venv .venv && . .venv/bin/activate && pip install -r require
 cd web && npm install && npx playwright install chromium && cd ..
 cp .env.example web/.env.local   # placeholders only; adjust if ports differ
 ```
+On Windows, run these in Git Bash and use `.venv/Scripts/activate` instead of `.venv/bin/activate`.
 
 ## Run
 ```bash

@@ -10,4 +10,5 @@ coverage/
 next-env.d.ts
 *.tsbuildinfo
 CURRENT_TASK.md
+BRIEF.md
 .run/

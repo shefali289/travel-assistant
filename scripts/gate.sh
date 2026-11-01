@@ -10,17 +10,21 @@
 set -uo pipefail
 ROOT="$(cd "$(dirname "$0")/.." && pwd)"; cd "$ROOT"
 ID="${1:?usage: scripts/gate.sh <task-id> (see tasks/README.md)}"
-DOC="tasks/$ID.md"; N="${ID%%-*}"; N="${N#0}"
-[ -f "$DOC" ] || { echo "No task doc $DOC"; exit 2; }
-FAILS=0
-pass() { printf '  \033[32mPASS\033[0m %s\n' "$1"; }
-fail() { printf '  \033[31mFAIL\033[0m %s\n' "$1"; FAILS=$((FAILS+1)); }
-step() { printf '\n== %s ==\n' "$1"; }
+DOC="tasks/$ID.md"; [ -f "$DOC" ] || DOC="tasks/done/$ID.md"; N="${ID%%-*}"; N="${N#0}"
+[ -f "$DOC" ] || { echo "No task doc tasks/$ID.md"; exit 2; }
+FAILS=0; PASSES=0; STEP=""; FAILED_STEPS=""; FAILED_NAMES=""
+pass() { printf '  \033[32mPASS\033[0m %s\n' "$1"; PASSES=$((PASSES+1)); }
+fail() {
+  printf '  \033[31mFAIL\033[0m %s\n' "$1"; FAILS=$((FAILS+1))
+  case ",$FAILED_STEPS," in *",$STEP,"*) ;; *) FAILED_STEPS="${FAILED_STEPS:+$FAILED_STEPS,}$STEP" ;; esac
+  FAILED_NAMES="${FAILED_NAMES:+$FAILED_NAMES; }$1"
+}
+step() { printf '\n== %s ==\n' "$1"; STEP="${1%% *}"; }
 section() { awk -v h="$1" '$0 ~ "^## "h {f=1; next} /^## / {f=0} f' "$DOC"; }
-pyenv() { [ -d api/.venv ] && . api/.venv/bin/activate; true; }
+pyenv() { [ -f api/.venv/Scripts/activate ] && . api/.venv/Scripts/activate; [ -f api/.venv/bin/activate ] && . api/.venv/bin/activate; true; }
 
 step "PLAN"
-plan="$(section "1\\. Plan")"
+plan="$(section "1[.] Plan")"
 if echo "$plan" | grep -q "_TBD_"; then fail "Plan section still has _TBD_ (run /plan $ID, then write the agreed plan)"; else pass "plan written"; fi
 q=$(echo "$plan" | grep -cE '^\s*- Q:' || true); a=$(echo "$plan" | grep -cE '^\s*A: *[^ _]' || true)
 if [ "$q" -eq "$a" ]; then pass "questions answered ($a/$q)"; else fail "unanswered questions ($a/$q answered): fill every 'A:' line"; fi
@@ -93,8 +97,14 @@ fi
 step "HYGIENE"
 if git grep -nIE '(sk-ant-[A-Za-z0-9_-]{10,}|sk-[A-Za-z0-9]{20,}|AKIA[0-9A-Z]{16}|ghp_[A-Za-z0-9]{20,}|[A-Za-z0-9._%+-]+@(gmail|outlook|hotmail|yahoo)\.com)' -- ':!scripts/gate.sh' >/tmp/gate-secrets.txt; then fail "possible secret/personal data:"; cat /tmp/gate-secrets.txt; else pass "no secrets or personal emails tracked"; fi
 git ls-files --error-unmatch CURRENT_TASK.md >/dev/null 2>&1 && fail "CURRENT_TASK.md is committed (it is short-term memory: git rm --cached it)" || pass "CURRENT_TASK.md not committed"
-git ls-files | grep -qE '(^|/)\.env(\.local)?$' && fail ".env file committed" || pass "no .env committed"
+git ls-files | grep -E '(^|/)\.env(\.local)?$' >/dev/null && fail ".env file committed" || pass "no .env committed"
 
 printf '\n'
-if [ "$FAILS" -eq 0 ]; then printf '\033[32mGATE PASSED for %s\033[0m\n' "$ID"; else printf '\033[31mGATE FAILED for %s: %d check(s)\033[0m\n' "$ID" "$FAILS"; fi
+if [ "$FAILS" -eq 0 ]; then
+  printf '\033[32mGATE PASSED for %s\033[0m\n' "$ID"
+  bash scripts/handoff.sh gate-result "$ID" pass "$PASSES checks"
+else
+  printf '\033[31mGATE FAILED for %s: %d check(s)\033[0m\n' "$ID" "$FAILS"
+  bash scripts/handoff.sh gate-result "$ID" fail "[$FAILED_STEPS] $PASSES passed, $FAILS failed: $FAILED_NAMES"
+fi
 exit $(( FAILS > 0 ))
