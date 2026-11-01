@@ -101,6 +101,14 @@ Gate passes. The red commit precedes green. Any contract revisions are recorded.
 - `FIXTURE_DELAY_MS` values `nan` and `inf` are not tested, because a parser that accepts them could hang the run. Green should still fall back to 800 ms for them.
 - Passing at red, because the behaviour needs no new code: `test_ac2_8_health_response_matches_the_contract` and the 15 cases of `test_ac2_8_rejected_payloads_also_fail_the_contract_request_schema`, which check only the YAML.
 - `evidence/02-api-red.txt` has the local repo path and username replaced with `<repo>` and `<user>`, because `AGENTS.md` bars personal data in files. Nothing else in the output changed.
+- Green: `/recommendations` keeps FastAPI's body parsing, as section 3 says, instead of reading the raw body. The invalid UTF-8 case is mapped by a handler that turns any `HTTPException` 400 into the 422 `ErrorResponse`. FastAPI raises a 400 only there, and no route in the app raises one. Framework 404 and 405 stay as they are, as the plan answer says.
+- The 422 texts the AC leaves open: missing "The message field is required. Describe the hotel you need."; blank is the contract's example text; non-string "The message field must be text. Describe the hotel you need."; over 500 "The message field must be 500 characters or fewer."; scenario "The scenario field must be success, empty or error."
+- A blank message over 500 characters gets the length error, because the length check runs before the blank check. Both name `message`.
+- `FIXTURE_DELAY_MS` is parsed with `float()`, so `1.5` means 1.5 ms. `nan`, `inf`, `-inf` and values that overflow (`1e400`) fall back to 800 ms. Checked once with a throwaway script outside the repo, as they stay untested on purpose. There is no upper limit, so a very large finite value waits that long: the AC only names non-numeric and negative values, and the value comes from the operator.
+- `parse_price` goes through `float()`, so `220.0` in the CSV becomes the integer 220, following "whole numbers stay integers". The AC does not bar negative prices and the contract has no minimum, so they load.
+- Beyond the listed ACs, `load_fixtures` raises `ValueError` on a row with missing columns. Otherwise a short row would serve `explanation: null`, which breaks the contract. No test covers this.
+- Checked with the same throwaway script, not covered by tests: a lone surrogate in `message`, a JSON `null`, number or string body, very deep nesting and a `text/plain` body all return a 422 `ErrorResponse`. JSON with no `Content-Type` returns 200, as the plan answer says.
+- No test was edited and `openapi/openapi.yaml` did not change.
 
 ## Status log (updated automatically)
 - 2026-11-01 07:33 UTC - on branch task/02-api
@@ -110,3 +118,6 @@ Gate passes. The red commit precedes green. Any contract revisions are recorded.
 - 2026-11-01 07:40 UTC - next: implement (agent)
 - 2026-11-01 07:45 UTC - red: 99 failed, 17 passed; evidence saved, waiting on the test(02-api) commit
 - 2026-11-01 07:46 UTC - next: commit-red (human)
+- 2026-11-01 07:50 UTC - next: implement (agent)
+- 2026-11-01 07:53 UTC - green: 116 passed, probe 0 failures; evidence saved, waiting on the feat(02-api) commit
+- 2026-11-01 07:53 UTC - next: commit-green (human)
