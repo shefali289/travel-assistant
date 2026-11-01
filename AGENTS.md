@@ -14,14 +14,14 @@ A traveller asks for a hotel, reviews the assistant's recommendations, and choos
 - `scripts/handoff.sh`: works out the next action from repo state. `scripts/gate.sh <task>`: the quality gate. `scripts/probes/` holds independent acceptance probes. `reviews/` holds AI code reviews. `evidence/` holds saved test runs and screenshots.
 
 ## Workflow (spec-driven, test-first)
-`/plan <task>` (ask questions) → human answers and approves → `/implement <task>` (red commit → green commit) → `scripts/gate.sh <task>` → `/review <task>` → fix → gate passes → Done.
+`/plan <task>` (ask questions) → human answers and approves → `/implement <task>` (red → green, logged in the Status log) → `scripts/gate.sh <task>` → `/review <task>` → fix → gate passes → one commit → Done.
 - **At session start, run `scripts/handoff.sh status` (Claude Code injects this automatically) and read `CURRENT_TASK.md` if it exists. Update it at every phase change. Never commit it.**
 - **One branch per task:** `task/<id>`, created from `main` by `scripts/handoff.sh` (automatic in hooks). Never commit a task on `main`. The final gate rebases on `main` and checks the branch. The human fast-forwards `main` to it.
-- **Never commit or push without asking.** Give the human the exact commands. Run one only if they approve that specific commit or push.
+- **Never commit or push without asking.** Work stays uncommitted until the task's final gate passes. Then give the human the commands for the task's one commit and push, and run them only if they approve. Give each command separately in a code block, one per line, never chained with `&&`. Stage only the files changed for that task or request, by name. Never use `git add -A` or `git add .`.
 - **Keep the task doc current.** Add every decision to its "Decisions & agent notes" as you make it. The Status log section is written by scripts: use `scripts/handoff.sh log <task> "<text>"` to add to it.
 - **If anything is unclear or the spec conflicts with the brief, stop and ask. Do not guess.** Record each question and answer in the task doc's Plan section.
 - Write tests from the acceptance criteria only, and put the AC id in the test title (`AC3.2 ...` or pytest `test_ac2_3_...`).
-- Never weaken or delete a test to get green. If a test is wrong, explain why and fix it in its own commit.
+- Never weaken or delete a test to get green. If a test is wrong, explain why, change it only after the human agrees, and record it under Decisions.
 
 ## API contract (summary; the YAML is authoritative once written)
 `POST /recommendations` with body `{ message: string (non-blank), scenario?: "success"|"empty"|"error" }`

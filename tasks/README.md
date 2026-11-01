@@ -1,6 +1,6 @@
 # Harness: spec-driven AI-in-the-SDLC
 
-Six tasks, each one logically separate outcome. You implement them yourself (VS Code + your AI agent). The harness keeps the agent on rails and makes every phase visible in git.
+Six tasks, each one logically separate outcome. You implement them yourself (VS Code + your AI agent). The harness keeps the agent on rails and records every phase in the task doc. Each task ends in one commit.
 
 ## Pieces
 | Piece | Where | Purpose |
@@ -16,22 +16,22 @@ Six tasks, each one logically separate outcome. You implement them yourself (VS 
 ## Lifecycle per task
 | Phase | Who | How | Output |
 |---|---|---|---|
-| 0. Branch | script | automatic (hooks), or `scripts/handoff.sh branch` | `task/NN-name` created from `main`. All of the task's commits go here |
+| 0. Branch | script | automatic (hooks), or `scripts/handoff.sh branch` | `task/NN-name` created from `main`. The task's work stays uncommitted on it until Done |
 | 1. Plan | agent proposes, **you decide** | `/plan 02-api` | Questions (`- Q:` / `A:`) and a short plan in the task doc's Plan section. The agent **stops and asks** when anything is unclear. |
-| 2. Spec | you | Edit the ACs in the task doc if your answers changed scope | **You commit** the task doc (`docs(NN): plan and spec`) |
-| 3. Implement (red) | agent or you | `/implement 02-api` | Failing tests that carry AC ids. `evidence/NN-red.txt`. **You commit** `test(NN): ...` |
-| 3. Implement (green) | agent or you | same command | Minimal code to pass. `evidence/NN-green.txt`. **You commit** `feat(NN): ...` |
+| 2. Spec | you | Edit the ACs in the task doc if your answers changed scope | Updated task doc (not committed yet) |
+| 3. Implement (red) | agent or you | `/implement 02-api` | Failing tests that carry AC ids. `evidence/NN-red.txt` and a `red:` line in the Status log |
+| 3. Implement (green) | agent or you | same command | Minimal code to pass. `evidence/NN-green.txt` and a `green:` line in the Status log |
 | 4. Verify | script | `scripts/gate.sh 02-api` | Every check green. If `main` moved, the gate rebases the branch on it first (it stops on conflicts). The result is added to the task doc's Status log |
-| 5. Review | agent reviews, **you triage** | `/review 02-api` | `reviews/NN.md` with findings and a verdict. Fixes go in `fix(NN): ...` commits. **You commit** `review(NN): ...` |
-| 6. Done | script, then you | gate passes | The task doc moves to `tasks/done/` and the board below is ticked. **You commit** `chore(NN): mark task done`, **fast-forward `main`** to the branch and **push** both. Copy notable agent challenges into APPROACH.md |
+| 5. Review | agent reviews, **you triage** | `/review 02-api` | `reviews/NN.md` with findings and a verdict. Agreed fixes are made in the working tree, then it is reviewed again |
+| 6. Done | script, then you | gate passes | The task doc moves to `tasks/done/` and the board below is ticked. **You make the task's one commit** `feat(NN): ...`, **fast-forward `main`** to the branch and **push** both. Copy notable agent challenges into APPROACH.md |
 
-Expected history per task, on `task/NN-name`: `docs(NN)` → `test(NN)` → `feat(NN)` → (`fix(NN)`) → `review(NN)` → `chore(NN)`. The gate's BRANCH step checks that you're on the task branch, the tree is clean, the branch is rebased on `main` with no merge commits, and every commit is named `type(NN): ...`.
+One commit per task, on `task/NN-name`: `feat(NN): <summary>`, made after the final gate passes. Test-first is proven by the Status log (`red:` before `green:`) and the two evidence files. The gate's BRANCH step checks that you're on the task branch, that it is rebased on `main` (it rebases if needed) with no merge commits, and that any commit on it is named `type(NN): ...`. Tasks 01 and 02 were started under the older one-commit-per-phase flow, and the gate still accepts their history.
 
 ## Automatic handoff
-`scripts/handoff.sh status` works out the next action from the task docs, `CURRENT_TASK.md`, `reviews/` and git history.
+`scripts/handoff.sh status` works out the next action from the task docs, `CURRENT_TASK.md`, `reviews/` and the current branch.
 - **New session:** a SessionStart hook gives the agent the brief: active task, next action, decisions so far, recent status.
 - **Phase finished:** a Stop hook hands off once when the next action changes. `/implement` and `/review` go to a fresh agent. `/plan` and the gate stay in the current session. If nothing changed, it does nothing, so ordinary chat and repeated failures never loop.
-- **Approvals:** the chain stops at plan answers, review triage and every commit or push, and the agent gives you the exact commands. `.claude/settings.json` also makes Claude Code prompt on `git commit` and `git push`.
+- **Approvals:** the chain stops at plan answers, review triage and the one commit and push at the end of each task, and the agent gives you the exact commands. `.claude/settings.json` also makes Claude Code prompt on `git commit` and `git push`.
 - **After you act:** tell the agent to continue. A session cannot start itself.
 
 ## Task board

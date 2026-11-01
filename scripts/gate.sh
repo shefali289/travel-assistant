@@ -1,13 +1,14 @@
 #!/usr/bin/env bash
 # Quality gate for one harness task. Usage: scripts/gate.sh <task-id>   e.g. scripts/gate.sh 02-api
 # A task is Done only when this exits 0. Each step maps to an SDLC phase:
-#   BRANCH  on task/<id>, clean tree, rebased on main (done here if needed), linear history, commits named type(<id>)
+#   BRANCH  on task/<id>, rebased on main (done here if needed), linear history, any commits named type(<id>)
 #   PLAN    plan written and every question answered in the task doc
 #   SPEC    every acceptance criterion (ACn.m) traced to a test or harness probe
-#   BUILD   red-before-green commits with saved evidence
+#   BUILD   red before green (Status log order) with saved evidence
 #   TEST    unit tests, typecheck, lint, independent harness probe(s)
 #   REVIEW  AI code review recorded with an APPROVE verdict and no open blockers
 #   HYGIENE no secrets/personal data, CURRENT_TASK.md never committed
+# Work stays uncommitted until this passes. Then the person makes the task's one commit.
 set -uo pipefail
 ROOT="$(cd "$(dirname "$0")/.." && pwd)"; cd "$ROOT"
 # Run from a copy in .run/, because the BRANCH step may rebase, which rewrites this file while bash is reading it.
@@ -27,17 +28,15 @@ section() { awk -v h="$1" '$0 ~ "^## "h {f=1; next} /^## / {f=0} f' "$DOC"; }
 pyenv() { [ -f api/.venv/Scripts/activate ] && . api/.venv/Scripts/activate; [ -f api/.venv/bin/activate ] && . api/.venv/bin/activate; true; }
 
 step "BRANCH"
-# Left out: files scripts rewrite on every run (task doc Status log, this gate's probe output). They go in the done commit.
-BR="task/$ID"; cur="$(git branch --show-current)"; dirty="$(git status --porcelain -- . ':!tasks' ":!evidence/$ID-probe.txt")"
+BR="task/$ID"; cur="$(git branch --show-current)"
 [ "$cur" = "$BR" ] && pass "on branch $BR" || fail "on '$cur', not $BR (run scripts/handoff.sh branch $ID)"
-[ -z "$dirty" ] && pass "working tree clean" || fail "uncommitted changes: commit them, then re-run the gate (see git status)"
 if git merge-base --is-ancestor main HEAD; then pass "up to date with main"
-elif [ "$cur" = "$BR" ] && [ -z "$dirty" ]; then
-  # Behind main: rebase, then run the new gate from the start so every check sees the rebased code.
+elif [ "$cur" = "$BR" ]; then
+  # Behind main: rebase (--autostash carries the uncommitted work), then run the new gate from the start.
   # --apply: the default merge backend fails on Git for Windows 2.40 with "failed to stat '<sha>...<sha>'".
   if git rebase --apply -q --autostash main >/tmp/gate-rebase.txt 2>&1; then echo "  rebased $BR on main, running the gate again"; GATE_COPY= exec bash scripts/gate.sh "$@"
-  else git rebase --abort; fail "rebase on main has conflicts: run 'git rebase --apply main', resolve them, then re-run the gate"; fi
-else fail "behind main: commit your work, then re-run the gate so it can rebase"; fi
+  else git rebase --abort; fail "rebase on main has conflicts (see /tmp/gate-rebase.txt): ask the person how to resolve them"; fi
+else fail "behind main: switch to $BR, then re-run the gate so it can rebase"; fi
 [ -z "$(git rev-list --merges main..HEAD)" ] && pass "linear history (no merge commits)" || fail "merge commits on $BR: rebase on main instead of merging"
 bad="$(git log --format=%s main..HEAD | grep -vE "^(docs|test|feat|fix|refactor|review|chore)\($ID\): " || true)"
 [ -z "$bad" ] && pass "every commit on $BR is named type($ID): ..." || fail "commits not named type($ID): $(echo "$bad" | head -3 | paste -sd ';')"
@@ -62,9 +61,13 @@ fi
 
 step "BUILD (test-first evidence)"
 if echo "$TRACE_SRC" | grep -q tests; then
+  # /implement logs "red:" then "green:" in the Status log. Older tasks proved it with test( ) then feat( ) commits.
+  red=$(grep -nE '^- .* - red: ' "$DOC" | head -1 | cut -d: -f1); green=$(grep -nE '^- .* - green: ' "$DOC" | head -1 | cut -d: -f1)
   log=$(git log --reverse --format=%s)
-  red=$(echo "$log" | grep -nE "^test\($ID\)" | head -1 | cut -d: -f1); green=$(echo "$log" | grep -nE "^feat\($ID\)" | head -1 | cut -d: -f1)
-  if [ -n "$red" ] && [ -n "$green" ] && [ "$red" -lt "$green" ]; then pass "commit test($ID) precedes feat($ID)"; else fail "need a 'test($ID): ...' commit before a 'feat($ID): ...' commit"; fi
+  cred=$(echo "$log" | grep -nE "^test\($ID\)" | head -1 | cut -d: -f1); cgreen=$(echo "$log" | grep -nE "^feat\($ID\)" | head -1 | cut -d: -f1)
+  if [ -n "$red" ] && [ -n "$green" ] && [ "$red" -lt "$green" ]; then pass "Status log records red before green"
+  elif [ -n "$cred" ] && [ -n "$cgreen" ] && [ "$cred" -lt "$cgreen" ]; then pass "commit test($ID) precedes feat($ID)"
+  else fail "Status log needs a 'red:' line before a 'green:' line (scripts/handoff.sh log $ID \"red: ...\")"; fi
   if [ -f "evidence/$ID-red.txt" ] && grep -qiE "fail|error" "evidence/$ID-red.txt"; then pass "evidence/$ID-red.txt shows failures"; else fail "save the failing run to evidence/$ID-red.txt"; fi
   if [ -f "evidence/$ID-green.txt" ]; then pass "evidence/$ID-green.txt saved"; else fail "save the passing run to evidence/$ID-green.txt"; fi
 else
@@ -83,7 +86,8 @@ step "TEST"
 ( cd web && npm run -s lint >/tmp/gate-lint.txt 2>&1 ) && pass "lint" || { fail "lint"; tail -10 /tmp/gate-lint.txt; }
 
 probe_ui() {
-  scripts/serve.sh start >/tmp/gate-serve.txt 2>&1 || { fail "could not start servers (see .run/*.log)"; return; }
+  # On a failed start, stop whichever server did come up.
+  scripts/serve.sh start >/tmp/gate-serve.txt 2>&1 || { fail "could not start servers (see .run/*.log)"; scripts/serve.sh stop; return; }
   node scripts/probes/journey.mjs "$1" | tee "evidence/$ID-probe.txt" | grep -E "FAIL|failure"
   [ "${PIPESTATUS[0]}" -eq 0 ] && pass "journey probe '$1' (evidence/$ID-probe.txt)" || fail "journey probe '$1' (evidence/$ID-probe.txt)"
   scripts/serve.sh stop
@@ -114,7 +118,8 @@ else
 fi
 
 step "HYGIENE"
-if git grep -nIE '(sk-ant-[A-Za-z0-9_-]{10,}|sk-[A-Za-z0-9]{20,}|AKIA[0-9A-Z]{16}|ghp_[A-Za-z0-9]{20,}|[A-Za-z0-9._%+-]+@(gmail|outlook|hotmail|yahoo)\.com)' -- ':!scripts/gate.sh' >/tmp/gate-secrets.txt; then fail "possible secret/personal data:"; cat /tmp/gate-secrets.txt; else pass "no secrets or personal emails tracked"; fi
+# --untracked: the task's work is not committed yet, and its one commit will include these files.
+if git grep --untracked -nIE '(sk-ant-[A-Za-z0-9_-]{10,}|sk-[A-Za-z0-9]{20,}|AKIA[0-9A-Z]{16}|ghp_[A-Za-z0-9]{20,}|[A-Za-z0-9._%+-]+@(gmail|outlook|hotmail|yahoo)\.com)' -- ':!scripts/gate.sh' >/tmp/gate-secrets.txt; then fail "possible secret/personal data:"; cat /tmp/gate-secrets.txt; else pass "no secrets or personal emails tracked"; fi
 git ls-files --error-unmatch CURRENT_TASK.md >/dev/null 2>&1 && fail "CURRENT_TASK.md is committed (it is short-term memory: git rm --cached it)" || pass "CURRENT_TASK.md not committed"
 git ls-files | grep -E '(^|/)\.env(\.local)?$' >/dev/null && fail ".env file committed" || pass "no .env committed"
 

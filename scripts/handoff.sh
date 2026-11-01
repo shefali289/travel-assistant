@@ -14,8 +14,6 @@ STATE=".run/handoff-state"
 
 doc_of() { for d in "tasks/$1.md" "tasks/done/$1.md"; do [ -f "$d" ] && { echo "$d"; return; }; done; }
 section() { awk -v h="$2" '$0 ~ "^## "h {f=1; next} /^## / {f=0} f' "$1"; }
-# Not grep -q: it exits at the first match, git log dies writing to the closed pipe, and pipefail reports a failure.
-committed() { git log --format=%s 2>/dev/null | grep -E "^$1\($2\)" >/dev/null; }
 phase_is() { [ -f CURRENT_TASK.md ] && grep -qE "^Task[:=] *$ID\b" CURRENT_TASK.md && grep -qE "^Phase[:=] *$1\b" CURRENT_TASK.md; }
 next() { WHO="$1"; ACTION="$2"; TEXT="$3"; }
 
@@ -25,7 +23,7 @@ log() {
   printf -- '- %s - %s\n' "$(date -u '+%Y-%m-%d %H:%M UTC')" "$2" >> "$doc"
 }
 
-fresh_agent() { echo "Hand off to a fresh agent: use the Agent tool (general-purpose) with this brief: run scripts/handoff.sh status, then follow .claude/commands/$1.md with ARGUMENTS=$ID. Do not commit or push. If you need a human decision or a commit, return it with the exact commands in your final message. Relay that message to the person."; }
+fresh_agent() { echo "Hand off to a fresh agent: use the Agent tool (general-purpose) with this brief: run scripts/handoff.sh status, then follow .claude/commands/$1.md with ARGUMENTS=$ID. Do not commit or push: nothing is committed until the task's final gate passes. If you need a human decision, return it in your final message. Relay that message to the person."; }
 
 # Sets WHO (agent|human|none), ACTION, TEXT and ID.
 resolve() {
@@ -34,14 +32,14 @@ resolve() {
   finished="$(git status --porcelain -uall -- tasks/done 2>/dev/null | sed -nE 's#.*tasks/done/([^ "]+)\.md.*#\1#p' | head -1)"
   if [ -n "$finished" ]; then
     ID="$finished"; DOC="tasks/done/$ID.md"
-    next human commit-done "Task $ID passed the gate and moved to tasks/done/. Ask the person to commit it, merge it into main and push, giving them: $(merge_cmds "git add -A && git commit -m 'chore($ID): mark task done' && ")"
+    next human commit-done "Task $ID passed the gate and moved to tasks/done/. This is the task's one commit. Ask the person to check git status, then commit, merge into main and push, giving them these commands one per line (fill in the summary). Stage only files this task changed, named one by one, never git add -A; drop any listed file that belongs to other work: (1) git add $(git status --porcelain -uall | sed -E 's/^...//; s/.* -> //' | paste -sd' ') (2) git commit -m 'feat($ID): <one-line summary of the task>' $(merge_cmds 3)"
     return
   fi
   # Each task lives on its own branch. A finished task's branch must be merged into main before the next one starts.
   BRANCH="$(git branch --show-current)"
   if [ -f "tasks/done/${BRANCH#task/}.md" ]; then
     ID="${BRANCH#task/}"; DOC="tasks/done/$ID.md"
-    next human merge "Task $ID is done but its branch is not merged. Ask the person to merge it into main and push, giving them: $(merge_cmds)"
+    next human merge "Task $ID is done but its branch is not merged. Ask the person to merge it into main and push, giving them these commands one per line: $(merge_cmds 1)"
     return
   fi
   # The active task is the lowest-numbered doc still in tasks/.
@@ -52,7 +50,9 @@ resolve() {
     return
   fi
 
-  # Plan: agent asks, human answers, human commits. Same checks as the gate's PLAN step.
+  # Nothing is committed while a task is in progress. Phases are read from the task doc and reviews/,
+  # and the person makes one commit when the final gate passes.
+  # Plan: agent asks, human answers. Same checks as the gate's PLAN step.
   plan="$(section "$DOC" "1[.] Plan")"
   q=$(echo "$plan" | grep -cE '^\s*- Q:'); a=$(echo "$plan" | grep -cE '^\s*A: *[^ _]')
   if echo "$plan" | grep -q "_TBD_" || [ "$q" -ne "$a" ]; then
@@ -60,50 +60,23 @@ resolve() {
     else next agent plan "Run /plan $ID in this session, because it needs a conversation with the person. Ask the questions, then stop for answers."; fi
     return
   fi
-  if ! committed docs "$ID"; then
-    next human commit-plan "Plan for $ID is ready. Ask the person to review $DOC and commit it, giving them: git add $DOC && git commit -m 'docs($ID): plan and spec'"
-    return
-  fi
-
-  # Test-first tasks: failing tests, human commit, implementation, human commit.
-  if grep -m1 -oE 'Verified by:[*]* *[a-z+ ]+' "$DOC" | grep -q tests; then
-    if ! committed test "$ID"; then
-      if phase_is red-commit; then next human commit-red "Failing tests for $ID are ready. Ask the person to commit them, giving them: git add -A && git commit -m 'test($ID): failing acceptance tests'"
-      else next agent implement "$(fresh_agent implement)"; fi
-      return
-    fi
-    if ! committed feat "$ID"; then
-      if phase_is green-commit; then next human commit-green "Implementation for $ID passes its tests. Ask the person to commit it, giving them: git add -A && git commit -m 'feat($ID): implement acceptance criteria'"
-      else next agent implement "$(fresh_agent implement)"; fi
-      return
-    fi
-  fi
-  # /implement ends with a gate run. Only REVIEW may still be failing before the task can be reviewed.
-  # BRANCH may fail too, because the tree is not clean until the work is committed for review.
-  if ! grep -E ' - gate ' "$DOC" | tail -1 | grep -qE 'gate (PASSED|FAILED \[(BRANCH,)?REVIEW\])'; then
+  # Implement: red, green, then a gate run, in one fresh agent. Only REVIEW may still fail before the review.
+  if ! grep -E ' - gate ' "$DOC" | tail -1 | grep -qE 'gate (PASSED|FAILED \[REVIEW\])'; then
     next agent implement "$(fresh_agent implement)"; return
   fi
 
-  # Review: a fresh agent reviews committed work, the human triages and commits. Then a final gate run.
-  if [ ! -f "reviews/$ID.md" ]; then
-    if [ -n "$(git status --porcelain -- . ':!tasks' 2>/dev/null)" ]; then
-      next human commit-work "Work for $ID is uncommitted and the review needs it in history. Ask the person to check git status and commit it, giving them: git add -A && git commit -m 'docs($ID): implementation and evidence'"
-    else next agent review "$(fresh_agent review)"; fi
-    return
-  fi
+  # Review: a fresh agent reviews the uncommitted work against main, the human triages. Then the final gate run.
+  if [ ! -f "reviews/$ID.md" ]; then next agent review "$(fresh_agent review)"; return; fi
   if ! grep -qE '^Verdict: *APPROVE' "reviews/$ID.md" || grep -qE '^\s*- \[ \] *(BLOCKER|MAJOR)' "reviews/$ID.md"; then
-    next human triage "Review of $ID has open findings. Ask the person to read reviews/$ID.md and decide what to fix. Fixes go in commits they approve, named fix($ID), then /review $ID runs again."
-    return
-  fi
-  if ! committed review "$ID"; then
-    next human commit-review "Review of $ID is approved. Ask the person to commit it, giving them: git add reviews/$ID.md && git commit -m 'review($ID): APPROVE'"
+    next human triage "Review of $ID has open findings. Ask the person to read reviews/$ID.md and decide what to fix. Agreed fixes are made in the working tree (no commit), then /review $ID runs again."
     return
   fi
   next agent gate "Run scripts/gate.sh $ID. It rebases task/$ID on main if needed. A pass moves the task doc to tasks/done/."
 }
 
-# Commands for the person: optional prefix (the done commit), then fast-forward main and push main plus the task branch.
-merge_cmds() { echo "${1:-}git switch main && git merge --ff-only task/$ID && git push origin main task/$ID"; }
+# Commands for the person, numbered from $1 and never chained, so each one can be run and checked on its own:
+# fast-forward main to the task branch, then push both.
+merge_cmds() { echo "($1) git switch main ($(($1+1))) git merge --ff-only task/$ID ($(($1+2))) git push origin main task/$ID"; }
 
 # Get onto task/<id>: switch if it exists, otherwise create it from main. Never leaves another task's branch.
 switch_branch() {
