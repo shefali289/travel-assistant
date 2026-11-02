@@ -42,7 +42,7 @@ One commit per task, on `task/NN-name`: `feat(NN): <summary>`, made after the fi
 | 03 | [search](done/03-search.md) | Traveller types a request, picks a demo scenario, sees progress | Vitest + journey `search` | Done |
 | 04 | [results](done/04-results.md) | Traveller reviews message + cards; empty and recoverable error states | Vitest + journey `results` | Done |
 | 05 | [choose](done/05-choose.md) | Traveller chooses one hotel by mouse or keyboard and sees a summary | Vitest + journey `choose` | Done |
-| 06 | [evidence-docs](06-evidence-docs.md) | 360px + keyboard evidence, README, APPROACH, agent-context evidence | journey `all` + doc checks | Todo |
+| 06 | [evidence-docs](done/06-evidence-docs.md) | 360px + keyboard evidence, README, APPROACH, agent-context evidence | journey `all` + doc checks | Done |
 
 ## Brief → task traceability (every submission criterion has an owner)
 | Brief criterion | Task | Checked by |

@@ -1,0 +1,41 @@
+stage: search (request form, demo control, validation, loading)
+  ok   request field labelled 'Your request' and prefilled with the Wellington example
+  ok   'Demo scenario' select offers success, empty, error
+  ok   blank message shows inline error
+  ok   blank message sends no request
+  ok   progress shown in role=status while waiting
+  ok   submit disabled while waiting
+  ok   one POST /recommendations sent
+stage: results (cards, fixture label, empty, error + retry)
+  ok   list 'Recommended hotels' appears
+  ok   three hotel cards
+  ok   cards show "Harbour House"
+  ok   cards show "City Garden"
+  ok   cards show "Quay Rooms"
+  ok   cards show "NZD 220"
+  ok   cards show "NZD 245"
+  ok   cards show "NZD 195"
+  ok   cards show breakfast included / not included
+  ok   cards show explanation
+  ok   response labelled as fixture data
+  ok   empty scenario shows 'No hotels to show'
+  ok   empty scenario shows no cards
+  ok   error scenario shows role=alert with the API message
+  ok   Retry button offered
+  ok   Retry (scenario switched to success) recovers and shows cards
+  ok   alert cleared after recovery
+stage: choose (keyboard-only selection and summary)
+  ok   Find hotels reachable with Tab
+  ok   Enter on Find hotels submits
+  ok   'Choose City Garden' reachable with Tab
+  ok   focused Choose button has a visible outline (solid 2px)
+  ok   chosen button has aria-pressed=true
+  ok   summary region 'Your choice' shown
+  ok   summary names the hotel and nightly price
+  ok   focus moved to the summary
+  ok   exactly one hotel chosen at a time
+  ok   summary follows a new choice
+stage: small screen (360px)
+  ok   no horizontal overflow at 360px (overflow 0px)
+
+0 failure(s)

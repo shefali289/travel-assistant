@@ -1,0 +1,66 @@
+Evidence that the coding agent loads AGENTS.md (AC6.3)
+STATUS: Both parts filled in by the human's runs. Part 1 is the stronger evidence.
+
+Note for any fresh-session answer: the session-start hook (scripts/handoff.sh session-start, set in
+.claude/settings.json) adds task notes to a fresh session. Those notes come from the task docs and are separate
+from the CLAUDE.md -> AGENTS.md import, so an answer alone is weaker evidence than the /memory output.
+
+== 1. /memory output in Claude Code (exact excerpt) ==
+Screenshot taken by the human: evidence/agent-memory.png. The menu text below is copied from that screenshot:
+
+Memory
+
+  Auto-memory: on
+
+  1. Project memory           Checked in at ./CLAUDE.md
+  2. L AGENTS.md              @-imported
+  3. User memory              Saved in ~/.claude/CLAUDE.md
+  4. Open auto-memory folder
+
+== 2. Fresh session answer (exact excerpt) ==
+Run by the human in a normal PowerShell terminal from the repo root. Unedited, except that the local path in the
+prompt is replaced with <repo> to remove a username:
+
+PS <repo>> claude -p "What is the API contract and the UI contract?"
+## API contract
+
+`POST /recommendations` accepts `{ message: string (non-blank), scenario?: "success" | "empty" | "error" }`.
+
+All three scenarios respond after a short delay controlled by `FIXTURE_DELAY_MS` (default 800 ms). Invalid requests return immediately.
+
+| Scenario | Status | Response |
+|---|---|---|
+| `success` | 200 | `{ message, hotels: [h1, h2, h3], source: "fixture" }` |
+| `empty` | 200 | `{ message, hotels: [], source: "fixture" }` |
+| `error` | 503 | `{ code, message, retryable: true }` |
+| invalid | 422 | `{ code, message, retryable: false }` |
+
+`Hotel = { id, name, nightlyPrice: number, currency, breakfastIncluded: boolean, explanation }`
+
+The authoritative source is `openapi/openapi.yaml`.
+
+## UI contract
+
+| Element | Role / accessible name |
+|---|---|
+| Request field | textbox labelled **Your request**, prefilled with the Wellington example|
+| Demo control | select labelled **Demo scenario** with options `success`, `empty`, `error` and visible text containing "Demo control" |
+| Submit | button **Find hotels** (while loading: **Finding hotels…**, disabled with `aria-busy`) |
+| Blank message error | inline text containing "describe the hotel", textbox gets `aria-invalid` |
+| Progress | `role="status"` containing "Finding hotels" |
+| Results | assistant message, "Fixture data" label, list labelled **Recommended hotels**,one `listitem` per hotel with an `h3` name, `NZD 220` + "per night", "Breakfast included" / "Breakfast not included", explanation |
+| Empty | text containing "No hotels to show" |
+| Error | `role="alert"` with the API message, **Retry** button beside it (only when retryable) |
+| Choose | button **Choose \<hotel name\>** with `aria-pressed` |
+| Summary | region labelled **Your choice** that gets focus, showing name, `NZD 220 per night`, breakfast, explanation, and a fixture/no-booking note |
+
+This information comes from `AGENTS.md`, which is loaded via `CLAUDE.md` at session start.
+
+Earlier attempt: the coding agent tried this command on 2026-11-02 at 03:08 UTC from inside its own Claude Code
+session (Claude Code 2.1.69). Claude Code refused to start, with this exact output:
+
+  Error: Claude Code cannot be launched inside another Claude Code session.
+  Nested sessions share runtime resources and will crash all active sessions.
+  To bypass this check, unset the CLAUDECODE environment variable.
+
+The agent did not bypass that check.

@@ -1,0 +1,96 @@
+$ (cd api && ... python -m pytest -q)
+........................................................................ [ 52%]
+.................................................................        [100%]
+============================== warnings summary ===============================
+.venv\Lib\site-packages\starlette\testclient.py:37
+  <repo>\api\.venv\Lib\site-packages\starlette\testclient.py:37: DeprecationWarning: The anyio.abc.BlockingPortal alias is deprecated, use anyio.from_thread.BlockingPortal instead.
+    _PortalFactoryType = typing.Callable[[], typing.ContextManager[anyio.abc.BlockingPortal]]
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+137 passed, 1 warning in 14.70s
+exit 0
+$ (cd web && npm test && npm run typecheck && npm run lint)
+
+> web@0.1.0 test
+> vitest run
+
+
+ RUN  v3.2.7 <repo>/web
+
+ ✓ components/HotelAssistant.search.test.tsx (14 tests) 1950ms
+   ✓ submit > AC3.6 sends the trimmed message and the chosen scenario  489ms
+ ✓ components/HotelAssistant.results.test.tsx (21 tests) 4302ms
+   ✓ retry > AC4.6 resends the message from the failed request with the current scenario and leaves the field unchanged  954ms
+   ✓ retry > AC4.6 a second Retry still resends the message from the failed request  882ms
+ ✓ components/HotelAssistant.choose.test.tsx (26 tests) 5606ms
+   ✓ keyboard > AC5.5 Space on a focused Choose button shows the summary  403ms
+   ✓ clearing the choice > AC5.6 Find hotels clears it, even when the same hotels come back  399ms
+   ✓ clearing the choice > AC5.6 editing the field keeps it  464ms
+ ✓ lib/api.test.ts (19 tests) 23ms
+ ✓ components/HotelCard.test.tsx (8 tests) 203ms
+ ✓ lib/format.test.ts (2 tests) 3ms
+
+ Test Files  6 passed (6)
+      Tests  90 passed (90)
+   Start at  16:10:21
+   Duration  34.08s (transform 1.62s, setup 13.97s, collect 2.44s, tests 12.09s, environment 38.96s, prepare 4.56s)
+
+
+> web@0.1.0 typecheck
+> tsc --noEmit
+
+
+> web@0.1.0 lint
+> eslint .
+
+exit 0
+$ scripts/serve.sh start
+curl: (7) Failed to connect to localhost port 3000 after 2513 ms: Couldn't connect to server
+curl: (7) Failed to connect to localhost port 3000 after 2475 ms: Couldn't connect to server
+curl: (7) Failed to connect to localhost port 3000 after 2517 ms: Couldn't connect to server
+exit 0
+$ node scripts/probes/journey.mjs all
+stage: search (request form, demo control, validation, loading)
+  ok   request field labelled 'Your request' and prefilled with the Wellington example
+  ok   'Demo scenario' select offers success, empty, error
+  ok   blank message shows inline error
+  ok   blank message sends no request
+  ok   progress shown in role=status while waiting
+  ok   submit disabled while waiting
+  ok   one POST /recommendations sent
+stage: results (cards, fixture label, empty, error + retry)
+  ok   list 'Recommended hotels' appears
+  ok   three hotel cards
+  ok   cards show "Harbour House"
+  ok   cards show "City Garden"
+  ok   cards show "Quay Rooms"
+  ok   cards show "NZD 220"
+  ok   cards show "NZD 245"
+  ok   cards show "NZD 195"
+  ok   cards show breakfast included / not included
+  ok   cards show explanation
+  ok   response labelled as fixture data
+  ok   empty scenario shows 'No hotels to show'
+  ok   empty scenario shows no cards
+  ok   error scenario shows role=alert with the API message
+  ok   Retry button offered
+  ok   Retry (scenario switched to success) recovers and shows cards
+  ok   alert cleared after recovery
+stage: choose (keyboard-only selection and summary)
+  ok   Find hotels reachable with Tab
+  ok   Enter on Find hotels submits
+  ok   'Choose City Garden' reachable with Tab
+  ok   focused Choose button has a visible outline (solid 2px)
+  ok   chosen button has aria-pressed=true
+  ok   summary region 'Your choice' shown
+  ok   summary names the hotel and nightly price
+  ok   focus moved to the summary
+  ok   exactly one hotel chosen at a time
+  ok   summary follows a new choice
+stage: small screen (360px)
+  ok   no horizontal overflow at 360px (overflow 0px)
+
+0 failure(s)
+exit 0
+$ scripts/serve.sh stop
+exit 0
