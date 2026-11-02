@@ -2,6 +2,7 @@
 
 import { useEffect, useId, useRef, useState, type FormEvent } from "react";
 import { fetchRecommendations, type ApiError } from "@/lib/api";
+import { formatBreakfast, formatPrice } from "@/lib/format";
 import type { RecommendationResponse, Scenario } from "@/lib/types";
 import { HotelCard } from "./HotelCard";
 
@@ -21,24 +22,33 @@ export function HotelAssistant() {
   const [scenario, setScenario] = useState<Scenario>("success");
   const [blankError, setBlankError] = useState(false);
   const [request, setRequest] = useState<RequestState>({ status: "idle" });
+  const [selectedId, setSelectedId] = useState<string | null>(null);
 
   const fieldRef = useRef<HTMLTextAreaElement>(null);
   const submitRef = useRef<HTMLButtonElement>(null);
+  const summaryRef = useRef<HTMLElement>(null);
   const wasLoading = useRef(false);
   const id = useId();
   const fieldId = `${id}-request`;
   const errorId = `${id}-request-error`;
   const scenarioId = `${id}-scenario`;
   const hintId = `${id}-scenario-hint`;
+  const summaryHeadingId = `${id}-summary-heading`;
 
   const loading = request.status === "loading";
   const result = request.status === "success" ? request.data : null;
+  const chosenHotel = result?.hotels.find((hotel) => hotel.id === selectedId);
 
   // Runs after the render that re-enables the button, because a disabled button cannot take focus.
   useEffect(() => {
     if (wasLoading.current && !loading) submitRef.current?.focus();
     wasLoading.current = loading;
   }, [loading]);
+
+  // Runs only when the choice changes, so re-renders and pressing the chosen button again leave focus alone.
+  useEffect(() => {
+    if (selectedId) summaryRef.current?.focus();
+  }, [selectedId]);
 
   async function handleSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
@@ -55,6 +65,7 @@ export function HotelAssistant() {
   // Retry calls this too, with the message from the failed request and the scenario selected now.
   async function search(sentMessage: string) {
     setBlankError(false);
+    setSelectedId(null);
     setRequest({ status: "loading" });
     try {
       const data = await fetchRecommendations({ message: sentMessage, scenario });
@@ -149,10 +160,51 @@ export function HotelAssistant() {
       {result && result.hotels.length > 0 && (
         // role="list" because Tailwind removes the list style, and Safari then stops announcing a list.
         <ul role="list" aria-label="Recommended hotels" className="mt-4 grid gap-4 md:grid-cols-3">
-          {result.hotels.map((hotel) => (
-            <HotelCard key={hotel.id} hotel={hotel} />
-          ))}
+          {result.hotels.map((hotel) => {
+            const chosen = hotel.id === selectedId;
+            return (
+              <HotelCard key={hotel.id} hotel={hotel} chosen={chosen}>
+                <div className="mt-auto pt-4">
+                  <button
+                    type="button"
+                    aria-pressed={chosen}
+                    onClick={() => setSelectedId(hotel.id)}
+                    className={`w-full rounded border border-blue-700 px-4 py-2 font-medium ${
+                      chosen ? "bg-blue-700 text-white" : "bg-white text-blue-800 hover:bg-blue-50"
+                    } ${FOCUS_RING}`}
+                  >
+                    Choose {hotel.name}
+                  </button>
+                </div>
+              </HotelCard>
+            );
+          })}
         </ul>
+      )}
+
+      {chosenHotel && (
+        // A focus: outline, not focus-visible:, because focus-visible may not match after a mouse click.
+        <section
+          ref={summaryRef}
+          aria-labelledby={summaryHeadingId}
+          tabIndex={-1}
+          className="mt-6 rounded border border-slate-400 bg-white p-4 focus:outline-2 focus:outline-offset-2 focus:outline-blue-700"
+        >
+          <h2 id={summaryHeadingId} className="text-xl font-semibold text-slate-900">
+            Your choice
+          </h2>
+          <dl className="mt-2 text-slate-900">
+            <dt className="mt-2 font-medium">Hotel</dt>
+            <dd>{chosenHotel.name}</dd>
+            <dt className="mt-2 font-medium">Price</dt>
+            <dd>{`${formatPrice(chosenHotel.nightlyPrice, chosenHotel.currency)} per night`}</dd>
+            <dt className="mt-2 font-medium">Breakfast</dt>
+            <dd>{formatBreakfast(chosenHotel.breakfastIncluded)}</dd>
+            <dt className="mt-2 font-medium">Why this hotel</dt>
+            <dd>{chosenHotel.explanation}</dd>
+          </dl>
+          <p className="mt-4 text-sm text-slate-700">Fixture data for this demo. No booking has been made.</p>
+        </section>
       )}
 
       {request.status === "error" && (

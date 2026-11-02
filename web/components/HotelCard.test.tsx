@@ -49,4 +49,34 @@ describe("HotelCard", () => {
 
     expect(screen.getByText("Lower price; breakfast costs extra.")).toBeVisible();
   });
+
+  it("AC5.2 shows a Chosen badge only when chosen, and it is not part of the name", () => {
+    const { rerender } = render(
+      <ul>
+        <HotelCard hotel={withBreakfast} />
+      </ul>,
+    );
+    expect(screen.queryByText("Chosen")).not.toBeInTheDocument();
+
+    rerender(
+      <ul>
+        <HotelCard hotel={withBreakfast} chosen />
+      </ul>,
+    );
+
+    expect(screen.getByText("Chosen")).toBeVisible();
+    expect(screen.getByRole("heading", { level: 3, name: "Harbour House" })).toBeVisible();
+  });
+
+  it("AC5.1 renders its children inside the card", () => {
+    render(
+      <ul>
+        <HotelCard hotel={withBreakfast}>
+          <button type="button">Choose Harbour House</button>
+        </HotelCard>
+      </ul>,
+    );
+
+    expect(screen.getByRole("listitem")).toContainElement(screen.getByRole("button", { name: "Choose Harbour House" }));
+  });
 });

@@ -1,0 +1,13 @@
+stage: choose (keyboard-only selection and summary)
+  ok   Find hotels reachable with Tab
+  ok   Enter on Find hotels submits
+  ok   'Choose City Garden' reachable with Tab
+  ok   focused Choose button has a visible outline (solid 2px)
+  ok   chosen button has aria-pressed=true
+  ok   summary region 'Your choice' shown
+  ok   summary names the hotel and nightly price
+  ok   focus moved to the summary
+  ok   exactly one hotel chosen at a time
+  ok   summary follows a new choice
+
+0 failure(s)
