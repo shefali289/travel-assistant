@@ -1,0 +1,23 @@
+
+> web@0.1.0 test
+> vitest run
+
+
+ RUN  v3.2.7 <repo>/web
+
+ ✓ components/HotelCard.test.tsx (6 tests) 260ms
+ ✓ components/HotelAssistant.search.test.tsx (14 tests) 2723ms
+   ✓ request field > AC3.4 the error clears once the traveller types  377ms
+   ✓ submit > AC3.6 sends the trimmed message and the chosen scenario  680ms
+   ✓ keyboard > AC3.8 Enter in the field adds a new line and does not submit  332ms
+ ✓ components/HotelAssistant.results.test.tsx (21 tests) 6063ms
+   ✓ retry > AC4.6 resends the message from the failed request with the current scenario and leaves the field unchanged  1505ms
+   ✓ retry > AC4.6 a second Retry still resends the message from the failed request  1631ms
+ ✓ lib/api.test.ts (19 tests) 33ms
+ ✓ lib/format.test.ts (2 tests) 4ms
+
+ Test Files  5 passed (5)
+      Tests  62 passed (62)
+   Start at  14:27:37
+   Duration  38.71s (transform 573ms, setup 18.57s, collect 1.46s, tests 9.08s, environment 48.94s, prepare 2.08s)
+

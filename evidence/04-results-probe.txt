@@ -1,0 +1,20 @@
+stage: results (cards, fixture label, empty, error + retry)
+  ok   list 'Recommended hotels' appears
+  ok   three hotel cards
+  ok   cards show "Harbour House"
+  ok   cards show "City Garden"
+  ok   cards show "Quay Rooms"
+  ok   cards show "NZD 220"
+  ok   cards show "NZD 245"
+  ok   cards show "NZD 195"
+  ok   cards show breakfast included / not included
+  ok   cards show explanation
+  ok   response labelled as fixture data
+  ok   empty scenario shows 'No hotels to show'
+  ok   empty scenario shows no cards
+  ok   error scenario shows role=alert with the API message
+  ok   Retry button offered
+  ok   Retry (scenario switched to success) recovers and shows cards
+  ok   alert cleared after recovery
+
+0 failure(s)

@@ -1,0 +1,2850 @@
+
+> web@0.1.0 test
+> vitest run
+
+
+ RUN  v3.2.7 <repo>/web
+
+ ✓ lib/api.test.ts (19 tests) 24ms
+ ✓ components/HotelAssistant.search.test.tsx (14 tests) 1853ms
+   ✓ submit > AC3.6 sends the trimmed message and the chosen scenario  451ms
+ ❯ components/HotelCard.test.tsx (6 tests | 6 failed) 152ms
+   × HotelCard > AC4.3 shows the name as an h3 103ms
+     → Unable to find an accessible element with the role "listitem"
+
+Here are the accessible roles:
+
+  list:
+
+  Name "":
+  <ul />
+
+  --------------------------------------------------
+
+Ignored nodes: comments, script, style
+<body>
+  <div>
+    <ul />
+  </div>
+</body>
+   × HotelCard > AC4.3 shows the price with its currency and per night 12ms
+     → Unable to find an accessible element with the role "listitem"
+
+Here are the accessible roles:
+
+  list:
+
+  Name "":
+  <ul />
+
+  --------------------------------------------------
+
+Ignored nodes: comments, script, style
+<body>
+  <div>
+    <ul />
+  </div>
+</body>
+   × HotelCard > AC4.3 shows a non-whole price with two decimals 10ms
+     → Unable to find an accessible element with the role "listitem"
+
+Here are the accessible roles:
+
+  list:
+
+  Name "":
+  <ul />
+
+  --------------------------------------------------
+
+Ignored nodes: comments, script, style
+<body>
+  <div>
+    <ul />
+  </div>
+</body>
+   × HotelCard > AC4.3 shows Breakfast included when breakfast is included 10ms
+     → Unable to find an accessible element with the role "listitem"
+
+Here are the accessible roles:
+
+  list:
+
+  Name "":
+  <ul />
+
+  --------------------------------------------------
+
+Ignored nodes: comments, script, style
+<body>
+  <div>
+    <ul />
+  </div>
+</body>
+   × HotelCard > AC4.3 shows Breakfast not included when breakfast is not included 8ms
+     → Unable to find an accessible element with the role "listitem"
+
+Here are the accessible roles:
+
+  list:
+
+  Name "":
+  <ul />
+
+  --------------------------------------------------
+
+Ignored nodes: comments, script, style
+<body>
+  <div>
+    <ul />
+  </div>
+</body>
+   × HotelCard > AC4.3 shows the explanation 7ms
+     → Unable to find an accessible element with the role "listitem"
+
+Here are the accessible roles:
+
+  list:
+
+  Name "":
+  <ul />
+
+  --------------------------------------------------
+
+Ignored nodes: comments, script, style
+<body>
+  <div>
+    <ul />
+  </div>
+</body>
+ ❯ components/HotelAssistant.results.test.tsx (19 tests | 19 failed) 5226ms
+   × success > AC4.1 shows the assistant message under an h2 reading Assistant's reply 287ms
+     → expect(received).toBeVisible()
+
+received value must be an HTMLElement or an SVGElement.
+Received has type:  Null
+Received has value: null
+   × success > AC4.1 shows a visible Fixture data label 89ms
+     → Unable to find an element with the text: Fixture data. This could be because the text is broken up by multiple elements. In this case, you can provide a function for your text matcher to make your matcher more flexible.
+
+Ignored nodes: comments, script, style
+<body>
+  <div>
+    <form
+      class="mt-6 max-w-2xl"
+    >
+      <label
+        class="block font-medium text-slate-900"
+        for="«r1»-request"
+      >
+        Your request
+      </label>
+      <textarea
+        class="mt-1 block w-full rounded border border-slate-500 bg-white px-3 py-2 text-slate-900 disabled:bg-slate-100 disabled:text-slate-600 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-700"
+        id="«r1»-request"
+        rows="3"
+      >
+        Find a Wellington hotel for two nights, up to NZD 250 per night; breakfast preferred.
+      </textarea>
+      <div
+        class="mt-4 rounded border border-dashed border-slate-500 bg-white p-3"
+      >
+        <label
+          class="block font-medium text-slate-900"
+          for="«r1»-scenario"
+        >
+          Demo scenario
+        </label>
+        <select
+          aria-describedby="«r1»-scenario-hint"
+          class="mt-1 block w-full rounded border border-slate-500 bg-white px-3 py-2 text-slate-900 disabled:bg-slate-100 disabled:text-slate-600 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-700"
+          id="«r1»-scenario"
+        >
+          <option
+            value="success"
+          >
+            success
+          </option>
+          <option
+            value="empty"
+          >
+            empty
+          </option>
+          <option
+            value="error"
+          >
+            error
+          </option>
+        </select>
+        <p
+          class="mt-1 text-sm text-slate-700"
+          id="«r1»-scenario-hint"
+        >
+          Demo control: chooses which fixture outcome the API returns. It is here to show each state and is not part of a real search.
+        </p>
+      </div>
+      <button
+        class="mt-4 w-full rounded bg-blue-700 px-4 py-2 font-medium text-white hover:bg-blue-800 disabled:bg-slate-500 sm:w-auto focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-700"
+        type="submit"
+      >
+        Find hotels
+      </button>
+      <div
+        class="mt-4 text-slate-800"
+        role="status"
+      />
+    </form>
+  </div>
+</body>
+   × success > AC4.2 lists one listitem per hotel in API order 53ms
+     → Expected container to be an Element, a Document or a DocumentFragment but got null.
+   × success > AC4.3 each card shows its own hotel's price, breakfast and explanation 46ms
+     → Expected container to be an Element, a Document or a DocumentFragment but got null.
+   × empty > AC4.4 shows the message under the heading, the Fixture data label, the empty text and no list 56ms
+     → expect(received).toBeVisible()
+
+received value must be an HTMLElement or an SVGElement.
+Received has type:  Null
+Received has value: null
+   × error > AC4.5 shows the API message in role=alert with a Retry button when retryable 119ms
+     → Unable to find an accessible element with the role "alert"
+
+Here are the accessible roles:
+
+  textbox:
+
+  Name "Your request":
+  <textarea
+    class="mt-1 block w-full rounded border border-slate-500 bg-white px-3 py-2 text-slate-900 disabled:bg-slate-100 disabled:text-slate-600 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-700"
+    id="«r5»-request"
+    rows="3"
+  />
+
+  --------------------------------------------------
+  combobox:
+
+  Name "Demo scenario":
+  <select
+    aria-describedby="«r5»-scenario-hint"
+    class="mt-1 block w-full rounded border border-slate-500 bg-white px-3 py-2 text-slate-900 disabled:bg-slate-100 disabled:text-slate-600 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-700"
+    id="«r5»-scenario"
+  />
+
+  --------------------------------------------------
+  option:
+
+  Name "success":
+  <option
+    value="success"
+  />
+
+  Name "empty":
+  <option
+    value="empty"
+  />
+
+  Name "error":
+  <option
+    value="error"
+  />
+
+  --------------------------------------------------
+  paragraph:
+
+  Name "":
+  <p
+    class="mt-1 text-sm text-slate-700"
+    id="«r5»-scenario-hint"
+  />
+
+  --------------------------------------------------
+  button:
+
+  Name "Find hotels":
+  <button
+    class="mt-4 w-full rounded bg-blue-700 px-4 py-2 font-medium text-white hover:bg-blue-800 disabled:bg-slate-500 sm:w-auto focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-700"
+    type="submit"
+  />
+
+  --------------------------------------------------
+  status:
+
+  Name "":
+  <div
+    class="mt-4 text-slate-800"
+    role="status"
+  />
+
+  --------------------------------------------------
+
+Ignored nodes: comments, script, style
+<body>
+  <div>
+    <form
+      class="mt-6 max-w-2xl"
+    >
+      <label
+        class="block font-medium text-slate-900"
+        for="«r5»-request"
+      >
+        Your request
+      </label>
+      <textarea
+        class="mt-1 block w-full rounded border border-slate-500 bg-white px-3 py-2 text-slate-900 disabled:bg-slate-100 disabled:text-slate-600 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-700"
+        id="«r5»-request"
+        rows="3"
+      >
+        Find a Wellington hotel for two nights, up to NZD 250 per night; breakfast preferred.
+      </textarea>
+      <div
+        class="mt-4 rounded border border-dashed border-slate-500 bg-white p-3"
+      >
+        <label
+          class="block font-medium text-slate-900"
+          for="«r5»-scenario"
+        >
+          Demo scenario
+        </label>
+        <select
+          aria-describedby="«r5»-scenario-hint"
+          class="mt-1 block w-full rounded border border-slate-500 bg-white px-3 py-2 text-slate-900 disabled:bg-slate-100 disabled:text-slate-600 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-700"
+          id="«r5»-scenario"
+        >
+          <option
+            value="success"
+          >
+            success
+          </option>
+          <option
+            value="empty"
+          >
+            empty
+          </option>
+          <option
+            value="error"
+          >
+            error
+          </option>
+        </select>
+        <p
+          class="mt-1 text-sm text-slate-700"
+          id="«r5»-scenario-hint"
+        >
+          Demo control: chooses which fixture outcome the API returns. It is here to show each state and is not part of a real search.
+        </p>
+      </div>
+      <button
+        class="mt-4 w-full rounded bg-blue-700 px-4 py-2 font-medium text-white hover:bg-blue-800 disabled:bg-slate-500 sm:w-auto focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-700"
+        type="submit"
+      >
+        Find hotels
+      </button>
+      <div
+        class="mt-4 text-slate-800"
+        role="status"
+      />
+    </form>
+  </div>
+</body>
+   × error > AC4.5 shows the message only, with no Retry button, when not retryable 79ms
+     → Unable to find an accessible element with the role "alert"
+
+Here are the accessible roles:
+
+  textbox:
+
+  Name "Your request":
+  <textarea
+    class="mt-1 block w-full rounded border border-slate-500 bg-white px-3 py-2 text-slate-900 disabled:bg-slate-100 disabled:text-slate-600 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-700"
+    id="«r6»-request"
+    rows="3"
+  />
+
+  --------------------------------------------------
+  combobox:
+
+  Name "Demo scenario":
+  <select
+    aria-describedby="«r6»-scenario-hint"
+    class="mt-1 block w-full rounded border border-slate-500 bg-white px-3 py-2 text-slate-900 disabled:bg-slate-100 disabled:text-slate-600 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-700"
+    id="«r6»-scenario"
+  />
+
+  --------------------------------------------------
+  option:
+
+  Name "success":
+  <option
+    value="success"
+  />
+
+  Name "empty":
+  <option
+    value="empty"
+  />
+
+  Name "error":
+  <option
+    value="error"
+  />
+
+  --------------------------------------------------
+  paragraph:
+
+  Name "":
+  <p
+    class="mt-1 text-sm text-slate-700"
+    id="«r6»-scenario-hint"
+  />
+
+  --------------------------------------------------
+  button:
+
+  Name "Find hotels":
+  <button
+    class="mt-4 w-full rounded bg-blue-700 px-4 py-2 font-medium text-white hover:bg-blue-800 disabled:bg-slate-500 sm:w-auto focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-700"
+    type="submit"
+  />
+
+  --------------------------------------------------
+  status:
+
+  Name "":
+  <div
+    class="mt-4 text-slate-800"
+    role="status"
+  />
+
+  --------------------------------------------------
+
+Ignored nodes: comments, script, style
+<body>
+  <div>
+    <form
+      class="mt-6 max-w-2xl"
+    >
+      <label
+        class="block font-medium text-slate-900"
+        for="«r6»-request"
+      >
+        Your request
+      </label>
+      <textarea
+        class="mt-1 block w-full rounded border border-slate-500 bg-white px-3 py-2 text-slate-900 disabled:bg-slate-100 disabled:text-slate-600 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-700"
+        id="«r6»-request"
+        rows="3"
+      >
+        Find a Wellington hotel for two nights, up to NZD 250 per night; breakfast preferred.
+      </textarea>
+      <div
+        class="mt-4 rounded border border-dashed border-slate-500 bg-white p-3"
+      >
+        <label
+          class="block font-medium text-slate-900"
+          for="«r6»-scenario"
+        >
+          Demo scenario
+        </label>
+        <select
+          aria-describedby="«r6»-scenario-hint"
+          class="mt-1 block w-full rounded border border-slate-500 bg-white px-3 py-2 text-slate-900 disabled:bg-slate-100 disabled:text-slate-600 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-700"
+          id="«r6»-scenario"
+        >
+          <option
+            value="success"
+          >
+            success
+          </option>
+          <option
+            value="empty"
+          >
+            empty
+          </option>
+          <option
+            value="error"
+          >
+            error
+          </option>
+        </select>
+        <p
+          class="mt-1 text-sm text-slate-700"
+          id="«r6»-scenario-hint"
+        >
+          Demo control: chooses which fixture outcome the API returns. It is here to show each state and is not part of a real search.
+        </p>
+      </div>
+      <button
+        class="mt-4 w-full rounded bg-blue-700 px-4 py-2 font-medium text-white hover:bg-blue-800 disabled:bg-slate-500 sm:w-auto focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-700"
+        type="submit"
+      >
+        Find hotels
+      </button>
+      <div
+        class="mt-4 text-slate-800"
+        role="status"
+      />
+    </form>
+  </div>
+</body>
+   × retry > AC4.6 resends the message from the failed request with the current scenario and leaves the field unchanged 919ms
+     → expected "spy" to be called 2 times, but got 1 times
+   × retry > AC4.6 a second Retry still resends the message from the failed request 1725ms
+     → Unable to find role="button" and name "Retry"
+
+Ignored nodes: comments, script, style
+<body>
+  <div>
+    <form
+      class="mt-6 max-w-2xl"
+    >
+      <label
+        class="block font-medium text-slate-900"
+        for="«r8»-request"
+      >
+        Your request
+      </label>
+      <textarea
+        class="mt-1 block w-full rounded border border-slate-500 bg-white px-3 py-2 text-slate-900 disabled:bg-slate-100 disabled:text-slate-600 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-700"
+        id="«r8»-request"
+        rows="3"
+      >
+        Edited afterwards
+      </textarea>
+      <div
+        class="mt-4 rounded border border-dashed border-slate-500 bg-white p-3"
+      >
+        <label
+          class="block font-medium text-slate-900"
+          for="«r8»-scenario"
+        >
+          Demo scenario
+        </label>
+        <select
+          aria-describedby="«r8»-scenario-hint"
+          class="mt-1 block w-full rounded border border-slate-500 bg-white px-3 py-2 text-slate-900 disabled:bg-slate-100 disabled:text-slate-600 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-700"
+          id="«r8»-scenario"
+        >
+          <option
+            value="success"
+          >
+            success
+          </option>
+          <option
+            value="empty"
+          >
+            empty
+          </option>
+          <option
+            value="error"
+          >
+            error
+          </option>
+        </select>
+        <p
+          class="mt-1 text-sm text-slate-700"
+          id="«r8»-scenario-hint"
+        >
+          Demo control: chooses which fixture outcome the API returns. It is here to show each state and is not part of a real search.
+        </p>
+      </div>
+      <button
+        class="mt-4 w-full rounded bg-blue-700 px-4 py-2 font-medium text-white hover:bg-blue-800 disabled:bg-slate-500 sm:w-auto focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-700"
+        type="submit"
+      >
+        Find hotels
+      </button>
+      <div
+        class="mt-4 text-slate-800"
+        role="status"
+      />
+    </form>
+  </div>
+</body>
+
+Ignored nodes: comments, script, style
+<body>
+  <div>
+    <form
+      class="mt-6 max-w-2xl"
+    >
+      <label
+        class="block font-medium text-slate-900"
+        for="«r8»-request"
+      >
+        Your request
+      </label>
+      <textarea
+        class="mt-1 block w-full rounded border border-slate-500 bg-white px-3 py-2 text-slate-900 disabled:bg-slate-100 disabled:text-slate-600 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-700"
+        id="«r8»-request"
+        rows="3"
+      >
+        Edited afterwards
+      </textarea>
+      <div
+        class="mt-4 rounded border border-dashed border-slate-500 bg-white p-3"
+      >
+        <label
+          class="block font-medium text-slate-900"
+          for="«r8»-scenario"
+        >
+          Demo scenario
+        </label>
+        <select
+          aria-describedby="«r8»-scenario-hint"
+          class="mt-1 block w-full rounded border border-slate-500 bg-white px-3 py-2 text-slate-900 disabled:bg-slate-100 disabled:text-slate-600 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-700"
+          id="«r8»-scenario"
+        >
+          <option
+            value="success"
+          >
+            success
+          </option>
+          <option
+            value="empty"
+          >
+            empty
+          </option>
+          <option
+            value="error"
+          >
+            error
+          </option>
+        </select>
+        <p
+          class="mt-1 text-sm text-slate-700"
+          id="«r8»-scenario-hint"
+        >
+          Demo control: chooses which fixture outcome the API returns. It is here to show each state and is not part of a real search.
+        </p>
+      </div>
+      <button
+        class="mt-4 w-full rounded bg-blue-700 px-4 py-2 font-medium text-white hover:bg-blue-800 disabled:bg-slate-500 sm:w-auto focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-700"
+        type="submit"
+      >
+        Find hotels
+      </button>
+      <div
+        class="mt-4 text-slate-800"
+        role="status"
+      />
+    </form>
+  </div>
+</body>
+   × retry > AC4.6 a successful Retry removes the alert, shows the cards and returns focus to Find hotels 1129ms
+     → Unable to find role="list" and name "Recommended hotels"
+
+Ignored nodes: comments, script, style
+<body>
+  <div>
+    <button>
+      Elsewhere
+    </button>
+    <form
+      class="mt-6 max-w-2xl"
+    >
+      <label
+        class="block font-medium text-slate-900"
+        for="«r9»-request"
+      >
+        Your request
+      </label>
+      <textarea
+        class="mt-1 block w-full rounded border border-slate-500 bg-white px-3 py-2 text-slate-900 disabled:bg-slate-100 disabled:text-slate-600 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-700"
+        id="«r9»-request"
+        rows="3"
+      >
+        Find a Wellington hotel for two nights, up to NZD 250 per night; breakfast preferred.
+      </textarea>
+      <div
+        class="mt-4 rounded border border-dashed border-slate-500 bg-white p-3"
+      >
+        <label
+          class="block font-medium text-slate-900"
+          for="«r9»-scenario"
+        >
+          Demo scenario
+        </label>
+        <select
+          aria-describedby="«r9»-scenario-hint"
+          class="mt-1 block w-full rounded border border-slate-500 bg-white px-3 py-2 text-slate-900 disabled:bg-slate-100 disabled:text-slate-600 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-700"
+          id="«r9»-scenario"
+        >
+          <option
+            value="success"
+          >
+            success
+          </option>
+          <option
+            value="empty"
+          >
+            empty
+          </option>
+          <option
+            value="error"
+          >
+            error
+          </option>
+        </select>
+        <p
+          class="mt-1 text-sm text-slate-700"
+          id="«r9»-scenario-hint"
+        >
+          Demo control: chooses which fixture outcome the API returns. It is here to show each state and is not part of a real search.
+        </p>
+      </div>
+      <button
+        class="mt-4 w-full rounded bg-blue-700 px-4 py-2 font-medium text-white hover:bg-blue-800 disabled:bg-slate-500 sm:w-auto focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-700"
+        type="submit"
+      >
+        Find hotels
+      </button>
+      <div
+        class="mt-4 text-slate-800"
+        role="status"
+      />
+    </form>
+  </div>
+</body>
+
+Ignored nodes: comments, script, style
+<body>
+  <div>
+    <button>
+      Elsewhere
+    </button>
+    <form
+      class="mt-6 max-w-2xl"
+    >
+      <label
+        class="block font-medium text-slate-900"
+        for="«r9»-request"
+      >
+        Your request
+      </label>
+      <textarea
+        class="mt-1 block w-full rounded border border-slate-500 bg-white px-3 py-2 text-slate-900 disabled:bg-slate-100 disabled:text-slate-600 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-700"
+        id="«r9»-request"
+        rows="3"
+      >
+        Find a Wellington hotel for two nights, up to NZD 250 per night; breakfast preferred.
+      </textarea>
+      <div
+        class="mt-4 rounded border border-dashed border-slate-500 bg-white p-3"
+      >
+        <label
+          class="block font-medium text-slate-900"
+          for="«r9»-scenario"
+        >
+          Demo scenario
+        </label>
+        <select
+          aria-describedby="«r9»-scenario-hint"
+          class="mt-1 block w-full rounded border border-slate-500 bg-white px-3 py-2 text-slate-900 disabled:bg-slate-100 disabled:text-slate-600 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-700"
+          id="«r9»-scenario"
+        >
+          <option
+            value="success"
+          >
+            success
+          </option>
+          <option
+            value="empty"
+          >
+            empty
+          </option>
+          <option
+            value="error"
+          >
+            error
+          </option>
+        </select>
+        <p
+          class="mt-1 text-sm text-slate-700"
+          id="«r9»-scenario-hint"
+        >
+          Demo control: chooses which fixture outcome the API returns. It is here to show each state and is not part of a real search.
+        </p>
+      </div>
+      <button
+        class="mt-4 w-full rounded bg-blue-700 px-4 py-2 font-medium text-white hover:bg-blue-800 disabled:bg-slate-500 sm:w-auto focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-700"
+        type="submit"
+      >
+        Find hotels
+      </button>
+      <div
+        class="mt-4 text-slate-800"
+        role="status"
+      />
+    </form>
+  </div>
+</body>
+   × retry > AC4.6 Retry is the next Tab stop after Find hotels and works with Enter 109ms
+     → expect(received).toHaveFocus()
+
+received value must be an HTMLElement or an SVGElement.
+Received has type:  Null
+Received has value: null
+   × a new search > AC4.7 clears the cards as soon as it starts and shows none next to a new error 54ms
+     → expect(received).toBeVisible()
+
+received value must be an HTMLElement or an SVGElement.
+Received has type:  Null
+Received has value: null
+   × a new search > AC4.7 clears the error as soon as it starts and shows none next to new cards 68ms
+     → Unable to find an accessible element with the role "alert"
+
+Here are the accessible roles:
+
+  textbox:
+
+  Name "Your request":
+  <textarea
+    class="mt-1 block w-full rounded border border-slate-500 bg-white px-3 py-2 text-slate-900 disabled:bg-slate-100 disabled:text-slate-600 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-700"
+    id="«rc»-request"
+    rows="3"
+  />
+
+  --------------------------------------------------
+  combobox:
+
+  Name "Demo scenario":
+  <select
+    aria-describedby="«rc»-scenario-hint"
+    class="mt-1 block w-full rounded border border-slate-500 bg-white px-3 py-2 text-slate-900 disabled:bg-slate-100 disabled:text-slate-600 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-700"
+    id="«rc»-scenario"
+  />
+
+  --------------------------------------------------
+  option:
+
+  Name "success":
+  <option
+    value="success"
+  />
+
+  Name "empty":
+  <option
+    value="empty"
+  />
+
+  Name "error":
+  <option
+    value="error"
+  />
+
+  --------------------------------------------------
+  paragraph:
+
+  Name "":
+  <p
+    class="mt-1 text-sm text-slate-700"
+    id="«rc»-scenario-hint"
+  />
+
+  --------------------------------------------------
+  button:
+
+  Name "Find hotels":
+  <button
+    class="mt-4 w-full rounded bg-blue-700 px-4 py-2 font-medium text-white hover:bg-blue-800 disabled:bg-slate-500 sm:w-auto focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-700"
+    type="submit"
+  />
+
+  --------------------------------------------------
+  status:
+
+  Name "":
+  <div
+    class="mt-4 text-slate-800"
+    role="status"
+  />
+
+  --------------------------------------------------
+
+Ignored nodes: comments, script, style
+<body>
+  <div>
+    <form
+      class="mt-6 max-w-2xl"
+    >
+      <label
+        class="block font-medium text-slate-900"
+        for="«rc»-request"
+      >
+        Your request
+      </label>
+      <textarea
+        class="mt-1 block w-full rounded border border-slate-500 bg-white px-3 py-2 text-slate-900 disabled:bg-slate-100 disabled:text-slate-600 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-700"
+        id="«rc»-request"
+        rows="3"
+      >
+        Find a Wellington hotel for two nights, up to NZD 250 per night; breakfast preferred.
+      </textarea>
+      <div
+        class="mt-4 rounded border border-dashed border-slate-500 bg-white p-3"
+      >
+        <label
+          class="block font-medium text-slate-900"
+          for="«rc»-scenario"
+        >
+          Demo scenario
+        </label>
+        <select
+          aria-describedby="«rc»-scenario-hint"
+          class="mt-1 block w-full rounded border border-slate-500 bg-white px-3 py-2 text-slate-900 disabled:bg-slate-100 disabled:text-slate-600 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-700"
+          id="«rc»-scenario"
+        >
+          <option
+            value="success"
+          >
+            success
+          </option>
+          <option
+            value="empty"
+          >
+            empty
+          </option>
+          <option
+            value="error"
+          >
+            error
+          </option>
+        </select>
+        <p
+          class="mt-1 text-sm text-slate-700"
+          id="«rc»-scenario-hint"
+        >
+          Demo control: chooses which fixture outcome the API returns. It is here to show each state and is not part of a real search.
+        </p>
+      </div>
+      <button
+        class="mt-4 w-full rounded bg-blue-700 px-4 py-2 font-medium text-white hover:bg-blue-800 disabled:bg-slate-500 sm:w-auto focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-700"
+        type="submit"
+      >
+        Find hotels
+      </button>
+      <div
+        class="mt-4 text-slate-800"
+        role="status"
+      />
+    </form>
+  </div>
+</body>
+   × a new search > AC4.7 replaces an empty result with the new cards 67ms
+     → Unable to find an element with the text: No hotels to show. Try changing your request or the demo scenario.. This could be because the text is broken up by multiple elements. In this case, you can provide a function for your text matcher to make your matcher more flexible.
+
+Ignored nodes: comments, script, style
+<body>
+  <div>
+    <form
+      class="mt-6 max-w-2xl"
+    >
+      <label
+        class="block font-medium text-slate-900"
+        for="«rd»-request"
+      >
+        Your request
+      </label>
+      <textarea
+        class="mt-1 block w-full rounded border border-slate-500 bg-white px-3 py-2 text-slate-900 disabled:bg-slate-100 disabled:text-slate-600 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-700"
+        id="«rd»-request"
+        rows="3"
+      >
+        Find a Wellington hotel for two nights, up to NZD 250 per night; breakfast preferred.
+      </textarea>
+      <div
+        class="mt-4 rounded border border-dashed border-slate-500 bg-white p-3"
+      >
+        <label
+          class="block font-medium text-slate-900"
+          for="«rd»-scenario"
+        >
+          Demo scenario
+        </label>
+        <select
+          aria-describedby="«rd»-scenario-hint"
+          class="mt-1 block w-full rounded border border-slate-500 bg-white px-3 py-2 text-slate-900 disabled:bg-slate-100 disabled:text-slate-600 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-700"
+          id="«rd»-scenario"
+        >
+          <option
+            value="success"
+          >
+            success
+          </option>
+          <option
+            value="empty"
+          >
+            empty
+          </option>
+          <option
+            value="error"
+          >
+            error
+          </option>
+        </select>
+        <p
+          class="mt-1 text-sm text-slate-700"
+          id="«rd»-scenario-hint"
+        >
+          Demo control: chooses which fixture outcome the API returns. It is here to show each state and is not part of a real search.
+        </p>
+      </div>
+      <button
+        class="mt-4 w-full rounded bg-blue-700 px-4 py-2 font-medium text-white hover:bg-blue-800 disabled:bg-slate-500 sm:w-auto focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-700"
+        type="submit"
+      >
+        Find hotels
+      </button>
+      <div
+        class="mt-4 text-slate-800"
+        role="status"
+      />
+    </form>
+  </div>
+</body>
+   × a new search > AC4.7 a blocked blank submit keeps the results and only adds the inline error 122ms
+     → Unable to find an element with the text: Here are three hotels that fit your request.. This could be because the text is broken up by multiple elements. In this case, you can provide a function for your text matcher to make your matcher more flexible.
+
+Ignored nodes: comments, script, style
+<body>
+  <div>
+    <form
+      class="mt-6 max-w-2xl"
+    >
+      <label
+        class="block font-medium text-slate-900"
+        for="«re»-request"
+      >
+        Your request
+      </label>
+      <textarea
+        aria-describedby="«re»-request-error"
+        aria-invalid="true"
+        class="mt-1 block w-full rounded border border-slate-500 bg-white px-3 py-2 text-slate-900 disabled:bg-slate-100 disabled:text-slate-600 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-700"
+        id="«re»-request"
+        rows="3"
+      />
+      <p
+        class="mt-1 text-sm text-red-800"
+        id="«re»-request-error"
+      >
+        Please describe the hotel you need.
+      </p>
+      <div
+        class="mt-4 rounded border border-dashed border-slate-500 bg-white p-3"
+      >
+        <label
+          class="block font-medium text-slate-900"
+          for="«re»-scenario"
+        >
+          Demo scenario
+        </label>
+        <select
+          aria-describedby="«re»-scenario-hint"
+          class="mt-1 block w-full rounded border border-slate-500 bg-white px-3 py-2 text-slate-900 disabled:bg-slate-100 disabled:text-slate-600 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-700"
+          id="«re»-scenario"
+        >
+          <option
+            value="success"
+          >
+            success
+          </option>
+          <option
+            value="empty"
+          >
+            empty
+          </option>
+          <option
+            value="error"
+          >
+            error
+          </option>
+        </select>
+        <p
+          class="mt-1 text-sm text-slate-700"
+          id="«re»-scenario-hint"
+        >
+          Demo control: chooses which fixture outcome the API returns. It is here to show each state and is not part of a real search.
+        </p>
+      </div>
+      <button
+        class="mt-4 w-full rounded bg-blue-700 px-4 py-2 font-medium text-white hover:bg-blue-800 disabled:bg-slate-500 sm:w-auto focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-700"
+        type="submit"
+      >
+        Find hotels
+      </button>
+      <div
+        class="mt-4 text-slate-800"
+        role="status"
+      />
+    </form>
+  </div>
+</body>
+   × a new search > AC4.7 a blocked blank submit keeps the error and Retry and only adds the inline error 175ms
+     → Unable to find an accessible element with the role "alert"
+
+Here are the accessible roles:
+
+  textbox:
+
+  Name "Your request":
+  <textarea
+    aria-describedby="«rf»-request-error"
+    aria-invalid="true"
+    class="mt-1 block w-full rounded border border-slate-500 bg-white px-3 py-2 text-slate-900 disabled:bg-slate-100 disabled:text-slate-600 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-700"
+    id="«rf»-request"
+    rows="3"
+  />
+
+  --------------------------------------------------
+  paragraph:
+
+  Name "":
+  <p
+    class="mt-1 text-sm text-red-800"
+    id="«rf»-request-error"
+  />
+
+  Name "":
+  <p
+    class="mt-1 text-sm text-slate-700"
+    id="«rf»-scenario-hint"
+  />
+
+  --------------------------------------------------
+  combobox:
+
+  Name "Demo scenario":
+  <select
+    aria-describedby="«rf»-scenario-hint"
+    class="mt-1 block w-full rounded border border-slate-500 bg-white px-3 py-2 text-slate-900 disabled:bg-slate-100 disabled:text-slate-600 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-700"
+    id="«rf»-scenario"
+  />
+
+  --------------------------------------------------
+  option:
+
+  Name "success":
+  <option
+    value="success"
+  />
+
+  Name "empty":
+  <option
+    value="empty"
+  />
+
+  Name "error":
+  <option
+    value="error"
+  />
+
+  --------------------------------------------------
+  button:
+
+  Name "Find hotels":
+  <button
+    class="mt-4 w-full rounded bg-blue-700 px-4 py-2 font-medium text-white hover:bg-blue-800 disabled:bg-slate-500 sm:w-auto focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-700"
+    type="submit"
+  />
+
+  --------------------------------------------------
+  status:
+
+  Name "":
+  <div
+    class="mt-4 text-slate-800"
+    role="status"
+  />
+
+  --------------------------------------------------
+
+Ignored nodes: comments, script, style
+<body>
+  <div>
+    <form
+      class="mt-6 max-w-2xl"
+    >
+      <label
+        class="block font-medium text-slate-900"
+        for="«rf»-request"
+      >
+        Your request
+      </label>
+      <textarea
+        aria-describedby="«rf»-request-error"
+        aria-invalid="true"
+        class="mt-1 block w-full rounded border border-slate-500 bg-white px-3 py-2 text-slate-900 disabled:bg-slate-100 disabled:text-slate-600 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-700"
+        id="«rf»-request"
+        rows="3"
+      />
+      <p
+        class="mt-1 text-sm text-red-800"
+        id="«rf»-request-error"
+      >
+        Please describe the hotel you need.
+      </p>
+      <div
+        class="mt-4 rounded border border-dashed border-slate-500 bg-white p-3"
+      >
+        <label
+          class="block font-medium text-slate-900"
+          for="«rf»-scenario"
+        >
+          Demo scenario
+        </label>
+        <select
+          aria-describedby="«rf»-scenario-hint"
+          class="mt-1 block w-full rounded border border-slate-500 bg-white px-3 py-2 text-slate-900 disabled:bg-slate-100 disabled:text-slate-600 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-700"
+          id="«rf»-scenario"
+        >
+          <option
+            value="success"
+          >
+            success
+          </option>
+          <option
+            value="empty"
+          >
+            empty
+          </option>
+          <option
+            value="error"
+          >
+            error
+          </option>
+        </select>
+        <p
+          class="mt-1 text-sm text-slate-700"
+          id="«rf»-scenario-hint"
+        >
+          Demo control: chooses which fixture outcome the API returns. It is here to show each state and is not part of a real search.
+        </p>
+      </div>
+      <button
+        class="mt-4 w-full rounded bg-blue-700 px-4 py-2 font-medium text-white hover:bg-blue-800 disabled:bg-slate-500 sm:w-auto focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-700"
+        type="submit"
+      >
+        Find hotels
+      </button>
+      <div
+        class="mt-4 text-slate-800"
+        role="status"
+      />
+    </form>
+  </div>
+</body>
+   × announcing the reply > AC4.8 the same polite live container stays mounted across idle, loading and results and holds the message 4ms
+     → expect(received).toBeInTheDocument()
+
+received value must be an HTMLElement or an SVGElement.
+Received has type:  Null
+Received has value: null
+   × announcing the reply > AC4.8 the live container empties while a new search runs, so the next reply is announced 75ms
+     → Expected container to be an Element, a Document or a DocumentFragment but got null.
+   × announcing the reply > AC4.8 the status region is empty while the reply is on screen 45ms
+     → Expected container to be an Element, a Document or a DocumentFragment but got null.
+ ❯ lib/format.test.ts (2 tests | 2 failed) 9ms
+   × formatPrice > AC4.3 shows a whole price with the currency code and no decimals 7ms
+     → not implemented: NZD 220
+   × formatPrice > AC4.3 shows a non-whole price with two decimals 1ms
+     → not implemented: NZD 220.5
+
+⎯⎯⎯⎯⎯⎯ Failed Tests 27 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  lib/format.test.ts > formatPrice > AC4.3 shows a whole price with the currency code and no decimals
+Error: not implemented: NZD 220
+ ❯ formatPrice lib/format.ts:3:9
+      1| // Red stub: task 04 green implements this.
+      2| export function formatPrice(amount: number, currency: string): string {
+      3|   throw new Error(`not implemented: ${currency} ${amount}`);
+       |         ^
+      4| }
+      5| 
+ ❯ lib/format.test.ts:6:12
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/27]⎯
+
+ FAIL  lib/format.test.ts > formatPrice > AC4.3 shows a non-whole price with two decimals
+Error: not implemented: NZD 220.5
+ ❯ formatPrice lib/format.ts:3:9
+      1| // Red stub: task 04 green implements this.
+      2| export function formatPrice(amount: number, currency: string): string {
+      3|   throw new Error(`not implemented: ${currency} ${amount}`);
+       |         ^
+      4| }
+      5| 
+ ❯ lib/format.test.ts:10:12
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[2/27]⎯
+
+ FAIL  components/HotelAssistant.results.test.tsx > success > AC4.1 shows the assistant message under an h2 reading Assistant's reply
+Error: expect(received).toBeVisible()
+
+received value must be an HTMLElement or an SVGElement.
+Received has type:  Null
+Received has value: null
+ ❯ components/HotelAssistant.results.test.tsx:45:21
+     43| 
+     44|     const heading = reply();
+     45|     expect(heading).toBeVisible();
+       |                     ^
+     46|     const message = screen.getByText(SUCCESS.message);
+     47|     expect(message).toBeVisible();
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[3/27]⎯
+
+ FAIL  components/HotelAssistant.results.test.tsx > success > AC4.1 shows a visible Fixture data label
+TestingLibraryElementError: Unable to find an element with the text: Fixture data. This could be because the text is broken up by multiple elements. In this case, you can provide a function for your text matcher to make your matcher more flexible.
+
+Ignored nodes: comments, script, style
+<body>
+  <div>
+    <form
+      class="mt-6 max-w-2xl"
+    >
+      <label
+        class="block font-medium text-slate-900"
+        for="«r1»-request"
+      >
+        Your request
+      </label>
+      <textarea
+        class="mt-1 block w-full rounded border border-slate-500 bg-white px-3 py-2 text-slate-900 disabled:bg-slate-100 disabled:text-slate-600 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-700"
+        id="«r1»-request"
+        rows="3"
+      >
+        Find a Wellington hotel for two nights, up to NZD 250 per night; breakfast preferred.
+      </textarea>
+      <div
+        class="mt-4 rounded border border-dashed border-slate-500 bg-white p-3"
+      >
+        <label
+          class="block font-medium text-slate-900"
+          for="«r1»-scenario"
+        >
+          Demo scenario
+        </label>
+        <select
+          aria-describedby="«r1»-scenario-hint"
+          class="mt-1 block w-full rounded border border-slate-500 bg-white px-3 py-2 text-slate-900 disabled:bg-slate-100 disabled:text-slate-600 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-700"
+          id="«r1»-scenario"
+        >
+          <option
+            value="success"
+          >
+            success
+          </option>
+          <option
+            value="empty"
+          >
+            empty
+          </option>
+          <option
+            value="error"
+          >
+            error
+          </option>
+        </select>
+        <p
+          class="mt-1 text-sm text-slate-700"
+          id="«r1»-scenario-hint"
+        >
+          Demo control: chooses which fixture outcome the API returns. It is here to show each state and is not part of a real search.
+        </p>
+      </div>
+      <button
+        class="mt-4 w-full rounded bg-blue-700 px-4 py-2 font-medium text-white hover:bg-blue-800 disabled:bg-slate-500 sm:w-auto focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-700"
+        type="submit"
+      >
+        Find hotels
+      </button>
+      <div
+        class="mt-4 text-slate-800"
+        role="status"
+      />
+    </form>
+  </div>
+</body>
+ ❯ Object.getElementError node_modules/@testing-library/dom/dist/config.js:37:19
+ ❯ node_modules/@testing-library/dom/dist/query-helpers.js:76:38
+ ❯ node_modules/@testing-library/dom/dist/query-helpers.js:52:17
+ ❯ node_modules/@testing-library/dom/dist/query-helpers.js:95:19
+ ❯ components/HotelAssistant.results.test.tsx:57:19
+     55|     await search(userEvent.setup());
+     56| 
+     57|     expect(screen.getByText("Fixture data")).toBeVisible();
+       |                   ^
+     58|   });
+     59| 
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[4/27]⎯
+
+ FAIL  components/HotelAssistant.results.test.tsx > success > AC4.2 lists one listitem per hotel in API order
+TypeError: Expected container to be an Element, a Document or a DocumentFragment but got null.
+ ❯ checkContainerType node_modules/@testing-library/dom/dist/helpers.js:61:11
+ ❯ queryAllByRole node_modules/@testing-library/dom/dist/queries/role.js:34:35
+ ❯ node_modules/@testing-library/dom/dist/query-helpers.js:74:17
+ ❯ node_modules/@testing-library/dom/dist/query-helpers.js:109:15
+ ❯ components/HotelAssistant.results.test.tsx:65:40
+     63|     await search(userEvent.setup());
+     64| 
+     65|     const items = within(hotelList()!).getAllByRole("listitem");
+       |                                        ^
+     66|     expect(items.map((item) => within(item).getByRole("heading", { lev…
+     67|       "Harbour House",
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[5/27]⎯
+
+ FAIL  components/HotelAssistant.results.test.tsx > success > AC4.3 each card shows its own hotel's price, breakfast and explanation
+TypeError: Expected container to be an Element, a Document or a DocumentFragment but got null.
+ ❯ checkContainerType node_modules/@testing-library/dom/dist/helpers.js:61:11
+ ❯ queryAllByRole node_modules/@testing-library/dom/dist/queries/role.js:34:35
+ ❯ node_modules/@testing-library/dom/dist/query-helpers.js:74:17
+ ❯ node_modules/@testing-library/dom/dist/query-helpers.js:109:15
+ ❯ components/HotelAssistant.results.test.tsx:79:57
+     77|     await search(userEvent.setup());
+     78| 
+     79|     const [first, second, third] = within(hotelList()!).getAllByRole("…
+       |                                                         ^
+     80|     expect(first).toHaveTextContent(/NZD 220\s+per night/);
+     81|     expect(within(first).getByText("Breakfast included")).toBeVisible(…
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[6/27]⎯
+
+ FAIL  components/HotelAssistant.results.test.tsx > empty > AC4.4 shows the message under the heading, the Fixture data label, the empty text and no list
+Error: expect(received).toBeVisible()
+
+received value must be an HTMLElement or an SVGElement.
+Received has type:  Null
+Received has value: null
+ ❯ components/HotelAssistant.results.test.tsx:100:21
+     98| 
+     99|     const heading = reply();
+    100|     expect(heading).toBeVisible();
+       |                     ^
+    101|     const message = screen.getByText(EMPTY.message);
+    102|     expect(message).toBeVisible();
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[7/27]⎯
+
+ FAIL  components/HotelAssistant.results.test.tsx > error > AC4.5 shows the API message in role=alert with a Retry button when retryable
+TestingLibraryElementError: Unable to find an accessible element with the role "alert"
+
+Here are the accessible roles:
+
+  textbox:
+
+  Name "Your request":
+  <textarea
+    class="mt-1 block w-full rounded border border-slate-500 bg-white px-3 py-2 text-slate-900 disabled:bg-slate-100 disabled:text-slate-600 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-700"
+    id="«r5»-request"
+    rows="3"
+  />
+
+  --------------------------------------------------
+  combobox:
+
+  Name "Demo scenario":
+  <select
+    aria-describedby="«r5»-scenario-hint"
+    class="mt-1 block w-full rounded border border-slate-500 bg-white px-3 py-2 text-slate-900 disabled:bg-slate-100 disabled:text-slate-600 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-700"
+    id="«r5»-scenario"
+  />
+
+  --------------------------------------------------
+  option:
+
+  Name "success":
+  <option
+    value="success"
+  />
+
+  Name "empty":
+  <option
+    value="empty"
+  />
+
+  Name "error":
+  <option
+    value="error"
+  />
+
+  --------------------------------------------------
+  paragraph:
+
+  Name "":
+  <p
+    class="mt-1 text-sm text-slate-700"
+    id="«r5»-scenario-hint"
+  />
+
+  --------------------------------------------------
+  button:
+
+  Name "Find hotels":
+  <button
+    class="mt-4 w-full rounded bg-blue-700 px-4 py-2 font-medium text-white hover:bg-blue-800 disabled:bg-slate-500 sm:w-auto focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-700"
+    type="submit"
+  />
+
+  --------------------------------------------------
+  status:
+
+  Name "":
+  <div
+    class="mt-4 text-slate-800"
+    role="status"
+  />
+
+  --------------------------------------------------
+
+Ignored nodes: comments, script, style
+<body>
+  <div>
+    <form
+      class="mt-6 max-w-2xl"
+    >
+      <label
+        class="block font-medium text-slate-900"
+        for="«r5»-request"
+      >
+        Your request
+      </label>
+      <textarea
+        class="mt-1 block w-full rounded border border-slate-500 bg-white px-3 py-2 text-slate-900 disabled:bg-slate-100 disabled:text-slate-600 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-700"
+        id="«r5»-request"
+        rows="3"
+      >
+        Find a Wellington hotel for two nights, up to NZD 250 per night; breakfast preferred.
+      </textarea>
+      <div
+        class="mt-4 rounded border border-dashed border-slate-500 bg-white p-3"
+      >
+        <label
+          class="block font-medium text-slate-900"
+          for="«r5»-scenario"
+        >
+          Demo scenario
+        </label>
+        <select
+          aria-describedby="«r5»-scenario-hint"
+          class="mt-1 block w-full rounded border border-slate-500 bg-white px-3 py-2 text-slate-900 disabled:bg-slate-100 disabled:text-slate-600 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-700"
+          id="«r5»-scenario"
+        >
+          <option
+            value="success"
+          >
+            success
+          </option>
+          <option
+            value="empty"
+          >
+            empty
+          </option>
+          <option
+            value="error"
+          >
+            error
+          </option>
+        </select>
+        <p
+          class="mt-1 text-sm text-slate-700"
+          id="«r5»-scenario-hint"
+        >
+          Demo control: chooses which fixture outcome the API returns. It is here to show each state and is not part of a real search.
+        </p>
+      </div>
+      <button
+        class="mt-4 w-full rounded bg-blue-700 px-4 py-2 font-medium text-white hover:bg-blue-800 disabled:bg-slate-500 sm:w-auto focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-700"
+        type="submit"
+      >
+        Find hotels
+      </button>
+      <div
+        class="mt-4 text-slate-800"
+        role="status"
+      />
+    </form>
+  </div>
+</body>
+ ❯ Object.getElementError node_modules/@testing-library/dom/dist/config.js:37:19
+ ❯ node_modules/@testing-library/dom/dist/query-helpers.js:76:38
+ ❯ node_modules/@testing-library/dom/dist/query-helpers.js:52:17
+ ❯ node_modules/@testing-library/dom/dist/query-helpers.js:95:19
+ ❯ components/HotelAssistant.results.test.tsx:118:19
+    116|     await search(userEvent.setup());
+    117| 
+    118|     expect(screen.getByRole("alert")).toHaveTextContent(SERVICE_DOWN);
+       |                   ^
+    119|     expect(retry()).toBeVisible();
+    120|     expect(reply()).not.toBeInTheDocument();
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[8/27]⎯
+
+ FAIL  components/HotelAssistant.results.test.tsx > error > AC4.5 shows the message only, with no Retry button, when not retryable
+TestingLibraryElementError: Unable to find an accessible element with the role "alert"
+
+Here are the accessible roles:
+
+  textbox:
+
+  Name "Your request":
+  <textarea
+    class="mt-1 block w-full rounded border border-slate-500 bg-white px-3 py-2 text-slate-900 disabled:bg-slate-100 disabled:text-slate-600 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-700"
+    id="«r6»-request"
+    rows="3"
+  />
+
+  --------------------------------------------------
+  combobox:
+
+  Name "Demo scenario":
+  <select
+    aria-describedby="«r6»-scenario-hint"
+    class="mt-1 block w-full rounded border border-slate-500 bg-white px-3 py-2 text-slate-900 disabled:bg-slate-100 disabled:text-slate-600 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-700"
+    id="«r6»-scenario"
+  />
+
+  --------------------------------------------------
+  option:
+
+  Name "success":
+  <option
+    value="success"
+  />
+
+  Name "empty":
+  <option
+    value="empty"
+  />
+
+  Name "error":
+  <option
+    value="error"
+  />
+
+  --------------------------------------------------
+  paragraph:
+
+  Name "":
+  <p
+    class="mt-1 text-sm text-slate-700"
+    id="«r6»-scenario-hint"
+  />
+
+  --------------------------------------------------
+  button:
+
+  Name "Find hotels":
+  <button
+    class="mt-4 w-full rounded bg-blue-700 px-4 py-2 font-medium text-white hover:bg-blue-800 disabled:bg-slate-500 sm:w-auto focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-700"
+    type="submit"
+  />
+
+  --------------------------------------------------
+  status:
+
+  Name "":
+  <div
+    class="mt-4 text-slate-800"
+    role="status"
+  />
+
+  --------------------------------------------------
+
+Ignored nodes: comments, script, style
+<body>
+  <div>
+    <form
+      class="mt-6 max-w-2xl"
+    >
+      <label
+        class="block font-medium text-slate-900"
+        for="«r6»-request"
+      >
+        Your request
+      </label>
+      <textarea
+        class="mt-1 block w-full rounded border border-slate-500 bg-white px-3 py-2 text-slate-900 disabled:bg-slate-100 disabled:text-slate-600 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-700"
+        id="«r6»-request"
+        rows="3"
+      >
+        Find a Wellington hotel for two nights, up to NZD 250 per night; breakfast preferred.
+      </textarea>
+      <div
+        class="mt-4 rounded border border-dashed border-slate-500 bg-white p-3"
+      >
+        <label
+          class="block font-medium text-slate-900"
+          for="«r6»-scenario"
+        >
+          Demo scenario
+        </label>
+        <select
+          aria-describedby="«r6»-scenario-hint"
+          class="mt-1 block w-full rounded border border-slate-500 bg-white px-3 py-2 text-slate-900 disabled:bg-slate-100 disabled:text-slate-600 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-700"
+          id="«r6»-scenario"
+        >
+          <option
+            value="success"
+          >
+            success
+          </option>
+          <option
+            value="empty"
+          >
+            empty
+          </option>
+          <option
+            value="error"
+          >
+            error
+          </option>
+        </select>
+        <p
+          class="mt-1 text-sm text-slate-700"
+          id="«r6»-scenario-hint"
+        >
+          Demo control: chooses which fixture outcome the API returns. It is here to show each state and is not part of a real search.
+        </p>
+      </div>
+      <button
+        class="mt-4 w-full rounded bg-blue-700 px-4 py-2 font-medium text-white hover:bg-blue-800 disabled:bg-slate-500 sm:w-auto focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-700"
+        type="submit"
+      >
+        Find hotels
+      </button>
+      <div
+        class="mt-4 text-slate-800"
+        role="status"
+      />
+    </form>
+  </div>
+</body>
+ ❯ Object.getElementError node_modules/@testing-library/dom/dist/config.js:37:19
+ ❯ node_modules/@testing-library/dom/dist/query-helpers.js:76:38
+ ❯ node_modules/@testing-library/dom/dist/query-helpers.js:52:17
+ ❯ node_modules/@testing-library/dom/dist/query-helpers.js:95:19
+ ❯ components/HotelAssistant.results.test.tsx:131:19
+    129|     await search(userEvent.setup());
+    130| 
+    131|     expect(screen.getByRole("alert")).toHaveTextContent(invalid);
+       |                   ^
+    132|     expect(retry()).not.toBeInTheDocument();
+    133|   });
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[9/27]⎯
+
+ FAIL  components/HotelAssistant.results.test.tsx > retry > AC4.6 resends the message from the failed request with the current scenario and leaves the field unchanged
+AssertionError: expected "spy" to be called 2 times, but got 1 times
+ ❯ components/HotelAssistant.results.test.tsx:151:23
+    149|     await user.click(retry()!);
+    150| 
+    151|     expect(fetchMock).toHaveBeenCalledTimes(2);
+       |                       ^
+    152|     expect(fetchMock).toHaveBeenLastCalledWith({ message: "A quiet hot…
+    153|     await screen.findByRole("list", { name: "Recommended hotels" });
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[10/27]⎯
+
+ FAIL  components/HotelAssistant.results.test.tsx > retry > AC4.6 a second Retry still resends the message from the failed request
+TestingLibraryElementError: Unable to find role="button" and name "Retry"
+
+Ignored nodes: comments, script, style
+<body>
+  <div>
+    <form
+      class="mt-6 max-w-2xl"
+    >
+      <label
+        class="block font-medium text-slate-900"
+        for="«r8»-request"
+      >
+        Your request
+      </label>
+      <textarea
+        class="mt-1 block w-full rounded border border-slate-500 bg-white px-3 py-2 text-slate-900 disabled:bg-slate-100 disabled:text-slate-600 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-700"
+        id="«r8»-request"
+        rows="3"
+      >
+        Edited afterwards
+      </textarea>
+      <div
+        class="mt-4 rounded border border-dashed border-slate-500 bg-white p-3"
+      >
+        <label
+          class="block font-medium text-slate-900"
+          for="«r8»-scenario"
+        >
+          Demo scenario
+        </label>
+        <select
+          aria-describedby="«r8»-scenario-hint"
+          class="mt-1 block w-full rounded border border-slate-500 bg-white px-3 py-2 text-slate-900 disabled:bg-slate-100 disabled:text-slate-600 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-700"
+          id="«r8»-scenario"
+        >
+          <option
+            value="success"
+          >
+            success
+          </option>
+          <option
+            value="empty"
+          >
+            empty
+          </option>
+          <option
+            value="error"
+          >
+            error
+          </option>
+        </select>
+        <p
+          class="mt-1 text-sm text-slate-700"
+          id="«r8»-scenario-hint"
+        >
+          Demo control: chooses which fixture outcome the API returns. It is here to show each state and is not part of a real search.
+        </p>
+      </div>
+      <button
+        class="mt-4 w-full rounded bg-blue-700 px-4 py-2 font-medium text-white hover:bg-blue-800 disabled:bg-slate-500 sm:w-auto focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-700"
+        type="submit"
+      >
+        Find hotels
+      </button>
+      <div
+        class="mt-4 text-slate-800"
+        role="status"
+      />
+    </form>
+  </div>
+</body>
+
+Ignored nodes: comments, script, style
+<body>
+  <div>
+    <form
+      class="mt-6 max-w-2xl"
+    >
+      <label
+        class="block font-medium text-slate-900"
+        for="«r8»-request"
+      >
+        Your request
+      </label>
+      <textarea
+        class="mt-1 block w-full rounded border border-slate-500 bg-white px-3 py-2 text-slate-900 disabled:bg-slate-100 disabled:text-slate-600 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-700"
+        id="«r8»-request"
+        rows="3"
+      >
+        Edited afterwards
+      </textarea>
+      <div
+        class="mt-4 rounded border border-dashed border-slate-500 bg-white p-3"
+      >
+        <label
+          class="block font-medium text-slate-900"
+          for="«r8»-scenario"
+        >
+          Demo scenario
+        </label>
+        <select
+          aria-describedby="«r8»-scenario-hint"
+          class="mt-1 block w-full rounded border border-slate-500 bg-white px-3 py-2 text-slate-900 disabled:bg-slate-100 disabled:text-slate-600 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-700"
+          id="«r8»-scenario"
+        >
+          <option
+            value="success"
+          >
+            success
+          </option>
+          <option
+            value="empty"
+          >
+            empty
+          </option>
+          <option
+            value="error"
+          >
+            error
+          </option>
+        </select>
+        <p
+          class="mt-1 text-sm text-slate-700"
+          id="«r8»-scenario-hint"
+        >
+          Demo control: chooses which fixture outcome the API returns. It is here to show each state and is not part of a real search.
+        </p>
+      </div>
+      <button
+        class="mt-4 w-full rounded bg-blue-700 px-4 py-2 font-medium text-white hover:bg-blue-800 disabled:bg-slate-500 sm:w-auto focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-700"
+        type="submit"
+      >
+        Find hotels
+      </button>
+      <div
+        class="mt-4 text-slate-800"
+        role="status"
+      />
+    </form>
+  </div>
+</body>
+ ❯ waitForWrapper node_modules/@testing-library/dom/dist/wait-for.js:163:27
+ ❯ node_modules/@testing-library/dom/dist/query-helpers.js:86:33
+ ❯ components/HotelAssistant.results.test.tsx:168:18
+    166|     await user.type(field(), "Edited afterwards");
+    167|     await user.click(retry()!);
+    168|     await screen.findByRole("button", { name: "Retry" });
+       |                  ^
+    169|     await user.click(retry()!);
+    170| 
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[11/27]⎯
+
+ FAIL  components/HotelAssistant.results.test.tsx > retry > AC4.6 a successful Retry removes the alert, shows the cards and returns focus to Find hotels
+TestingLibraryElementError: Unable to find role="list" and name "Recommended hotels"
+
+Ignored nodes: comments, script, style
+<body>
+  <div>
+    <button>
+      Elsewhere
+    </button>
+    <form
+      class="mt-6 max-w-2xl"
+    >
+      <label
+        class="block font-medium text-slate-900"
+        for="«r9»-request"
+      >
+        Your request
+      </label>
+      <textarea
+        class="mt-1 block w-full rounded border border-slate-500 bg-white px-3 py-2 text-slate-900 disabled:bg-slate-100 disabled:text-slate-600 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-700"
+        id="«r9»-request"
+        rows="3"
+      >
+        Find a Wellington hotel for two nights, up to NZD 250 per night; breakfast preferred.
+      </textarea>
+      <div
+        class="mt-4 rounded border border-dashed border-slate-500 bg-white p-3"
+      >
+        <label
+          class="block font-medium text-slate-900"
+          for="«r9»-scenario"
+        >
+          Demo scenario
+        </label>
+        <select
+          aria-describedby="«r9»-scenario-hint"
+          class="mt-1 block w-full rounded border border-slate-500 bg-white px-3 py-2 text-slate-900 disabled:bg-slate-100 disabled:text-slate-600 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-700"
+          id="«r9»-scenario"
+        >
+          <option
+            value="success"
+          >
+            success
+          </option>
+          <option
+            value="empty"
+          >
+            empty
+          </option>
+          <option
+            value="error"
+          >
+            error
+          </option>
+        </select>
+        <p
+          class="mt-1 text-sm text-slate-700"
+          id="«r9»-scenario-hint"
+        >
+          Demo control: chooses which fixture outcome the API returns. It is here to show each state and is not part of a real search.
+        </p>
+      </div>
+      <button
+        class="mt-4 w-full rounded bg-blue-700 px-4 py-2 font-medium text-white hover:bg-blue-800 disabled:bg-slate-500 sm:w-auto focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-700"
+        type="submit"
+      >
+        Find hotels
+      </button>
+      <div
+        class="mt-4 text-slate-800"
+        role="status"
+      />
+    </form>
+  </div>
+</body>
+
+Ignored nodes: comments, script, style
+<body>
+  <div>
+    <button>
+      Elsewhere
+    </button>
+    <form
+      class="mt-6 max-w-2xl"
+    >
+      <label
+        class="block font-medium text-slate-900"
+        for="«r9»-request"
+      >
+        Your request
+      </label>
+      <textarea
+        class="mt-1 block w-full rounded border border-slate-500 bg-white px-3 py-2 text-slate-900 disabled:bg-slate-100 disabled:text-slate-600 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-700"
+        id="«r9»-request"
+        rows="3"
+      >
+        Find a Wellington hotel for two nights, up to NZD 250 per night; breakfast preferred.
+      </textarea>
+      <div
+        class="mt-4 rounded border border-dashed border-slate-500 bg-white p-3"
+      >
+        <label
+          class="block font-medium text-slate-900"
+          for="«r9»-scenario"
+        >
+          Demo scenario
+        </label>
+        <select
+          aria-describedby="«r9»-scenario-hint"
+          class="mt-1 block w-full rounded border border-slate-500 bg-white px-3 py-2 text-slate-900 disabled:bg-slate-100 disabled:text-slate-600 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-700"
+          id="«r9»-scenario"
+        >
+          <option
+            value="success"
+          >
+            success
+          </option>
+          <option
+            value="empty"
+          >
+            empty
+          </option>
+          <option
+            value="error"
+          >
+            error
+          </option>
+        </select>
+        <p
+          class="mt-1 text-sm text-slate-700"
+          id="«r9»-scenario-hint"
+        >
+          Demo control: chooses which fixture outcome the API returns. It is here to show each state and is not part of a real search.
+        </p>
+      </div>
+      <button
+        class="mt-4 w-full rounded bg-blue-700 px-4 py-2 font-medium text-white hover:bg-blue-800 disabled:bg-slate-500 sm:w-auto focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-700"
+        type="submit"
+      >
+        Find hotels
+      </button>
+      <div
+        class="mt-4 text-slate-800"
+        role="status"
+      />
+    </form>
+  </div>
+</body>
+ ❯ waitForWrapper node_modules/@testing-library/dom/dist/wait-for.js:163:27
+ ❯ node_modules/@testing-library/dom/dist/query-helpers.js:86:33
+ ❯ components/HotelAssistant.results.test.tsx:193:18
+    191|     pending.resolve(SUCCESS);
+    192| 
+    193|     await screen.findByRole("list", { name: "Recommended hotels" });
+       |                  ^
+    194|     expect(screen.queryByRole("alert")).not.toBeInTheDocument();
+    195|     expect(retry()).not.toBeInTheDocument();
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[12/27]⎯
+
+ FAIL  components/HotelAssistant.results.test.tsx > retry > AC4.6 Retry is the next Tab stop after Find hotels and works with Enter
+Error: expect(received).toHaveFocus()
+
+received value must be an HTMLElement or an SVGElement.
+Received has type:  Null
+Received has value: null
+ ❯ components/HotelAssistant.results.test.tsx:207:21
+    205| 
+    206|     await user.tab();
+    207|     expect(retry()).toHaveFocus();
+       |                     ^
+    208|     await user.keyboard("{Enter}");
+    209| 
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[13/27]⎯
+
+ FAIL  components/HotelAssistant.results.test.tsx > a new search > AC4.7 clears the cards as soon as it starts and shows none next to a new error
+Error: expect(received).toBeVisible()
+
+received value must be an HTMLElement or an SVGElement.
+Received has type:  Null
+Received has value: null
+ ❯ components/HotelAssistant.results.test.tsx:219:25
+    217|     render(<HotelAssistant />);
+    218|     await search(user);
+    219|     expect(hotelList()).toBeVisible();
+       |                         ^
+    220|     const pending = deferred();
+    221|     fetchMock.mockReturnValueOnce(pending.promise);
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[14/27]⎯
+
+ FAIL  components/HotelAssistant.results.test.tsx > a new search > AC4.7 clears the error as soon as it starts and shows none next to new cards
+TestingLibraryElementError: Unable to find an accessible element with the role "alert"
+
+Here are the accessible roles:
+
+  textbox:
+
+  Name "Your request":
+  <textarea
+    class="mt-1 block w-full rounded border border-slate-500 bg-white px-3 py-2 text-slate-900 disabled:bg-slate-100 disabled:text-slate-600 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-700"
+    id="«rc»-request"
+    rows="3"
+  />
+
+  --------------------------------------------------
+  combobox:
+
+  Name "Demo scenario":
+  <select
+    aria-describedby="«rc»-scenario-hint"
+    class="mt-1 block w-full rounded border border-slate-500 bg-white px-3 py-2 text-slate-900 disabled:bg-slate-100 disabled:text-slate-600 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-700"
+    id="«rc»-scenario"
+  />
+
+  --------------------------------------------------
+  option:
+
+  Name "success":
+  <option
+    value="success"
+  />
+
+  Name "empty":
+  <option
+    value="empty"
+  />
+
+  Name "error":
+  <option
+    value="error"
+  />
+
+  --------------------------------------------------
+  paragraph:
+
+  Name "":
+  <p
+    class="mt-1 text-sm text-slate-700"
+    id="«rc»-scenario-hint"
+  />
+
+  --------------------------------------------------
+  button:
+
+  Name "Find hotels":
+  <button
+    class="mt-4 w-full rounded bg-blue-700 px-4 py-2 font-medium text-white hover:bg-blue-800 disabled:bg-slate-500 sm:w-auto focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-700"
+    type="submit"
+  />
+
+  --------------------------------------------------
+  status:
+
+  Name "":
+  <div
+    class="mt-4 text-slate-800"
+    role="status"
+  />
+
+  --------------------------------------------------
+
+Ignored nodes: comments, script, style
+<body>
+  <div>
+    <form
+      class="mt-6 max-w-2xl"
+    >
+      <label
+        class="block font-medium text-slate-900"
+        for="«rc»-request"
+      >
+        Your request
+      </label>
+      <textarea
+        class="mt-1 block w-full rounded border border-slate-500 bg-white px-3 py-2 text-slate-900 disabled:bg-slate-100 disabled:text-slate-600 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-700"
+        id="«rc»-request"
+        rows="3"
+      >
+        Find a Wellington hotel for two nights, up to NZD 250 per night; breakfast preferred.
+      </textarea>
+      <div
+        class="mt-4 rounded border border-dashed border-slate-500 bg-white p-3"
+      >
+        <label
+          class="block font-medium text-slate-900"
+          for="«rc»-scenario"
+        >
+          Demo scenario
+        </label>
+        <select
+          aria-describedby="«rc»-scenario-hint"
+          class="mt-1 block w-full rounded border border-slate-500 bg-white px-3 py-2 text-slate-900 disabled:bg-slate-100 disabled:text-slate-600 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-700"
+          id="«rc»-scenario"
+        >
+          <option
+            value="success"
+          >
+            success
+          </option>
+          <option
+            value="empty"
+          >
+            empty
+          </option>
+          <option
+            value="error"
+          >
+            error
+          </option>
+        </select>
+        <p
+          class="mt-1 text-sm text-slate-700"
+          id="«rc»-scenario-hint"
+        >
+          Demo control: chooses which fixture outcome the API returns. It is here to show each state and is not part of a real search.
+        </p>
+      </div>
+      <button
+        class="mt-4 w-full rounded bg-blue-700 px-4 py-2 font-medium text-white hover:bg-blue-800 disabled:bg-slate-500 sm:w-auto focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-700"
+        type="submit"
+      >
+        Find hotels
+      </button>
+      <div
+        class="mt-4 text-slate-800"
+        role="status"
+      />
+    </form>
+  </div>
+</body>
+ ❯ Object.getElementError node_modules/@testing-library/dom/dist/config.js:37:19
+ ❯ node_modules/@testing-library/dom/dist/query-helpers.js:76:38
+ ❯ node_modules/@testing-library/dom/dist/query-helpers.js:52:17
+ ❯ node_modules/@testing-library/dom/dist/query-helpers.js:95:19
+ ❯ components/HotelAssistant.results.test.tsx:239:19
+    237|     render(<HotelAssistant />);
+    238|     await search(user);
+    239|     expect(screen.getByRole("alert")).toBeVisible();
+       |                   ^
+    240|     const pending = deferred();
+    241|     fetchMock.mockReturnValueOnce(pending.promise);
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[15/27]⎯
+
+ FAIL  components/HotelAssistant.results.test.tsx > a new search > AC4.7 replaces an empty result with the new cards
+TestingLibraryElementError: Unable to find an element with the text: No hotels to show. Try changing your request or the demo scenario.. This could be because the text is broken up by multiple elements. In this case, you can provide a function for your text matcher to make your matcher more flexible.
+
+Ignored nodes: comments, script, style
+<body>
+  <div>
+    <form
+      class="mt-6 max-w-2xl"
+    >
+      <label
+        class="block font-medium text-slate-900"
+        for="«rd»-request"
+      >
+        Your request
+      </label>
+      <textarea
+        class="mt-1 block w-full rounded border border-slate-500 bg-white px-3 py-2 text-slate-900 disabled:bg-slate-100 disabled:text-slate-600 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-700"
+        id="«rd»-request"
+        rows="3"
+      >
+        Find a Wellington hotel for two nights, up to NZD 250 per night; breakfast preferred.
+      </textarea>
+      <div
+        class="mt-4 rounded border border-dashed border-slate-500 bg-white p-3"
+      >
+        <label
+          class="block font-medium text-slate-900"
+          for="«rd»-scenario"
+        >
+          Demo scenario
+        </label>
+        <select
+          aria-describedby="«rd»-scenario-hint"
+          class="mt-1 block w-full rounded border border-slate-500 bg-white px-3 py-2 text-slate-900 disabled:bg-slate-100 disabled:text-slate-600 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-700"
+          id="«rd»-scenario"
+        >
+          <option
+            value="success"
+          >
+            success
+          </option>
+          <option
+            value="empty"
+          >
+            empty
+          </option>
+          <option
+            value="error"
+          >
+            error
+          </option>
+        </select>
+        <p
+          class="mt-1 text-sm text-slate-700"
+          id="«rd»-scenario-hint"
+        >
+          Demo control: chooses which fixture outcome the API returns. It is here to show each state and is not part of a real search.
+        </p>
+      </div>
+      <button
+        class="mt-4 w-full rounded bg-blue-700 px-4 py-2 font-medium text-white hover:bg-blue-800 disabled:bg-slate-500 sm:w-auto focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-700"
+        type="submit"
+      >
+        Find hotels
+      </button>
+      <div
+        class="mt-4 text-slate-800"
+        role="status"
+      />
+    </form>
+  </div>
+</body>
+ ❯ Object.getElementError node_modules/@testing-library/dom/dist/config.js:37:19
+ ❯ node_modules/@testing-library/dom/dist/query-helpers.js:76:38
+ ❯ node_modules/@testing-library/dom/dist/query-helpers.js:52:17
+ ❯ node_modules/@testing-library/dom/dist/query-helpers.js:95:19
+ ❯ components/HotelAssistant.results.test.tsx:257:19
+    255|     render(<HotelAssistant />);
+    256|     await search(user);
+    257|     expect(screen.getByText(EMPTY_TEXT)).toBeVisible();
+       |                   ^
+    258| 
+    259|     await search(user);
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[16/27]⎯
+
+ FAIL  components/HotelAssistant.results.test.tsx > a new search > AC4.7 a blocked blank submit keeps the results and only adds the inline error
+TestingLibraryElementError: Unable to find an element with the text: Here are three hotels that fit your request.. This could be because the text is broken up by multiple elements. In this case, you can provide a function for your text matcher to make your matcher more flexible.
+
+Ignored nodes: comments, script, style
+<body>
+  <div>
+    <form
+      class="mt-6 max-w-2xl"
+    >
+      <label
+        class="block font-medium text-slate-900"
+        for="«re»-request"
+      >
+        Your request
+      </label>
+      <textarea
+        aria-describedby="«re»-request-error"
+        aria-invalid="true"
+        class="mt-1 block w-full rounded border border-slate-500 bg-white px-3 py-2 text-slate-900 disabled:bg-slate-100 disabled:text-slate-600 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-700"
+        id="«re»-request"
+        rows="3"
+      />
+      <p
+        class="mt-1 text-sm text-red-800"
+        id="«re»-request-error"
+      >
+        Please describe the hotel you need.
+      </p>
+      <div
+        class="mt-4 rounded border border-dashed border-slate-500 bg-white p-3"
+      >
+        <label
+          class="block font-medium text-slate-900"
+          for="«re»-scenario"
+        >
+          Demo scenario
+        </label>
+        <select
+          aria-describedby="«re»-scenario-hint"
+          class="mt-1 block w-full rounded border border-slate-500 bg-white px-3 py-2 text-slate-900 disabled:bg-slate-100 disabled:text-slate-600 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-700"
+          id="«re»-scenario"
+        >
+          <option
+            value="success"
+          >
+            success
+          </option>
+          <option
+            value="empty"
+          >
+            empty
+          </option>
+          <option
+            value="error"
+          >
+            error
+          </option>
+        </select>
+        <p
+          class="mt-1 text-sm text-slate-700"
+          id="«re»-scenario-hint"
+        >
+          Demo control: chooses which fixture outcome the API returns. It is here to show each state and is not part of a real search.
+        </p>
+      </div>
+      <button
+        class="mt-4 w-full rounded bg-blue-700 px-4 py-2 font-medium text-white hover:bg-blue-800 disabled:bg-slate-500 sm:w-auto focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-700"
+        type="submit"
+      >
+        Find hotels
+      </button>
+      <div
+        class="mt-4 text-slate-800"
+        role="status"
+      />
+    </form>
+  </div>
+</body>
+ ❯ Object.getElementError node_modules/@testing-library/dom/dist/config.js:37:19
+ ❯ node_modules/@testing-library/dom/dist/query-helpers.js:76:38
+ ❯ node_modules/@testing-library/dom/dist/query-helpers.js:52:17
+ ❯ node_modules/@testing-library/dom/dist/query-helpers.js:95:19
+ ❯ components/HotelAssistant.results.test.tsx:275:19
+    273| 
+    274|     expect(screen.getByText(BLANK_ERROR)).toBeVisible();
+    275|     expect(screen.getByText(SUCCESS.message)).toBeVisible();
+       |                   ^
+    276|     expect(within(hotelList()!).getAllByRole("listitem")).toHaveLength…
+    277|     expect(fetchMock).toHaveBeenCalledTimes(1);
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[17/27]⎯
+
+ FAIL  components/HotelAssistant.results.test.tsx > a new search > AC4.7 a blocked blank submit keeps the error and Retry and only adds the inline error
+TestingLibraryElementError: Unable to find an accessible element with the role "alert"
+
+Here are the accessible roles:
+
+  textbox:
+
+  Name "Your request":
+  <textarea
+    aria-describedby="«rf»-request-error"
+    aria-invalid="true"
+    class="mt-1 block w-full rounded border border-slate-500 bg-white px-3 py-2 text-slate-900 disabled:bg-slate-100 disabled:text-slate-600 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-700"
+    id="«rf»-request"
+    rows="3"
+  />
+
+  --------------------------------------------------
+  paragraph:
+
+  Name "":
+  <p
+    class="mt-1 text-sm text-red-800"
+    id="«rf»-request-error"
+  />
+
+  Name "":
+  <p
+    class="mt-1 text-sm text-slate-700"
+    id="«rf»-scenario-hint"
+  />
+
+  --------------------------------------------------
+  combobox:
+
+  Name "Demo scenario":
+  <select
+    aria-describedby="«rf»-scenario-hint"
+    class="mt-1 block w-full rounded border border-slate-500 bg-white px-3 py-2 text-slate-900 disabled:bg-slate-100 disabled:text-slate-600 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-700"
+    id="«rf»-scenario"
+  />
+
+  --------------------------------------------------
+  option:
+
+  Name "success":
+  <option
+    value="success"
+  />
+
+  Name "empty":
+  <option
+    value="empty"
+  />
+
+  Name "error":
+  <option
+    value="error"
+  />
+
+  --------------------------------------------------
+  button:
+
+  Name "Find hotels":
+  <button
+    class="mt-4 w-full rounded bg-blue-700 px-4 py-2 font-medium text-white hover:bg-blue-800 disabled:bg-slate-500 sm:w-auto focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-700"
+    type="submit"
+  />
+
+  --------------------------------------------------
+  status:
+
+  Name "":
+  <div
+    class="mt-4 text-slate-800"
+    role="status"
+  />
+
+  --------------------------------------------------
+
+Ignored nodes: comments, script, style
+<body>
+  <div>
+    <form
+      class="mt-6 max-w-2xl"
+    >
+      <label
+        class="block font-medium text-slate-900"
+        for="«rf»-request"
+      >
+        Your request
+      </label>
+      <textarea
+        aria-describedby="«rf»-request-error"
+        aria-invalid="true"
+        class="mt-1 block w-full rounded border border-slate-500 bg-white px-3 py-2 text-slate-900 disabled:bg-slate-100 disabled:text-slate-600 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-700"
+        id="«rf»-request"
+        rows="3"
+      />
+      <p
+        class="mt-1 text-sm text-red-800"
+        id="«rf»-request-error"
+      >
+        Please describe the hotel you need.
+      </p>
+      <div
+        class="mt-4 rounded border border-dashed border-slate-500 bg-white p-3"
+      >
+        <label
+          class="block font-medium text-slate-900"
+          for="«rf»-scenario"
+        >
+          Demo scenario
+        </label>
+        <select
+          aria-describedby="«rf»-scenario-hint"
+          class="mt-1 block w-full rounded border border-slate-500 bg-white px-3 py-2 text-slate-900 disabled:bg-slate-100 disabled:text-slate-600 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-700"
+          id="«rf»-scenario"
+        >
+          <option
+            value="success"
+          >
+            success
+          </option>
+          <option
+            value="empty"
+          >
+            empty
+          </option>
+          <option
+            value="error"
+          >
+            error
+          </option>
+        </select>
+        <p
+          class="mt-1 text-sm text-slate-700"
+          id="«rf»-scenario-hint"
+        >
+          Demo control: chooses which fixture outcome the API returns. It is here to show each state and is not part of a real search.
+        </p>
+      </div>
+      <button
+        class="mt-4 w-full rounded bg-blue-700 px-4 py-2 font-medium text-white hover:bg-blue-800 disabled:bg-slate-500 sm:w-auto focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-700"
+        type="submit"
+      >
+        Find hotels
+      </button>
+      <div
+        class="mt-4 text-slate-800"
+        role="status"
+      />
+    </form>
+  </div>
+</body>
+ ❯ Object.getElementError node_modules/@testing-library/dom/dist/config.js:37:19
+ ❯ node_modules/@testing-library/dom/dist/query-helpers.js:76:38
+ ❯ node_modules/@testing-library/dom/dist/query-helpers.js:52:17
+ ❯ node_modules/@testing-library/dom/dist/query-helpers.js:95:19
+ ❯ components/HotelAssistant.results.test.tsx:290:19
+    288| 
+    289|     expect(screen.getByText(BLANK_ERROR)).toBeVisible();
+    290|     expect(screen.getByRole("alert")).toHaveTextContent(SERVICE_DOWN);
+       |                   ^
+    291|     expect(retry()).toBeVisible();
+    292|     expect(fetchMock).toHaveBeenCalledTimes(1);
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[18/27]⎯
+
+ FAIL  components/HotelAssistant.results.test.tsx > announcing the reply > AC4.8 the same polite live container stays mounted across idle, loading and results and holds the message
+Error: expect(received).toBeInTheDocument()
+
+received value must be an HTMLElement or an SVGElement.
+Received has type:  Null
+Received has value: null
+ ❯ components/HotelAssistant.results.test.tsx:303:20
+    301|     render(<HotelAssistant />);
+    302|     const region = liveRegion();
+    303|     expect(region).toBeInTheDocument();
+       |                    ^
+    304|     expect(region).toBeEmptyDOMElement();
+    305| 
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[19/27]⎯
+
+ FAIL  components/HotelAssistant.results.test.tsx > announcing the reply > AC4.8 the live container empties while a new search runs, so the next reply is announced
+TypeError: Expected container to be an Element, a Document or a DocumentFragment but got null.
+ ❯ checkContainerType node_modules/@testing-library/dom/dist/helpers.js:61:11
+ ❯ queryAllByText node_modules/@testing-library/dom/dist/queries/text.js:18:35
+ ❯ node_modules/@testing-library/dom/dist/query-helpers.js:74:17
+ ❯ node_modules/@testing-library/dom/dist/query-helpers.js:52:17
+ ❯ node_modules/@testing-library/dom/dist/query-helpers.js:95:19
+ ❯ components/HotelAssistant.results.test.tsx:320:28
+    318|     await search(user);
+    319|     const region = liveRegion();
+    320|     expect(within(region!).getByText(SUCCESS.message)).toBeVisible();
+       |                            ^
+    321|     const pending = deferred();
+    322|     fetchMock.mockReturnValueOnce(pending.promise);
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[20/27]⎯
+
+ FAIL  components/HotelAssistant.results.test.tsx > announcing the reply > AC4.8 the status region is empty while the reply is on screen
+TypeError: Expected container to be an Element, a Document or a DocumentFragment but got null.
+ ❯ checkContainerType node_modules/@testing-library/dom/dist/helpers.js:61:11
+ ❯ queryAllByText node_modules/@testing-library/dom/dist/queries/text.js:18:35
+ ❯ node_modules/@testing-library/dom/dist/query-helpers.js:74:17
+ ❯ node_modules/@testing-library/dom/dist/query-helpers.js:52:17
+ ❯ node_modules/@testing-library/dom/dist/query-helpers.js:95:19
+ ❯ components/HotelAssistant.results.test.tsx:335:34
+    333|     await search(userEvent.setup());
+    334| 
+    335|     expect(within(liveRegion()!).getByText(SUCCESS.message)).toBeVisib…
+       |                                  ^
+    336|     expect(screen.getByRole("status")).toBeEmptyDOMElement();
+    337|   });
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[21/27]⎯
+
+ FAIL  components/HotelCard.test.tsx > HotelCard > AC4.3 shows the name as an h3
+TestingLibraryElementError: Unable to find an accessible element with the role "listitem"
+
+Here are the accessible roles:
+
+  list:
+
+  Name "":
+  <ul />
+
+  --------------------------------------------------
+
+Ignored nodes: comments, script, style
+<body>
+  <div>
+    <ul />
+  </div>
+</body>
+ ❯ Object.getElementError node_modules/@testing-library/dom/dist/config.js:37:19
+ ❯ node_modules/@testing-library/dom/dist/query-helpers.js:76:38
+ ❯ node_modules/@testing-library/dom/dist/query-helpers.js:52:17
+ ❯ node_modules/@testing-library/dom/dist/query-helpers.js:95:19
+ ❯ renderCard components/HotelCard.test.tsx:15:17
+     13|     </ul>,
+     14|   );
+     15|   return screen.getByRole("listitem");
+       |                 ^
+     16| }
+     17| 
+ ❯ components/HotelCard.test.tsx:20:5
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[22/27]⎯
+
+ FAIL  components/HotelCard.test.tsx > HotelCard > AC4.3 shows the price with its currency and per night
+TestingLibraryElementError: Unable to find an accessible element with the role "listitem"
+
+Here are the accessible roles:
+
+  list:
+
+  Name "":
+  <ul />
+
+  --------------------------------------------------
+
+Ignored nodes: comments, script, style
+<body>
+  <div>
+    <ul />
+  </div>
+</body>
+ ❯ Object.getElementError node_modules/@testing-library/dom/dist/config.js:37:19
+ ❯ node_modules/@testing-library/dom/dist/query-helpers.js:76:38
+ ❯ node_modules/@testing-library/dom/dist/query-helpers.js:52:17
+ ❯ node_modules/@testing-library/dom/dist/query-helpers.js:95:19
+ ❯ renderCard components/HotelCard.test.tsx:15:17
+     13|     </ul>,
+     14|   );
+     15|   return screen.getByRole("listitem");
+       |                 ^
+     16| }
+     17| 
+ ❯ components/HotelCard.test.tsx:26:12
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[23/27]⎯
+
+ FAIL  components/HotelCard.test.tsx > HotelCard > AC4.3 shows a non-whole price with two decimals
+TestingLibraryElementError: Unable to find an accessible element with the role "listitem"
+
+Here are the accessible roles:
+
+  list:
+
+  Name "":
+  <ul />
+
+  --------------------------------------------------
+
+Ignored nodes: comments, script, style
+<body>
+  <div>
+    <ul />
+  </div>
+</body>
+ ❯ Object.getElementError node_modules/@testing-library/dom/dist/config.js:37:19
+ ❯ node_modules/@testing-library/dom/dist/query-helpers.js:76:38
+ ❯ node_modules/@testing-library/dom/dist/query-helpers.js:52:17
+ ❯ node_modules/@testing-library/dom/dist/query-helpers.js:95:19
+ ❯ renderCard components/HotelCard.test.tsx:15:17
+     13|     </ul>,
+     14|   );
+     15|   return screen.getByRole("listitem");
+       |                 ^
+     16| }
+     17| 
+ ❯ components/HotelCard.test.tsx:30:12
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[24/27]⎯
+
+ FAIL  components/HotelCard.test.tsx > HotelCard > AC4.3 shows Breakfast included when breakfast is included
+TestingLibraryElementError: Unable to find an accessible element with the role "listitem"
+
+Here are the accessible roles:
+
+  list:
+
+  Name "":
+  <ul />
+
+  --------------------------------------------------
+
+Ignored nodes: comments, script, style
+<body>
+  <div>
+    <ul />
+  </div>
+</body>
+ ❯ Object.getElementError node_modules/@testing-library/dom/dist/config.js:37:19
+ ❯ node_modules/@testing-library/dom/dist/query-helpers.js:76:38
+ ❯ node_modules/@testing-library/dom/dist/query-helpers.js:52:17
+ ❯ node_modules/@testing-library/dom/dist/query-helpers.js:95:19
+ ❯ renderCard components/HotelCard.test.tsx:15:17
+     13|     </ul>,
+     14|   );
+     15|   return screen.getByRole("listitem");
+       |                 ^
+     16| }
+     17| 
+ ❯ components/HotelCard.test.tsx:34:5
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[25/27]⎯
+
+ FAIL  components/HotelCard.test.tsx > HotelCard > AC4.3 shows Breakfast not included when breakfast is not included
+TestingLibraryElementError: Unable to find an accessible element with the role "listitem"
+
+Here are the accessible roles:
+
+  list:
+
+  Name "":
+  <ul />
+
+  --------------------------------------------------
+
+Ignored nodes: comments, script, style
+<body>
+  <div>
+    <ul />
+  </div>
+</body>
+ ❯ Object.getElementError node_modules/@testing-library/dom/dist/config.js:37:19
+ ❯ node_modules/@testing-library/dom/dist/query-helpers.js:76:38
+ ❯ node_modules/@testing-library/dom/dist/query-helpers.js:52:17
+ ❯ node_modules/@testing-library/dom/dist/query-helpers.js:95:19
+ ❯ renderCard components/HotelCard.test.tsx:15:17
+     13|     </ul>,
+     14|   );
+     15|   return screen.getByRole("listitem");
+       |                 ^
+     16| }
+     17| 
+ ❯ components/HotelCard.test.tsx:41:5
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[26/27]⎯
+
+ FAIL  components/HotelCard.test.tsx > HotelCard > AC4.3 shows the explanation
+TestingLibraryElementError: Unable to find an accessible element with the role "listitem"
+
+Here are the accessible roles:
+
+  list:
+
+  Name "":
+  <ul />
+
+  --------------------------------------------------
+
+Ignored nodes: comments, script, style
+<body>
+  <div>
+    <ul />
+  </div>
+</body>
+ ❯ Object.getElementError node_modules/@testing-library/dom/dist/config.js:37:19
+ ❯ node_modules/@testing-library/dom/dist/query-helpers.js:76:38
+ ❯ node_modules/@testing-library/dom/dist/query-helpers.js:52:17
+ ❯ node_modules/@testing-library/dom/dist/query-helpers.js:95:19
+ ❯ renderCard components/HotelCard.test.tsx:15:17
+     13|     </ul>,
+     14|   );
+     15|   return screen.getByRole("listitem");
+       |                 ^
+     16| }
+     17| 
+ ❯ components/HotelCard.test.tsx:48:5
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[27/27]⎯
+
+
+ Test Files  3 failed | 2 passed (5)
+      Tests  27 failed | 33 passed (60)
+   Start at  13:34:32
+   Duration  18.71s (transform 565ms, setup 10.22s, collect 2.30s, tests 7.27s, environment 18.06s, prepare 2.08s)
+

@@ -42,7 +42,7 @@ A traveller asks for a hotel, reviews the assistant's recommendations, and choos
 | Progress | `role="status"` containing "Finding hotels" |
 | Results | assistant message, a "Fixture data" label, list labelled **Recommended hotels**, one `listitem` per hotel with an `h3` name, `NZD 220` + "per night", "Breakfast included" / "Breakfast not included", explanation |
 | Empty | text containing "No hotels to show" |
-| Error | `role="alert"` with the API message and a **Retry** button (only when retryable) |
+| Error | `role="alert"` with the API message, and a **Retry** button beside it (only when retryable) |
 | Choose | button named **Choose <hotel name>** with `aria-pressed` |
 | Summary | region labelled **Your choice** that gets focus and shows name, `NZD 220 per night`, breakfast, explanation, and a fixture/no-booking note |
 
