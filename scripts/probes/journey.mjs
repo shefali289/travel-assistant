@@ -3,12 +3,13 @@
 // Relies only on the UI contract in AGENTS.md (accessible names), not on implementation details.
 import { createRequire } from "node:module";
 import { mkdirSync } from "node:fs";
+import { fileURLToPath } from "node:url";
 const require = createRequire(new URL("../../web/package.json", import.meta.url)); // resolve playwright from web/node_modules
 const { chromium } = require("playwright");
 
 const stage = process.argv[2] ?? "all";
 const BASE = process.env.WEB_URL ?? "http://localhost:3000";
-const OUT = new URL("../../evidence/", import.meta.url).pathname;
+const OUT = fileURLToPath(new URL("../../evidence/", import.meta.url));
 mkdirSync(OUT, { recursive: true });
 const failures = [];
 const check = (cond, msg) => { console.log(`  ${cond ? "ok  " : "FAIL"} ${msg}`); if (!cond) failures.push(msg); };

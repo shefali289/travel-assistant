@@ -1,0 +1,558 @@
+
+> web@0.1.0 test
+> vitest run
+
+
+ RUN  v3.2.7 <repo>/web
+
+ ✓ app/sanity.test.ts (1 test) 3ms
+ ❯ lib/api.test.ts (18 tests | 18 failed) 30ms
+   × fetchRecommendations > AC3.1 POSTs JSON to the default base URL and returns the typed body on 200 15ms
+     → promise rejected "Error: not implemented" instead of resolving
+   × fetchRecommendations > AC3.1 uses NEXT_PUBLIC_API_BASE_URL when it is set 1ms
+     → not implemented
+   × fetchRecommendations > AC3.2 throws ApiError with the server's message and retryable true on a 503 2ms
+     → expected Error: not implemented to be an instance of ApiError
+   × fetchRecommendations > AC3.2 throws ApiError with the server's message and retryable false on a 422 1ms
+     → expected Error: not implemented to be an instance of ApiError
+   × fetchRecommendations > AC3.3 turns a network failure into a retryable ApiError with no status and the agreed message 1ms
+     → expected Error: not implemented to be an instance of ApiError
+   × fetchRecommendations > AC3.3 turns a non-JSON error body into a retryable ApiError with a generic message 1ms
+     → expected Error: not implemented to be an instance of ApiError
+   × fetchRecommendations > AC3.3 turns a non-2xx JSON body with another shape into a retryable ApiError with a generic message 1ms
+     → expected Error: not implemented to be an instance of ApiError
+   × fetchRecommendations > AC3.3 turns a non-2xx JSON null body into a retryable ApiError with a generic message 1ms
+     → expected Error: not implemented to be an instance of ApiError
+   × fetchRecommendations > AC3.3 turns a non-2xx body with no retryable into a retryable ApiError with a generic message 1ms
+     → expected Error: not implemented to be an instance of ApiError
+   × fetchRecommendations > AC3.3 turns a non-2xx body with no code into a retryable ApiError with a generic message 1ms
+     → expected Error: not implemented to be an instance of ApiError
+   × fetchRecommendations > AC3.3 turns a non-2xx body with a non-boolean retryable into a retryable ApiError with a generic message 1ms
+     → expected Error: not implemented to be an instance of ApiError
+   × fetchRecommendations > AC3.3 turns a non-2xx body with a non-string message into a retryable ApiError with a generic message 1ms
+     → expected Error: not implemented to be an instance of ApiError
+   × fetchRecommendations > AC3.3 turns a 200 that is not JSON into a retryable ApiError with a generic message 0ms
+     → expected Error: not implemented to be an instance of ApiError
+   × fetchRecommendations > AC3.3 turns a 200 with a JSON null body into a retryable ApiError with a generic message 1ms
+     → expected Error: not implemented to be an instance of ApiError
+   × fetchRecommendations > AC3.3 turns a 200 with no message into a retryable ApiError with a generic message 0ms
+     → expected Error: not implemented to be an instance of ApiError
+   × fetchRecommendations > AC3.3 turns a 200 with a non-string message into a retryable ApiError with a generic message 0ms
+     → expected Error: not implemented to be an instance of ApiError
+   × fetchRecommendations > AC3.3 turns a 200 with no hotels into a retryable ApiError with a generic message 0ms
+     → expected Error: not implemented to be an instance of ApiError
+   × fetchRecommendations > AC3.3 turns a 200 with non-array hotels into a retryable ApiError with a generic message 0ms
+     → expected Error: not implemented to be an instance of ApiError
+ ❯ components/HotelAssistant.search.test.tsx (14 tests | 14 failed) 234ms
+   × request field > AC3.4 is labelled Your request and prefilled with the Wellington example 102ms
+     → Unable to find an accessible element with the role "textbox" and name "Your request"
+
+There are no accessible roles. But there might be some inaccessible roles. If you wish to access them, then set the `hidden` option to `true`. Learn more about this here: https://testing-library.com/docs/dom-testing-library/api-queries#byrole
+
+Ignored nodes: comments, script, style
+<body>
+  <div />
+</body>
+   × request field > AC3.4 a blank submit shows the linked inline error, moves focus to the field and sends no request 8ms
+     → Unable to find an accessible element with the role "textbox" and name "Your request"
+
+There are no accessible roles. But there might be some inaccessible roles. If you wish to access them, then set the `hidden` option to `true`. Learn more about this here: https://testing-library.com/docs/dom-testing-library/api-queries#byrole
+
+Ignored nodes: comments, script, style
+<body>
+  <div />
+</body>
+   × request field > AC3.4 a whitespace-only submit shows the linked inline error, moves focus to the field and sends no request 7ms
+     → Unable to find an accessible element with the role "textbox" and name "Your request"
+
+There are no accessible roles. But there might be some inaccessible roles. If you wish to access them, then set the `hidden` option to `true`. Learn more about this here: https://testing-library.com/docs/dom-testing-library/api-queries#byrole
+
+Ignored nodes: comments, script, style
+<body>
+  <div />
+</body>
+   × request field > AC3.4 the error clears once the traveller types 7ms
+     → Unable to find an accessible element with the role "textbox" and name "Your request"
+
+There are no accessible roles. But there might be some inaccessible roles. If you wish to access them, then set the `hidden` option to `true`. Learn more about this here: https://testing-library.com/docs/dom-testing-library/api-queries#byrole
+
+Ignored nodes: comments, script, style
+<body>
+  <div />
+</body>
+   × demo control > AC3.5 is a select labelled Demo scenario offering success, empty and error, defaulting to success 13ms
+     → Unable to find an accessible element with the role "combobox" and name "Demo scenario"
+
+There are no accessible roles. But there might be some inaccessible roles. If you wish to access them, then set the `hidden` option to `true`. Learn more about this here: https://testing-library.com/docs/dom-testing-library/api-queries#byrole
+
+Ignored nodes: comments, script, style
+<body>
+  <div />
+</body>
+   × demo control > AC3.5 has visible Demo control hint text linked with aria-describedby 9ms
+     → Unable to find an element with the text: /^Demo control: /. This could be because the text is broken up by multiple elements. In this case, you can provide a function for your text matcher to make your matcher more flexible.
+
+Ignored nodes: comments, script, style
+<body>
+  <div />
+</body>
+   × submit > AC3.6 sends the trimmed message and the chosen scenario 6ms
+     → Unable to find an accessible element with the role "textbox" and name "Your request"
+
+There are no accessible roles. But there might be some inaccessible roles. If you wish to access them, then set the `hidden` option to `true`. Learn more about this here: https://testing-library.com/docs/dom-testing-library/api-queries#byrole
+
+Ignored nodes: comments, script, style
+<body>
+  <div />
+</body>
+   × while waiting > AC3.7 shows progress, a busy disabled button and disabled inputs while waiting 5ms
+     → Unable to find an accessible element with the role "button" and name `/find(ing)? hotels/i`
+
+There are no accessible roles. But there might be some inaccessible roles. If you wish to access them, then set the `hidden` option to `true`. Learn more about this here: https://testing-library.com/docs/dom-testing-library/api-queries#byrole
+
+Ignored nodes: comments, script, style
+<body>
+  <div />
+</body>
+   × while waiting > AC3.7 keeps the status region mounted and empty before and after waiting 8ms
+     → Unable to find an accessible element with the role "status"
+
+There are no accessible roles. But there might be some inaccessible roles. If you wish to access them, then set the `hidden` option to `true`. Learn more about this here: https://testing-library.com/docs/dom-testing-library/api-queries#byrole
+
+Ignored nodes: comments, script, style
+<body>
+  <div />
+</body>
+   × while waiting > AC3.7 re-enables everything and returns focus to the submit button after a response 12ms
+     → Unable to find an accessible element with the role "button" and name `/find(ing)? hotels/i`
+
+There are no accessible roles. But there might be some inaccessible roles. If you wish to access them, then set the `hidden` option to `true`. Learn more about this here: https://testing-library.com/docs/dom-testing-library/api-queries#byrole
+
+Ignored nodes: comments, script, style
+<body>
+  <div />
+</body>
+   × while waiting > AC3.7 re-enables everything and returns focus to the submit button after a failure 6ms
+     → Unable to find an accessible element with the role "button" and name `/find(ing)? hotels/i`
+
+There are no accessible roles. But there might be some inaccessible roles. If you wish to access them, then set the `hidden` option to `true`. Learn more about this here: https://testing-library.com/docs/dom-testing-library/api-queries#byrole
+
+Ignored nodes: comments, script, style
+<body>
+  <div />
+</body>
+   × keyboard > AC3.8 Tab reaches the field, the select and the button in that order 39ms
+     → Unable to find an accessible element with the role "textbox" and name "Your request"
+
+There are no accessible roles. But there might be some inaccessible roles. If you wish to access them, then set the `hidden` option to `true`. Learn more about this here: https://testing-library.com/docs/dom-testing-library/api-queries#byrole
+
+Ignored nodes: comments, script, style
+<body>
+  <div />
+</body>
+   × keyboard > AC3.8 Enter on the button submits 4ms
+     → Unable to find an accessible element with the role "button" and name `/find(ing)? hotels/i`
+
+There are no accessible roles. But there might be some inaccessible roles. If you wish to access them, then set the `hidden` option to `true`. Learn more about this here: https://testing-library.com/docs/dom-testing-library/api-queries#byrole
+
+Ignored nodes: comments, script, style
+<body>
+  <div />
+</body>
+   × keyboard > AC3.8 Enter in the field adds a new line and does not submit 4ms
+     → Unable to find an accessible element with the role "textbox" and name "Your request"
+
+There are no accessible roles. But there might be some inaccessible roles. If you wish to access them, then set the `hidden` option to `true`. Learn more about this here: https://testing-library.com/docs/dom-testing-library/api-queries#byrole
+
+Ignored nodes: comments, script, style
+<body>
+  <div />
+</body>
+
+⎯⎯⎯⎯⎯⎯ Failed Tests 32 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  components/HotelAssistant.search.test.tsx > request field > AC3.4 is labelled Your request and prefilled with the Wellington example
+TestingLibraryElementError: Unable to find an accessible element with the role "textbox" and name "Your request"
+
+There are no accessible roles. But there might be some inaccessible roles. If you wish to access them, then set the `hidden` option to `true`. Learn more about this here: https://testing-library.com/docs/dom-testing-library/api-queries#byrole
+
+Ignored nodes: comments, script, style
+<body>
+  <div />
+</body>
+ ❯ Object.getElementError node_modules/@testing-library/dom/dist/config.js:37:19
+ ❯ node_modules/@testing-library/dom/dist/query-helpers.js:76:38
+ ❯ node_modules/@testing-library/dom/dist/query-helpers.js:52:17
+ ❯ node_modules/@testing-library/dom/dist/query-helpers.js:95:19
+ ❯ field components/HotelAssistant.search.test.tsx:18:28
+     16| const response: RecommendationResponse = { message: "Here you go.", ho…
+     17| 
+     18| const field = () => screen.getByRole("textbox", { name: "Your request"…
+       |                            ^
+     19| const scenario = () => screen.getByRole("combobox", { name: "Demo scen…
+     20| const submit = () => screen.getByRole("button", { name: /find(ing)? ho…
+ ❯ components/HotelAssistant.search.test.tsx:41:12
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/32]⎯
+
+ FAIL  components/HotelAssistant.search.test.tsx > request field > AC3.4 a blank submit shows the linked inline error, moves focus to the field and sends no request
+ FAIL  components/HotelAssistant.search.test.tsx > request field > AC3.4 a whitespace-only submit shows the linked inline error, moves focus to the field and sends no request
+TestingLibraryElementError: Unable to find an accessible element with the role "textbox" and name "Your request"
+
+There are no accessible roles. But there might be some inaccessible roles. If you wish to access them, then set the `hidden` option to `true`. Learn more about this here: https://testing-library.com/docs/dom-testing-library/api-queries#byrole
+
+Ignored nodes: comments, script, style
+<body>
+  <div />
+</body>
+ ❯ Object.getElementError node_modules/@testing-library/dom/dist/config.js:37:19
+ ❯ node_modules/@testing-library/dom/dist/query-helpers.js:76:38
+ ❯ node_modules/@testing-library/dom/dist/query-helpers.js:52:17
+ ❯ node_modules/@testing-library/dom/dist/query-helpers.js:95:19
+ ❯ field components/HotelAssistant.search.test.tsx:18:28
+     16| const response: RecommendationResponse = { message: "Here you go.", ho…
+     17| 
+     18| const field = () => screen.getByRole("textbox", { name: "Your request"…
+       |                            ^
+     19| const scenario = () => screen.getByRole("combobox", { name: "Demo scen…
+     20| const submit = () => screen.getByRole("button", { name: /find(ing)? ho…
+ ❯ components/HotelAssistant.search.test.tsx:51:22
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[2/32]⎯
+
+ FAIL  components/HotelAssistant.search.test.tsx > request field > AC3.4 the error clears once the traveller types
+TestingLibraryElementError: Unable to find an accessible element with the role "textbox" and name "Your request"
+
+There are no accessible roles. But there might be some inaccessible roles. If you wish to access them, then set the `hidden` option to `true`. Learn more about this here: https://testing-library.com/docs/dom-testing-library/api-queries#byrole
+
+Ignored nodes: comments, script, style
+<body>
+  <div />
+</body>
+ ❯ Object.getElementError node_modules/@testing-library/dom/dist/config.js:37:19
+ ❯ node_modules/@testing-library/dom/dist/query-helpers.js:76:38
+ ❯ node_modules/@testing-library/dom/dist/query-helpers.js:52:17
+ ❯ node_modules/@testing-library/dom/dist/query-helpers.js:95:19
+ ❯ field components/HotelAssistant.search.test.tsx:18:28
+     16| const response: RecommendationResponse = { message: "Here you go.", ho…
+     17| 
+     18| const field = () => screen.getByRole("textbox", { name: "Your request"…
+       |                            ^
+     19| const scenario = () => screen.getByRole("combobox", { name: "Demo scen…
+     20| const submit = () => screen.getByRole("button", { name: /find(ing)? ho…
+ ❯ components/HotelAssistant.search.test.tsx:65:22
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[3/32]⎯
+
+ FAIL  components/HotelAssistant.search.test.tsx > demo control > AC3.5 is a select labelled Demo scenario offering success, empty and error, defaulting to success
+TestingLibraryElementError: Unable to find an accessible element with the role "combobox" and name "Demo scenario"
+
+There are no accessible roles. But there might be some inaccessible roles. If you wish to access them, then set the `hidden` option to `true`. Learn more about this here: https://testing-library.com/docs/dom-testing-library/api-queries#byrole
+
+Ignored nodes: comments, script, style
+<body>
+  <div />
+</body>
+ ❯ Object.getElementError node_modules/@testing-library/dom/dist/config.js:37:19
+ ❯ node_modules/@testing-library/dom/dist/query-helpers.js:76:38
+ ❯ node_modules/@testing-library/dom/dist/query-helpers.js:52:17
+ ❯ node_modules/@testing-library/dom/dist/query-helpers.js:95:19
+ ❯ scenario components/HotelAssistant.search.test.tsx:19:31
+     17| 
+     18| const field = () => screen.getByRole("textbox", { name: "Your request"…
+     19| const scenario = () => screen.getByRole("combobox", { name: "Demo scen…
+       |                               ^
+     20| const submit = () => screen.getByRole("button", { name: /find(ing)? ho…
+     21| 
+ ❯ components/HotelAssistant.search.test.tsx:81:32
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[4/32]⎯
+
+ FAIL  components/HotelAssistant.search.test.tsx > demo control > AC3.5 has visible Demo control hint text linked with aria-describedby
+TestingLibraryElementError: Unable to find an element with the text: /^Demo control: /. This could be because the text is broken up by multiple elements. In this case, you can provide a function for your text matcher to make your matcher more flexible.
+
+Ignored nodes: comments, script, style
+<body>
+  <div />
+</body>
+ ❯ Object.getElementError node_modules/@testing-library/dom/dist/config.js:37:19
+ ❯ node_modules/@testing-library/dom/dist/query-helpers.js:76:38
+ ❯ node_modules/@testing-library/dom/dist/query-helpers.js:52:17
+ ❯ node_modules/@testing-library/dom/dist/query-helpers.js:95:19
+ ❯ components/HotelAssistant.search.test.tsx:89:25
+     87|     render(<HotelAssistant />);
+     88| 
+     89|     const hint = screen.getByText(/^Demo control: /);
+       |                         ^
+     90|     expect(hint).toBeVisible();
+     91|     expect(scenario()).toHaveAccessibleDescription(hint.textContent ??…
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[5/32]⎯
+
+ FAIL  components/HotelAssistant.search.test.tsx > submit > AC3.6 sends the trimmed message and the chosen scenario
+TestingLibraryElementError: Unable to find an accessible element with the role "textbox" and name "Your request"
+
+There are no accessible roles. But there might be some inaccessible roles. If you wish to access them, then set the `hidden` option to `true`. Learn more about this here: https://testing-library.com/docs/dom-testing-library/api-queries#byrole
+
+Ignored nodes: comments, script, style
+<body>
+  <div />
+</body>
+ ❯ Object.getElementError node_modules/@testing-library/dom/dist/config.js:37:19
+ ❯ node_modules/@testing-library/dom/dist/query-helpers.js:76:38
+ ❯ node_modules/@testing-library/dom/dist/query-helpers.js:52:17
+ ❯ node_modules/@testing-library/dom/dist/query-helpers.js:95:19
+ ❯ field components/HotelAssistant.search.test.tsx:18:28
+     16| const response: RecommendationResponse = { message: "Here you go.", ho…
+     17| 
+     18| const field = () => screen.getByRole("textbox", { name: "Your request"…
+       |                            ^
+     19| const scenario = () => screen.getByRole("combobox", { name: "Demo scen…
+     20| const submit = () => screen.getByRole("button", { name: /find(ing)? ho…
+ ❯ components/HotelAssistant.search.test.tsx:100:22
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[6/32]⎯
+
+ FAIL  components/HotelAssistant.search.test.tsx > while waiting > AC3.7 shows progress, a busy disabled button and disabled inputs while waiting
+TestingLibraryElementError: Unable to find an accessible element with the role "button" and name `/find(ing)? hotels/i`
+
+There are no accessible roles. But there might be some inaccessible roles. If you wish to access them, then set the `hidden` option to `true`. Learn more about this here: https://testing-library.com/docs/dom-testing-library/api-queries#byrole
+
+Ignored nodes: comments, script, style
+<body>
+  <div />
+</body>
+ ❯ Object.getElementError node_modules/@testing-library/dom/dist/config.js:37:19
+ ❯ node_modules/@testing-library/dom/dist/query-helpers.js:76:38
+ ❯ node_modules/@testing-library/dom/dist/query-helpers.js:52:17
+ ❯ node_modules/@testing-library/dom/dist/query-helpers.js:95:19
+ ❯ submit components/HotelAssistant.search.test.tsx:20:29
+     18| const field = () => screen.getByRole("textbox", { name: "Your request"…
+     19| const scenario = () => screen.getByRole("combobox", { name: "Demo scen…
+     20| const submit = () => screen.getByRole("button", { name: /find(ing)? ho…
+       |                             ^
+     21| 
+     22| function deferred() {
+ ❯ components/HotelAssistant.search.test.tsx:117:22
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[7/32]⎯
+
+ FAIL  components/HotelAssistant.search.test.tsx > while waiting > AC3.7 keeps the status region mounted and empty before and after waiting
+TestingLibraryElementError: Unable to find an accessible element with the role "status"
+
+There are no accessible roles. But there might be some inaccessible roles. If you wish to access them, then set the `hidden` option to `true`. Learn more about this here: https://testing-library.com/docs/dom-testing-library/api-queries#byrole
+
+Ignored nodes: comments, script, style
+<body>
+  <div />
+</body>
+ ❯ Object.getElementError node_modules/@testing-library/dom/dist/config.js:37:19
+ ❯ node_modules/@testing-library/dom/dist/query-helpers.js:76:38
+ ❯ node_modules/@testing-library/dom/dist/query-helpers.js:52:17
+ ❯ node_modules/@testing-library/dom/dist/query-helpers.js:95:19
+ ❯ components/HotelAssistant.search.test.tsx:132:27
+    130|     const user = userEvent.setup();
+    131|     render(<HotelAssistant />);
+    132|     const region = screen.getByRole("status");
+       |                           ^
+    133|     expect(region).toBeEmptyDOMElement();
+    134| 
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[8/32]⎯
+
+ FAIL  components/HotelAssistant.search.test.tsx > while waiting > AC3.7 re-enables everything and returns focus to the submit button after a response
+ FAIL  components/HotelAssistant.search.test.tsx > while waiting > AC3.7 re-enables everything and returns focus to the submit button after a failure
+TestingLibraryElementError: Unable to find an accessible element with the role "button" and name `/find(ing)? hotels/i`
+
+There are no accessible roles. But there might be some inaccessible roles. If you wish to access them, then set the `hidden` option to `true`. Learn more about this here: https://testing-library.com/docs/dom-testing-library/api-queries#byrole
+
+Ignored nodes: comments, script, style
+<body>
+  <div />
+</body>
+ ❯ Object.getElementError node_modules/@testing-library/dom/dist/config.js:37:19
+ ❯ node_modules/@testing-library/dom/dist/query-helpers.js:76:38
+ ❯ node_modules/@testing-library/dom/dist/query-helpers.js:52:17
+ ❯ node_modules/@testing-library/dom/dist/query-helpers.js:95:19
+ ❯ submit components/HotelAssistant.search.test.tsx:20:29
+     18| const field = () => screen.getByRole("textbox", { name: "Your request"…
+     19| const scenario = () => screen.getByRole("combobox", { name: "Demo scen…
+     20| const submit = () => screen.getByRole("button", { name: /find(ing)? ho…
+       |                             ^
+     21| 
+     22| function deferred() {
+ ❯ components/HotelAssistant.search.test.tsx:151:22
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[9/32]⎯
+
+ FAIL  components/HotelAssistant.search.test.tsx > keyboard > AC3.8 Tab reaches the field, the select and the button in that order
+TestingLibraryElementError: Unable to find an accessible element with the role "textbox" and name "Your request"
+
+There are no accessible roles. But there might be some inaccessible roles. If you wish to access them, then set the `hidden` option to `true`. Learn more about this here: https://testing-library.com/docs/dom-testing-library/api-queries#byrole
+
+Ignored nodes: comments, script, style
+<body>
+  <div />
+</body>
+ ❯ Object.getElementError node_modules/@testing-library/dom/dist/config.js:37:19
+ ❯ node_modules/@testing-library/dom/dist/query-helpers.js:76:38
+ ❯ node_modules/@testing-library/dom/dist/query-helpers.js:52:17
+ ❯ node_modules/@testing-library/dom/dist/query-helpers.js:95:19
+ ❯ field components/HotelAssistant.search.test.tsx:18:28
+     16| const response: RecommendationResponse = { message: "Here you go.", ho…
+     17| 
+     18| const field = () => screen.getByRole("textbox", { name: "Your request"…
+       |                            ^
+     19| const scenario = () => screen.getByRole("combobox", { name: "Demo scen…
+     20| const submit = () => screen.getByRole("button", { name: /find(ing)? ho…
+ ❯ components/HotelAssistant.search.test.tsx:170:12
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[10/32]⎯
+
+ FAIL  components/HotelAssistant.search.test.tsx > keyboard > AC3.8 Enter on the button submits
+TestingLibraryElementError: Unable to find an accessible element with the role "button" and name `/find(ing)? hotels/i`
+
+There are no accessible roles. But there might be some inaccessible roles. If you wish to access them, then set the `hidden` option to `true`. Learn more about this here: https://testing-library.com/docs/dom-testing-library/api-queries#byrole
+
+Ignored nodes: comments, script, style
+<body>
+  <div />
+</body>
+ ❯ Object.getElementError node_modules/@testing-library/dom/dist/config.js:37:19
+ ❯ node_modules/@testing-library/dom/dist/query-helpers.js:76:38
+ ❯ node_modules/@testing-library/dom/dist/query-helpers.js:52:17
+ ❯ node_modules/@testing-library/dom/dist/query-helpers.js:95:19
+ ❯ submit components/HotelAssistant.search.test.tsx:20:29
+     18| const field = () => screen.getByRole("textbox", { name: "Your request"…
+     19| const scenario = () => screen.getByRole("combobox", { name: "Demo scen…
+     20| const submit = () => screen.getByRole("button", { name: /find(ing)? ho…
+       |                             ^
+     21| 
+     22| function deferred() {
+ ❯ components/HotelAssistant.search.test.tsx:180:5
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[11/32]⎯
+
+ FAIL  components/HotelAssistant.search.test.tsx > keyboard > AC3.8 Enter in the field adds a new line and does not submit
+TestingLibraryElementError: Unable to find an accessible element with the role "textbox" and name "Your request"
+
+There are no accessible roles. But there might be some inaccessible roles. If you wish to access them, then set the `hidden` option to `true`. Learn more about this here: https://testing-library.com/docs/dom-testing-library/api-queries#byrole
+
+Ignored nodes: comments, script, style
+<body>
+  <div />
+</body>
+ ❯ Object.getElementError node_modules/@testing-library/dom/dist/config.js:37:19
+ ❯ node_modules/@testing-library/dom/dist/query-helpers.js:76:38
+ ❯ node_modules/@testing-library/dom/dist/query-helpers.js:52:17
+ ❯ node_modules/@testing-library/dom/dist/query-helpers.js:95:19
+ ❯ field components/HotelAssistant.search.test.tsx:18:28
+     16| const response: RecommendationResponse = { message: "Here you go.", ho…
+     17| 
+     18| const field = () => screen.getByRole("textbox", { name: "Your request"…
+       |                            ^
+     19| const scenario = () => screen.getByRole("combobox", { name: "Demo scen…
+     20| const submit = () => screen.getByRole("button", { name: /find(ing)? ho…
+ ❯ components/HotelAssistant.search.test.tsx:191:22
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[12/32]⎯
+
+ FAIL  lib/api.test.ts > fetchRecommendations > AC3.1 POSTs JSON to the default base URL and returns the typed body on 200
+AssertionError: promise rejected "Error: not implemented" instead of resolving
+ ❯ lib/api.test.ts:52:47
+     50|     fetchMock.mockResolvedValue(json(body, 200));
+     51| 
+     52|     await expect(fetchRecommendations(request)).resolves.toEqual(body);
+       |                                               ^
+     53| 
+     54|     expect(fetchMock).toHaveBeenCalledTimes(1);
+
+Caused by: Error: not implemented
+ ❯ fetchRecommendations lib/api.ts:17:9
+ ❯ lib/api.test.ts:52:18
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[13/32]⎯
+
+ FAIL  lib/api.test.ts > fetchRecommendations > AC3.1 uses NEXT_PUBLIC_API_BASE_URL when it is set
+Error: not implemented
+ ❯ fetchRecommendations lib/api.ts:17:9
+     15| // Stub so the red tests load. Green replaces it.
+     16| export async function fetchRecommendations(_request: RecommendationReq…
+     17|   throw new Error("not implemented");
+       |         ^
+     18| }
+     19| 
+ ❯ lib/api.test.ts:66:11
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[14/32]⎯
+
+ FAIL  lib/api.test.ts > fetchRecommendations > AC3.2 throws ApiError with the server's message and retryable true on a 503
+AssertionError: expected Error: not implemented to be an instance of ApiError
+ ❯ failure lib/api.test.ts:33:17
+     31|     (reason: unknown) => reason,
+     32|   );
+     33|   expect(error).toBeInstanceOf(ApiError);
+       |                 ^
+     34|   return error as ApiError;
+     35| }
+ ❯ lib/api.test.ts:76:19
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[15/32]⎯
+
+ FAIL  lib/api.test.ts > fetchRecommendations > AC3.2 throws ApiError with the server's message and retryable false on a 422
+AssertionError: expected Error: not implemented to be an instance of ApiError
+ ❯ failure lib/api.test.ts:33:17
+     31|     (reason: unknown) => reason,
+     32|   );
+     33|   expect(error).toBeInstanceOf(ApiError);
+       |                 ^
+     34|   return error as ApiError;
+     35| }
+ ❯ lib/api.test.ts:88:19
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[16/32]⎯
+
+ FAIL  lib/api.test.ts > fetchRecommendations > AC3.3 turns a network failure into a retryable ApiError with no status and the agreed message
+AssertionError: expected Error: not implemented to be an instance of ApiError
+ ❯ failure lib/api.test.ts:33:17
+     31|     (reason: unknown) => reason,
+     32|   );
+     33|   expect(error).toBeInstanceOf(ApiError);
+       |                 ^
+     34|   return error as ApiError;
+     35| }
+ ❯ lib/api.test.ts:98:19
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[17/32]⎯
+
+ FAIL  lib/api.test.ts > fetchRecommendations > AC3.3 turns a non-JSON error body into a retryable ApiError with a generic message
+ FAIL  lib/api.test.ts > fetchRecommendations > AC3.3 turns a non-2xx JSON body with another shape into a retryable ApiError with a generic message
+ FAIL  lib/api.test.ts > fetchRecommendations > AC3.3 turns a non-2xx JSON null body into a retryable ApiError with a generic message
+ FAIL  lib/api.test.ts > fetchRecommendations > AC3.3 turns a non-2xx body with no retryable into a retryable ApiError with a generic message
+ FAIL  lib/api.test.ts > fetchRecommendations > AC3.3 turns a non-2xx body with no code into a retryable ApiError with a generic message
+ FAIL  lib/api.test.ts > fetchRecommendations > AC3.3 turns a non-2xx body with a non-boolean retryable into a retryable ApiError with a generic message
+ FAIL  lib/api.test.ts > fetchRecommendations > AC3.3 turns a non-2xx body with a non-string message into a retryable ApiError with a generic message
+ FAIL  lib/api.test.ts > fetchRecommendations > AC3.3 turns a 200 that is not JSON into a retryable ApiError with a generic message
+ FAIL  lib/api.test.ts > fetchRecommendations > AC3.3 turns a 200 with a JSON null body into a retryable ApiError with a generic message
+ FAIL  lib/api.test.ts > fetchRecommendations > AC3.3 turns a 200 with no message into a retryable ApiError with a generic message
+ FAIL  lib/api.test.ts > fetchRecommendations > AC3.3 turns a 200 with a non-string message into a retryable ApiError with a generic message
+ FAIL  lib/api.test.ts > fetchRecommendations > AC3.3 turns a 200 with no hotels into a retryable ApiError with a generic message
+ FAIL  lib/api.test.ts > fetchRecommendations > AC3.3 turns a 200 with non-array hotels into a retryable ApiError with a generic message
+AssertionError: expected Error: not implemented to be an instance of ApiError
+ ❯ failure lib/api.test.ts:33:17
+     31|     (reason: unknown) => reason,
+     32|   );
+     33|   expect(error).toBeInstanceOf(ApiError);
+       |                 ^
+     34|   return error as ApiError;
+     35| }
+ ❯ lib/api.test.ts:130:19
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[18/32]⎯
+
+
+ Test Files  2 failed | 1 passed (3)
+      Tests  32 failed | 1 passed (33)
+   Start at  21:46:25
+   Duration  10.57s (transform 217ms, setup 5.63s, collect 984ms, tests 267ms, environment 11.04s, prepare 1.59s)
+

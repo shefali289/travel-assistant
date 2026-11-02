@@ -39,7 +39,7 @@ One commit per task, on `task/NN-name`: `feat(NN): <summary>`, made after the fi
 |---|---|---|---|---|
 | 01 | [contract](done/01-contract.md) | OpenAPI contract drafted before any code | contract probe | Done |
 | 02 | [api](done/02-api.md) | FastAPI validates input and serves the 3 scenarios from the CSV fixture | pytest + API probe | Done |
-| 03 | [search](03-search.md) | Traveller types a request, picks a demo scenario, sees progress | Vitest + journey `search` | Todo |
+| 03 | [search](done/03-search.md) | Traveller types a request, picks a demo scenario, sees progress | Vitest + journey `search` | Done |
 | 04 | [results](04-results.md) | Traveller reviews message + cards; empty and recoverable error states | Vitest + journey `results` | Todo |
 | 05 | [choose](05-choose.md) | Traveller chooses one hotel by mouse or keyboard and sees a summary | Vitest + journey `choose` | Todo |
 | 06 | [evidence-docs](06-evidence-docs.md) | 360px + keyboard evidence, README, APPROACH, agent-context evidence | journey `all` + doc checks | Todo |

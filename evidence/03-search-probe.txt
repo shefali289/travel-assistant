@@ -1,0 +1,10 @@
+stage: search (request form, demo control, validation, loading)
+  ok   request field labelled 'Your request' and prefilled with the Wellington example
+  ok   'Demo scenario' select offers success, empty, error
+  ok   blank message shows inline error
+  ok   blank message sends no request
+  ok   progress shown in role=status while waiting
+  ok   submit disabled while waiting
+  ok   one POST /recommendations sent
+
+0 failure(s)

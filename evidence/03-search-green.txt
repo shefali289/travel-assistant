@@ -1,0 +1,16 @@
+
+> web@0.1.0 test
+> vitest run
+
+
+ RUN  v3.2.7 <repo>/web
+
+ ✓ lib/api.test.ts (19 tests) 24ms
+ ✓ components/HotelAssistant.search.test.tsx (14 tests) 1849ms
+   ✓ submit > AC3.6 sends the trimmed message and the chosen scenario  596ms
+
+ Test Files  2 passed (2)
+      Tests  33 passed (33)
+   Start at  11:35:01
+   Duration  11.51s (transform 170ms, setup 2.48s, collect 902ms, tests 1.87s, environment 8.24s, prepare 684ms)
+
